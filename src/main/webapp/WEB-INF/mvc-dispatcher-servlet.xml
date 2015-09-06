@@ -26,6 +26,8 @@
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
           p:basenames="messages" />
 
+    <mvc:resources mapping="/resources/**" location="/resources/" cache-period="0"/>
+
     <!-- Declare the Interceptor -->
     <mvc:interceptors>
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
