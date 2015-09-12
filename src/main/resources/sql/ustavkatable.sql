@@ -1,0 +1,8 @@
+INSERT INTO ustavka_param_sys (`ID_USTAVKA`, `DATE_USTAVKA`, `VALUE_USTAVKA_PRE`, `VALUE_USTAVKA_AV`, `COEFF_RETURN`) 
+	VALUES ('Наклономер', '2014-04-09', 12.8, 15.0, 0.5);
+INSERT INTO ustavka_param_sys (`ID_USTAVKA`, `DATE_USTAVKA`, `VALUE_USTAVKA_PRE`, `VALUE_USTAVKA_AV`, `COEFF_RETURN`) 
+	VALUES ('Струнный тензометр', '2014-04-09', 0.31, 0.36, 0.5);
+INSERT INTO ustavka_param_sys (`ID_USTAVKA`, `DATE_USTAVKA`, `VALUE_USTAVKA_PRE`, `VALUE_USTAVKA_AV`, `COEFF_RETURN`) 
+	VALUES ('Струнный тензометр/Термистор', '2014-04-09', 0.31, 0.36, 0.5);
+INSERT INTO ustavka_param_sys (`ID_USTAVKA`, `DATE_USTAVKA`, `VALUE_USTAVKA_PRE`, `VALUE_USTAVKA_AV`, `COEFF_RETURN`) 
+	VALUES ('Щелемер трехосный', '2014-04-09', 13.6, 16.0, 0.5);
