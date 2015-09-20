@@ -12,17 +12,32 @@
 
     <context:component-scan base-package="ru.rushydro.vniig" />
 
-    <context:annotation-config />
     <sws:annotation-driven />
 
-    <bean class="org.springframework.ws.server.endpoint.adapter.GenericMarshallingMethodEndpointAdapter">
-        <property name="marshaller" ref="marshaller" />
-        <property name="unmarshaller" ref="marshaller" />
-    </bean>
+    <sws:interceptors>
+        <bean class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+            <description>
+                This interceptor validates both incoming and outgoing message contents according to the 'echo.xsd' XML
+                Schema file.
+            </description>
+            <property name="schema" value="/WEB-INF/wsdl/sensors.xsd"/>
+            <property name="validateRequest" value="true"/>
+            <property name="validateResponse" value="true"/>
+        </bean>
+        <bean class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor">
+            <description>
+                This interceptor logs the message payload.
+            </description>
+        </bean>
+    </sws:interceptors>
 
-    <bean id="marshaller" class="org.springframework.oxm.xmlbeans.XmlBeansMarshaller"/>
-
-    <sws:dynamic-wsdl id="SensorsService" portTypeName="service" locationUri="/service/SensorsService" >
+    <sws:dynamic-wsdl id="sensorsService"
+                      transportUri="http://schemas.xmlsoap.org/soap/http"
+                      serviceName="getSensorValues"
+                      portTypeName="getSensorValuesPort"
+                      targetNamespace="http://localhost:8080/ws/sensorsService"
+                      createSoap11Binding="true"
+                      locationUri="http://localhost:8080/ws/sensorsService" >
         <sws:xsd location="/WEB-INF/wsdl/sensors.xsd" />
     </sws:dynamic-wsdl>
 

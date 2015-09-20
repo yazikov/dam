@@ -22,7 +22,7 @@
 
     <servlet-mapping>
         <servlet-name>service-ws</servlet-name>
-        <url-pattern>/service/*</url-pattern>
+        <url-pattern>/ws/*</url-pattern>
     </servlet-mapping>
 
     <context-param>

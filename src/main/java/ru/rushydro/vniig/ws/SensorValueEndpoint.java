@@ -10,22 +10,15 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
  */
 @Endpoint
 public class SensorValueEndpoint {
-    private static final String NAMESPACE_URI = "http://192.168.0.57/SensorsService";
+    private static final String NAMESPACE_URI = "http://localhost:8080/ws/sensorsService";
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getSensorValues")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "sendSensorValuesRequest")
     @ResponsePayload
-    public GetSensorValuesResponse getCountry(@RequestPayload GetSensorValuesRequest request) {
-        GetSensorValuesResponse response = new GetSensorValuesResponse();
-        SensorValues sensorValues = new SensorValues();
-        for (int i = 0; i < 5; i++) {
-            SensorValue sensorValue = new SensorValue();
-            sensorValue.setSensorId(i);
-            sensorValue.setSensorValue(i * 0.5);
-            sensorValues.getSensorValue().add(sensorValue);
-        }
-
+    public SendSensorValuesResponse getSensorValues(@RequestPayload SendSensorValuesRequest request) {
+        SendSensorValuesResponse response = new SendSensorValuesResponse();
+        response.setStatusCode(1);
+        response.setStatusDescription("");
         return response;
     }
-
 
 }
