@@ -10,21 +10,22 @@ package ru.rushydro.vniig.ws;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for sensorValue complex type.
+ * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="sensorValue">
+ * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="sensorId" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="sensorValue" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="sensorValues" type="{http://localhost:8080/ws/sensorsService}sensorValues"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,45 +35,37 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "sensorValue", propOrder = {
-    "sensorId",
-    "sensorValue"
+@XmlType(name = "", propOrder = {
+    "sensorValues"
 })
-public class SensorValue {
+@XmlRootElement(name = "sendSensorValuesRequest")
+public class SendSensorValuesRequest {
 
-    protected long sensorId;
-    protected double sensorValue;
+    @XmlElement(required = true)
+    protected SensorValues sensorValues;
 
     /**
-     * Gets the value of the sensorId property.
+     * Gets the value of the sensorValues property.
      * 
+     * @return
+     *     possible object is
+     *     {@link SensorValues }
+     *     
      */
-    public long getSensorId() {
-        return sensorId;
+    public SensorValues getSensorValues() {
+        return sensorValues;
     }
 
     /**
-     * Sets the value of the sensorId property.
+     * Sets the value of the sensorValues property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link SensorValues }
+     *     
      */
-    public void setSensorId(long value) {
-        this.sensorId = value;
-    }
-
-    /**
-     * Gets the value of the sensorValue property.
-     * 
-     */
-    public double getSensorValue() {
-        return sensorValue;
-    }
-
-    /**
-     * Sets the value of the sensorValue property.
-     * 
-     */
-    public void setSensorValue(double value) {
-        this.sensorValue = value;
+    public void setSensorValues(SensorValues value) {
+        this.sensorValues = value;
     }
 
 }
