@@ -10,7 +10,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
  */
 @Endpoint
 public class SensorValueEndpoint {
-    private static final String NAMESPACE_URI = "http://localhost:8080/ws/sensorsService";
+    private static final String NAMESPACE_URI = "http://192.168.0.11:8080/ws/sensorsService";
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "sendSensorValuesRequest")
     @ResponsePayload
@@ -18,6 +18,13 @@ public class SensorValueEndpoint {
         SendSensorValuesResponse response = new SendSensorValuesResponse();
         response.setStatusCode(1);
         response.setStatusDescription("");
+
+        if (request != null
+                && request.getSensorValues() != null
+                && request.getSensorValues().getSensorValue() != null) {
+            request.getSensorValues().getSensorValue().forEach(sensorValue -> System.out.println("Sensor ID: " + sensorValue.getSensorId() + " sensor value: " + sensorValue.getSensorValue()));
+        }
+
         return response;
     }
 
