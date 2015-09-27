@@ -2,10 +2,10 @@ drop table TASK_ASO;
 drop table USTAVKA_PARAM_SYS;
 drop table MEAS_PARAM_SYS;
 drop table SIGN_SYS;
-drop table PASPORT_PARAM_SYS;
+drop table PASSPORT_PARAM_SYS;
 drop table TYPE_SIGNAL_TABLE;
 
-create SEQUENCE SIGN_SYS
+-- create SEQUENCE SIGN_SYS
 
 create table TYPE_SIGNAL_TABLE(
 ID_SIGNAL Integer,
@@ -43,6 +43,7 @@ VALUE_MEAS float,
 TRUST_MEAS INTEGER,
 WORK_SENSORS  boolean,
 primary key(ID_SENSORS)
+foreign key(ID_SENSORS) references  PASPORT_PARAM_SYS(ID_SENSORS) on delete cascade
 );
 
 create table SIGN_SYS
@@ -54,9 +55,10 @@ SORT_SIGN INTEGER,
 TEXT_SIGN INTEGER,
 ID_SENSORS  INTEGER,
 primary key(ID_SIGN)
+foreign key(ID_SENSOR) references  PASPORT_PARAM_SYS(ID_SENSORS) on delete cascade
 );
 
-create table PASPORT_PARAM_SYS
+create table PASSPORT_PARAM_SYS
 (
 SENSORS_OA_TYPE VARCHAR(40),
 SENSORS_OA_ELEMENTS VARCHAR(40),
@@ -65,5 +67,7 @@ TYPE_OF_MEAS VARCHAR(50),
 SENSORS_GROUP VARCHAR(40),
 SENSORS_TYPE VARCHAR(40),
 ID_SENSORS INTEGER,
+X_VALUE FLOAT,
+Y_VALUE FLOAT,
 primary key(ID_SENSORS)
 );
