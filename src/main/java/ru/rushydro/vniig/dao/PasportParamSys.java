@@ -13,6 +13,19 @@ public class PasportParamSys {
     Integer idSensors;
     Float xValue;
     Float yValue;
+
+    public PasportParamSys(String sensorsOaType, String sensorsOaElements, String sortMeas, String typeOfMeas, String sensorsGroup, String sensorsType, Float xValue, Integer idSensors, Float yValue) {
+        this.sensorsOaType = sensorsOaType;
+        this.sensorsOaElements = sensorsOaElements;
+        this.sortMeas = sortMeas;
+        this.typeOfMeas = typeOfMeas;
+        this.sensorsGroup = sensorsGroup;
+        this.sensorsType = sensorsType;
+        this.xValue = xValue;
+        this.idSensors = idSensors;
+        this.yValue = yValue;
+    }
+
     public String getSensorsOaType() {
         return sensorsOaType;
     }
