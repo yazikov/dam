@@ -1,18 +1,49 @@
-package ru.rushydro.vniig.dao;
+package ru.rushydro.vniig.entry;
+
+import javax.persistence.*;
 
 /**
  * Created by alyon on 27.09.2015.
  */
-public class PasportParamSys {
+public class PassportParamSys extends AbstractEntry {
+    @Column(name = "sensors_oa_type")
     String sensorsOaType;
+    @Column(name = "sensors_oa_elements")
     String sensorsOaElements;
+    @Column(name = "sort_meas")
     String sortMeas;
+    @Column(name = "type_of_meas")
     String typeOfMeas;
+    @Column(name = "sensors_group")
     String sensorsGroup;
+    @Column(name = "sensors_type")
     String sensorsType;
+    @Id
+    @Column(name = "id_sensors")
     Integer idSensors;
+    @Column(name = "x_value")
     Float xValue;
+    @Column(name = "y_value")
     Float yValue;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_sensors")
+    MeasParamSys measParamSys;
+
+
+
+    public PassportParamSys(String sensorsOaType, String sensorsOaElements, String sortMeas, String typeOfMeas, String sensorsGroup, String sensorsType, Float xValue, Integer idSensors, Float yValue) {
+        this.sensorsOaType = sensorsOaType;
+        this.sensorsOaElements = sensorsOaElements;
+        this.sortMeas = sortMeas;
+        this.typeOfMeas = typeOfMeas;
+        this.sensorsGroup = sensorsGroup;
+        this.sensorsType = sensorsType;
+        this.xValue = xValue;
+        this.idSensors = idSensors;
+        this.yValue = yValue;
+    }
+
     public String getSensorsOaType() {
         return sensorsOaType;
     }
