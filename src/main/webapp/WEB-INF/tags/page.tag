@@ -96,24 +96,14 @@
     </header>
 
     <div class="layout">
-        <div class="col1">
-            <div class="block"></div>
-            <div class="block"></div>
-            <div class="block"></div>
-        </div>
-        <div class="col3">
-            <div class="block"></div>
-            <div class="block"></div>
-        </div>
-        <div class="col2"><jsp:doBody/></div>
-
+        <jsp:doBody/>
     </div>
     <div style="clear: both" ></div>
 
 </div>
 
 <footer>
-    <div>World &copy; TM</div>
+    <div>Русгидро</div>
 </footer>
 
 <script src="${jqueryJs}"></script>

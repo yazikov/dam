@@ -85,5 +85,33 @@ public class PasportParamSys {
         this.yValue = yValue;
     }
 
+    public String toJSON() {
+        StringBuilder sb = new StringBuilder();
+        if (idSensors != null) {
+            sb.append("id:").append(idSensors);
+        }
 
+        if (sensorsType != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("name:").append("\"").append(sensorsType).append("\"");
+        }
+
+        if (xValue != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("x:").append(xValue);
+        }
+
+        if (yValue != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("y:").append(yValue);
+        }
+
+        return "{" + sb.toString() + "}";
+    }
 }
