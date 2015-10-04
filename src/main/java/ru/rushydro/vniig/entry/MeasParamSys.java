@@ -31,12 +31,6 @@ public class MeasParamSys {
     @Column(name = "work_sensors")
     Boolean workSensors;
 
-    String tableName = "MEAS_PARAM_SYS";
-
-    public String getTableName()
-    {
-        return tableName;
-    }
     public MeasParamSys(Integer idSensors, Integer statusSensors, Integer sortSensors, Date dateMeas, Date timeMeas, Float value_meas, Integer sortMeas, Integer trustMeas, Boolean workSensors) {
         this.idSensors = idSensors;
         this.statusSensors = statusSensors;

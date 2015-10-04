@@ -22,12 +22,6 @@ public class UstavkaParamSys {
     @Column(name = "coeff_return")
     Float coeffReturn;
 
-    String tableName = "USTAVKA_PARAM_SYS";
-    public String getTableName()
-    {
-        return tableName;
-    }
-
     public UstavkaParamSys(String idUstavka, Date dateUstavka, Float valueUstavkaPre, Float valueUstavkaAv, Float coeffReturn) {
         this.idUstavka = idUstavka;
         this.dateUstavka = dateUstavka;

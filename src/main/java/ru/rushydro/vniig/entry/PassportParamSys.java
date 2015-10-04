@@ -11,8 +11,8 @@ public class PassportParamSys extends AbstractEntry {
     @Column(name = "OBJ_MONITOR")
     String objMonitor;
 
-    @ManyToOne
-    @JoinColumn(name = "id_type")
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "MEAS_PARAM_TYPE_SIG")
     MeasParamTypeSig measParamTypeSig;
 
     @Column(name = "NAME_SENSORS")
@@ -62,11 +62,11 @@ public class PassportParamSys extends AbstractEntry {
         this.objMonitor = objMonitor;
     }
 
-    public Integer getMeasParamTypeSig() {
+    public MeasParamTypeSig getMeasParamTypeSig() {
         return measParamTypeSig;
     }
 
-    public void setMeasParamTypeSig(Integer measParamTypeSig) {
+    public void setMeasParamTypeSig(MeasParamTypeSig measParamTypeSig) {
         this.measParamTypeSig = measParamTypeSig;
     }
 
@@ -134,13 +134,6 @@ public class PassportParamSys extends AbstractEntry {
         this.measParamSys = measParamSys;
     }
 
-    public Double getCurrentValue() {
-        return currentValue;
-    }
-
-    public void setCurrentValue(Double currentValue) {
-        this.currentValue = currentValue;
-    }
 
     public String toJSON() {
         StringBuilder sb = new StringBuilder();

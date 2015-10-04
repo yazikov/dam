@@ -24,21 +24,6 @@ public class SignSys extends AbstractEntry {
     @Column(name = "id_sensors")
     Integer idSensors;
 
-    String tableName = "SIGN_SYS";
-    public String getTableName()
-    {
-        return tableName;
-    }
-
-    public SignSys(Integer idSign, Date dateSign, Date timeSign, Integer sortSign, Integer textSign, Integer idSensors) {
-        this.idSign = idSign;
-        this.dateSign = dateSign;
-        this.timeSign = timeSign;
-        this.sortSign = sortSign;
-        this.textSign = textSign;
-        this.idSensors = idSensors;
-    }
-
     public Integer getIdSign() {
         return idSign;
     }
@@ -63,20 +48,12 @@ public class SignSys extends AbstractEntry {
         this.timeSign = timeSign;
     }
 
-    public Integer getSortSign() {
+    public TypeSignalTable getSortSign() {
         return sortSign;
     }
 
-    public void setSortSign(Integer sortSign) {
+    public void setSortSign(TypeSignalTable sortSign) {
         this.sortSign = sortSign;
-    }
-
-    public Integer getTextSign() {
-        return textSign;
-    }
-
-    public void setTextSign(Integer textSign) {
-        this.textSign = textSign;
     }
 
     public Integer getIdSensors() {
