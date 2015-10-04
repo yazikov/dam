@@ -30,7 +30,10 @@ public class PassportParamSys extends AbstractEntry {
     @JoinColumn(name = "id_sensors")
     MeasParamSys measParamSys;
 
+    Double currentValue;
 
+    public PassportParamSys() {
+    }
 
     public PassportParamSys(String sensorsOaType, String sensorsOaElements, String sortMeas, String typeOfMeas, String sensorsGroup, String sensorsType, Float xValue, Integer idSensors, Float yValue) {
         this.sensorsOaType = sensorsOaType;
@@ -114,6 +117,14 @@ public class PassportParamSys extends AbstractEntry {
 
     public void setyValue(Float yValue) {
         this.yValue = yValue;
+    }
+
+    public Double getCurrentValue() {
+        return currentValue;
+    }
+
+    public void setCurrentValue(Double currentValue) {
+        this.currentValue = currentValue;
     }
 
     public String toJSON() {

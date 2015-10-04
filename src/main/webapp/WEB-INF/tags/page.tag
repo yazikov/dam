@@ -18,6 +18,9 @@
     <link href="${bootstrapCss}" rel="stylesheet" />
     <link href="${mainCss}" rel="stylesheet" />
 
+    <script src="${jqueryJs}"></script>
+    <script src="${bootstrapJs}"></script>
+
 </head>
 
 <body>
@@ -106,8 +109,7 @@
     <div>Русгидро</div>
 </footer>
 
-<script src="${jqueryJs}"></script>
-<script src="${bootstrapJs}"></script>
+
 <script src="${mainJs}"></script>
 
 </body>
