@@ -5,6 +5,8 @@ import javax.persistence.*;
 /**
  * Created by alyon on 27.09.2015.
  */
+@Entity
+@Table(name = "PASSPORT_PARAM_SYS")
 public class PassportParamSys extends AbstractEntry {
     @Column(name = "sensors_oa_type")
     String sensorsOaType;
@@ -30,6 +32,11 @@ public class PassportParamSys extends AbstractEntry {
     @JoinColumn(name = "id_sensors")
     MeasParamSys measParamSys;
 
+    static String tableName = "PASSPORT_PARAM_SYS";
+    public static String getTableName()
+    {
+        return tableName;
+    }
     Double currentValue;
 
     public PassportParamSys() {

@@ -1,7 +1,6 @@
 package ru.rushydro.vniig.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.rushydro.vniig.entry.PassportParamSys;
 
@@ -51,7 +50,7 @@ public class IndexController {
     }
 
     @RequestMapping(path = "/test")
-    public String testPage(Model model) {
+    public String testPage() {
         return "test";
     }
 }

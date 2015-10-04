@@ -11,12 +11,18 @@ import javax.persistence.Table;
  * Created by alyon on 27.09.2015.
  */
 @Entity
-@Table(name = "type_signal_table")
+@Table(name = "TYPE_SIGNAL_TABLE")
 public class TypeSignalTable {
     @Id@Column(name = "id_signal")
     Integer idSignal;
     @Column(name = "text_signal")
     String textSignal;
+
+    String tableName = "TYPE_SIGNAL_TABLE";
+    public String getTableName()
+    {
+        return tableName;
+    }
 
     public TypeSignalTable(Integer idSignal, String textSignal) {
         this.idSignal = idSignal;
