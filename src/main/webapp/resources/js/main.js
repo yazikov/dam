@@ -70,12 +70,16 @@ $(document).ready(function() {
         }
     });
 
-
-
-
 });
 
-
+function getSensorById(id) {
+    for (var i = 0; i < sensors.length; i++) {
+        var sensor = sensors[i];
+        if (sensor.id == id) {
+            return sensor;
+        }
+    }
+}
 
 function scrollToCenter(elem) {
     var childrens = elem.children();

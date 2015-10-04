@@ -18,8 +18,8 @@ function drawMap() {
     if (map != null) {
         var context = map[0].getContext("2d");
 
-        for (var i=0; i < circles.length; i++) {
-            drawCircle(context, circles[i], colors[i%3]);
+        for (var i=0; i < sensors.length; i++) {
+            drawSensor(context, sensors[i], colors[i%3]);
         }
 
         var container = $('.map_container')[0];
@@ -32,20 +32,21 @@ function drawMap() {
 
             alert("x: " + x+ " y: " + y);
 
-            for (var i = 0; i < circles.length; i++) {
-                var circle = circles[i];
-                if (x < (circle.x + 3) && x > (circle.x - 3) && y < (circle.y + 3) && y > (circle.y - 3)) {
-                    alert ('clicked number: ' + circle.id);
+            for (var i = 0; i < sensors.length; i++) {
+                var sensor = sensors[i];
+                if (x < (sensor.x + 3) && x > (sensor.x - 3) && y < (sensor.y + 3) && y > (sensor.y - 3)) {
+                    alert ('clicked number: ' + sensor.id);
+                    clickSensor(sensor.id, true);
                 }
             }
         });
     }
 }
 
-var drawCircle = function (context, circle, color) {
+var drawSensor = function (context, sensor, color) {
     context.beginPath();
     context.fontWeight = "normal";
-    context.arc(circle.x, circle.y, 5, 0, 2 * Math.PI, false);
+    context.arc(sensor.x, sensor.y, 5, 0, 2 * Math.PI, false);
     context.fillStyle = color;
     context.fill();
     context.lineWidth = 1;
@@ -53,5 +54,17 @@ var drawCircle = function (context, circle, color) {
     context.stroke();
     context.fillStyle = "black";
     context.font = "bold 14px Arial";
-    context.fillText(circle.name, circle.x + 7, circle.y + 5);
+    context.fillText(sensor.name, sensor.x + 7, sensor.y + 5);
 };
+
+function clickSensor (id, isMap) {
+    var sensor = getSensorById(id);
+    var info = $('#sensor-info');
+    var tree = $('#tree');
+    if (isMap) {
+        tree.jstree('deselect_all');
+        tree.jstree('select_node', 'tree-sensor-' + sensor.id);
+        info.html(sensor.name + ": ");
+    }
+}
+

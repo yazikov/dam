@@ -8,6 +8,21 @@
 <link href="${jsTreeCss}" rel="stylesheet" />
 <script src="${jsTreeJs}"></script>
 
-<div id="tree"></div>
+<div id="tree">
+    <ul>
+        <c:forEach items="${roots}" var="root">
+            <li>
+                <c:out value="${root}" />
+                <ul>
+                    <c:forEach items="${sensors}" var="sensor">
+                        <c:if test="${sensor.objMonitor == root}">
+                            <li id="tree-sensor-${sensor.idSensors}" data-jstree='{"id":"${sensor.idSensors}"}'><c:out value="${sensor.name}" /></li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
 
 <script src="${treeJs}"></script>

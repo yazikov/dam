@@ -13,8 +13,22 @@
   <jsp:body>
     <div class="col1">
       <div class="col1_resize"></div>
-      <div class="block info_block"></div>
-      <div class="block data_block"><t:tree /></div>
+      <div class="block info_block">
+        <div class="panel panel-default">
+          <div class="panel-heading">Информация о датчикам</div>
+          <div class="panel-body">
+            <div id="sensor-info"></div>
+          </div>
+        </div>
+      </div>
+      <div class="block data_block">
+        <div class="panel panel-default">
+          <div class="panel-heading">Список датчиков</div>
+          <div class="panel-body">
+            <t:tree />
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col3">
       <div class="col3_resize"></div>

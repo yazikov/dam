@@ -50,6 +50,7 @@ header {
     /*border-left: 2px solid gray;*/
     /*border-right: 2px solid gray;*/
     width: 200px;
+    overflow: auto;
 }
 
 .info_block {
@@ -69,6 +70,22 @@ header {
 
 #map {
     background: url("../images/map.jpg");
+}
+
+.jstree-default a {
+    white-space:normal !important; height: auto;
+}
+.jstree-anchor {
+    height: auto !important;
+}
+.jstree-default li > ins {
+    vertical-align:top;
+}
+.jstree-leaf {
+    height: auto;
+}
+.jstree-leaf a{
+    height: auto !important;
 }
 
 .sensor {

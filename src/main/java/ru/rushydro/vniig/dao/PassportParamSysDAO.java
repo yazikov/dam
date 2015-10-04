@@ -19,7 +19,7 @@ import java.util.List;
 public class PassportParamSysDAO extends AbstractDAO<PassportParamSys> {
 
     public List<String> getAllRootNodes() {
-        TypedQuery<String> query = em.createQuery("SELECT DISTINCT pps.objMonitor FROM PassportParamSys pps WHERE pps.number != '' ", String.class);
+        TypedQuery<String> query = em.createQuery("SELECT DISTINCT pps.objMonitor FROM PassportParamSys pps WHERE pps.number != '' order by pps.objMonitor ", String.class);
 
         return query.getResultList();
     }

@@ -24,38 +24,10 @@ public class IndexController {
     public String indexPage(Model model) {
 
         List<String> roots = sensorService.getAllRootNodes();
-
         List<PassportParamSys> passportParamSysList = sensorService.getSensorByType(1);
 
-//        PassportParamSys sensor = new PassportParamSys();
-//        sensor.setIdSensors(0);
-//        sensor.setxValue(391);
-//        sensor.setyValue(538);
-//        sensor.setName("П-10");
-//        passportParamSysList.add(sensor);
-//
-//        sensor = new PassportParamSys();
-//        sensor.setIdSensors(1);
-//        sensor.setxValue(387);
-//        sensor.setyValue(560);
-//        sensor.setName("П-9");
-//        passportParamSysList.add(sensor);
-//
-//        sensor = new PassportParamSys();
-//        sensor.setIdSensors(2);
-//        sensor.setxValue(377);
-//        sensor.setyValue(608);
-//        sensor.setName("П-28");
-//        passportParamSysList.add(sensor);
-//
-//        sensor = new PassportParamSys();
-//        sensor.setIdSensors(3);
-//        sensor.setxValue(369);
-//        sensor.setyValue(634);
-//        sensor.setName("П-27");
-//        passportParamSysList.add(sensor);
-
-        model.addAttribute("sensors",passportParamSysList);
+        model.addAttribute("roots", roots);
+        model.addAttribute("sensors", passportParamSysList);
         return "index";
     }
 

@@ -4,7 +4,7 @@
 <spring:url value="/resources/js/map.js" var="mapJs" />
 
 <script>
-    var circles = [
+    var sensors = [
             <c:forEach items="${sensors}" var="sensor" varStatus="i">
     <c:out value="${sensor.toJSON()}" escapeXml="false" />
     <c:if test="${!i.last}">,</c:if>
