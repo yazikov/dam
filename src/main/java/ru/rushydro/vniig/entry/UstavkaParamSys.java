@@ -1,14 +1,13 @@
 package ru.rushydro.vniig.entry;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by alyon on 27.09.2015.
  */
+@Entity
+@Table(name = "USTAVKA_PARAM_SYS")
 public class UstavkaParamSys {
     @Id
     @Column(name = "id_ustavka")
@@ -22,6 +21,12 @@ public class UstavkaParamSys {
     Float valueUstavkaAv;
     @Column(name = "coeff_return")
     Float coeffReturn;
+
+    String tableName = "USTAVKA_PARAM_SYS";
+    public String getTableName()
+    {
+        return tableName;
+    }
 
     public UstavkaParamSys(String idUstavka, Date dateUstavka, Float valueUstavkaPre, Float valueUstavkaAv, Float coeffReturn) {
         this.idUstavka = idUstavka;

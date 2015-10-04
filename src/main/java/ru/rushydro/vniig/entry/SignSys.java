@@ -1,14 +1,13 @@
 package ru.rushydro.vniig.entry;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by alyon on 27.09.2015.
  */
+@Entity
+@Table(name = "SIGN_SYS")
 public class SignSys extends AbstractEntry {
     @Id
     @Column(name = "id_sign")
@@ -25,6 +24,12 @@ public class SignSys extends AbstractEntry {
     Integer textSign;
     @Column(name = "id_sensors")
     Integer idSensors;
+
+    String tableName = "SIGN_SYS";
+    public String getTableName()
+    {
+        return tableName;
+    }
 
     public SignSys(Integer idSign, Date dateSign, Date timeSign, Integer sortSign, Integer textSign, Integer idSensors) {
         this.idSign = idSign;

@@ -11,6 +11,25 @@
 
 <t:page>
   <jsp:body>
-    test
+    <div class="col1">
+      <div class="col1_resize"></div>
+      <div class="block info_block"></div>
+      <div class="block data_block"></div>
+    </div>
+    <div class="col3">
+      <div class="col3_resize"></div>
+      <div class="block data_block"></div>
+      <div class="block info_block"></div>
+    </div>
+    <div class="col2">
+      <div class="map_container">
+          <img src="${pageContext.request.contextPath}/resources/images/map.jpg" width="1024" usemap="#sensors"/>
+          <map id="sensors">
+            <c:forEach var="sensor" items="${sensors}">
+              <area class="sensor_norm" shape="circle" coords='${sensor.xValue.intValue()},${sensor.yValue.intValue()},3' onclick="alert('test')"/>
+            </c:forEach>
+          </map>
+      </div>
+    </div>
   </jsp:body>
 </t:page>

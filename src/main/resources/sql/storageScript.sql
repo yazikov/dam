@@ -2,9 +2,9 @@ drop table documents;
 drop table sensors;
 drop table SIGN_SYS;
 drop table TYPE_SIGNAL_TABLE;
-drop table PASSPORT_PARAM_SYS;
 
-create table PASSPORT_PARAM_SYS
+
+create table PASPORT_PARAM_SYS
 (
 SENSORS_OA_TYPE VARCHAR(40),
 SENSORS_OA_ELEMENTS VARCHAR(40),

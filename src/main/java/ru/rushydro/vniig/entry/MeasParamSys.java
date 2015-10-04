@@ -1,14 +1,13 @@
 package ru.rushydro.vniig.entry;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by alyon on 27.09.2015.
  */
+@Entity
+@Table(name = "MEAS_PARAM_SYS")
 public class MeasParamSys {
     @Id
     @Column(name = "id_sensors")
@@ -22,7 +21,7 @@ public class MeasParamSys {
     Date dateMeas;
     @Column(name = "time_meas")
 //    @Temporal(value= TemporalType.DATE)
-    Date timeMeas;
+            Date timeMeas;
     @Column(name = "sort_meas")
     Integer sortMeas;
     @Column(name = "value_meas")
@@ -32,6 +31,12 @@ public class MeasParamSys {
     @Column(name = "work_sensors")
     Boolean workSensors;
 
+    String tableName = "MEAS_PARAM_SYS";
+
+    public String getTableName()
+    {
+        return tableName;
+    }
     public MeasParamSys(Integer idSensors, Integer statusSensors, Integer sortSensors, Date dateMeas, Date timeMeas, Float value_meas, Integer sortMeas, Integer trustMeas, Boolean workSensors) {
         this.idSensors = idSensors;
         this.statusSensors = statusSensors;
