@@ -1,5 +1,6 @@
 package ru.rushydro.vniig.dao;
 
+import org.springframework.stereotype.Component;
 import ru.rushydro.vniig.entry.PassportParamSys;
 
 import javax.persistence.Query;
@@ -14,43 +15,21 @@ import java.util.List;
 /**
  * Created by alyon on 27.09.2015.
  */
+@Component
 public class PassportParamSysDAO extends AbstractDAO<PassportParamSys> {
-    public List<String> getAllRootNodes() throws SQLException
-    {
-        EntityTransaction tx = null;
-        List<String> result;
-        try{
-            tx = em.getTransaction();
-            tx.begin();
-            TypedQuery<String> query = em.createNamedQuery("SELECT DISTINCT obj_monitor FROM" + PassportParamSys.getTableName() + "WHERE number_of_sensor!='';", String.class);
-            result = query.getResultList();
-            tx.commit();
-        }
-        catch(RuntimeException e) {
-            if ( tx != null && tx.isActive() ) tx.rollback();
-            throw e;
-        }
-        return result;
-    }
-    public Collection getChildCollectionByRootName(String name)throws SQLException
-    {
-        EntityTransaction tx = null;
-        List<String> result;
-        try{
-            tx = em.getTransaction();
-            tx.begin();
-            TypedQuery<String> query = em.createNamedQuery("SELECT DISTINCT pps.obj_monitor FROM PassportParamSys pps WHERE number_of_sensor!='';", String.class);
-            result = query.getResultList();
-            tx.commit();
-        }
-        catch(RuntimeException e) {
-            if ( tx != null && tx.isActive() ) tx.rollback();
-            throw e;
-        }
-        return result;
 
-        return null;
+    public List<String> getAllRootNodes() {
+        TypedQuery<String> query = em.createQuery("SELECT DISTINCT pps.objMonitor FROM PassportParamSys pps WHERE pps.number != '' ", String.class);
+
+        return query.getResultList();
     }
+
+    public List<PassportParamSys> getSensorByRootName(String name) {
+        TypedQuery<PassportParamSys> query = em.createQuery("SELECT pps FROM PassportParamSys pps WHERE pps.number != '' ", PassportParamSys.class);
+
+        return query.getResultList();
+    }
+
     public Collection getAvandPreSign() throws SQLException
     {
         return null;

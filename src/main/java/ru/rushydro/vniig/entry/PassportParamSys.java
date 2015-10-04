@@ -8,98 +8,87 @@ import javax.persistence.*;
 @Entity
 @Table(name = "PASSPORT_PARAM_SYS")
 public class PassportParamSys extends AbstractEntry {
-    @Column(name = "sensors_oa_type")
-    String sensorsOaType;
-    @Column(name = "sensors_oa_elements")
-    String sensorsOaElements;
-    @Column(name = "sort_meas")
-    String sortMeas;
-    @Column(name = "type_of_meas")
-    String typeOfMeas;
-    @Column(name = "sensors_group")
-    String sensorsGroup;
-    @Column(name = "sensors_type")
-    String sensorsType;
+    @Column(name = "OBJ_MONITOR")
+    String objMonitor;
+
+    @Column(name = "MEAS_PARAM_TYPE_SIG")
+    Integer measParamTypeSig;
+
+    @Column(name = "NAME_SENSORS")
+    String name;
+
+    @Column(name = "SORT_SIGN")
+    String sortSign;
+
+    @Column(name = "TYPE_OF_SENSOR")
+    String typeOfSensor;
+
+    @Column(name = "NUMBER_OF_SENSOR")
+    String number;
+
     @Id
     @Column(name = "id_sensors")
     Integer idSensors;
     @Column(name = "x_value")
-    Float xValue;
+    Integer xValue;
     @Column(name = "y_value")
-    Float yValue;
+    Integer yValue;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_sensors")
     MeasParamSys measParamSys;
 
-    static String tableName = "PASSPORT_PARAM_SYS";
-    public static String getTableName()
-    {
-        return tableName;
-    }
     Double currentValue;
 
     public PassportParamSys() {
     }
 
-    public PassportParamSys(String sensorsOaType, String sensorsOaElements, String sortMeas, String typeOfMeas, String sensorsGroup, String sensorsType, Float xValue, Integer idSensors, Float yValue) {
-        this.sensorsOaType = sensorsOaType;
-        this.sensorsOaElements = sensorsOaElements;
-        this.sortMeas = sortMeas;
-        this.typeOfMeas = typeOfMeas;
-        this.sensorsGroup = sensorsGroup;
-        this.sensorsType = sensorsType;
-        this.xValue = xValue;
-        this.idSensors = idSensors;
-        this.yValue = yValue;
+    public String getObjMonitor() {
+        return objMonitor;
     }
 
-    public String getSensorsOaType() {
-        return sensorsOaType;
+    public void setObjMonitor(String objMonitor) {
+        this.objMonitor = objMonitor;
     }
 
-    public void setSensorsOaType(String sensorsOaType) {
-        this.sensorsOaType = sensorsOaType;
+    public Integer getMeasParamTypeSig() {
+        return measParamTypeSig;
     }
 
-    public String getSortMeas() {
-        return sortMeas;
+    public void setMeasParamTypeSig(Integer measParamTypeSig) {
+        this.measParamTypeSig = measParamTypeSig;
     }
 
-    public void setSortMeas(String sortMeas) {
-        this.sortMeas = sortMeas;
+    public String getName() {
+        return name;
     }
 
-    public String getSensorsOaElements() {
-        return sensorsOaElements;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setSensorsOaElements(String sensorsOaElements) {
-        this.sensorsOaElements = sensorsOaElements;
+    public String getSortSign() {
+        return sortSign;
     }
 
-    public String getTypeOfMeas() {
-        return typeOfMeas;
+    public void setSortSign(String sortSign) {
+        this.sortSign = sortSign;
     }
 
-    public void setTypeOfMeas(String typeOfMeas) {
-        this.typeOfMeas = typeOfMeas;
+    public String getTypeOfSensor() {
+        return typeOfSensor;
     }
 
-    public String getSensorsGroup() {
-        return sensorsGroup;
+    public void setTypeOfSensor(String typeOfSensor) {
+        this.typeOfSensor = typeOfSensor;
     }
 
-    public void setSensorsGroup(String sensorsGroup) {
-        this.sensorsGroup = sensorsGroup;
+    public String getNumber() {
+        return number;
     }
 
-    public String getSensorsType() {
-        return sensorsType;
-    }
-
-    public void setSensorsType(String sensorsType) {
-        this.sensorsType = sensorsType;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public Integer getIdSensors() {
@@ -110,20 +99,28 @@ public class PassportParamSys extends AbstractEntry {
         this.idSensors = idSensors;
     }
 
-    public Float getxValue() {
+    public Integer getxValue() {
         return xValue;
     }
 
-    public void setxValue(Float xValue) {
+    public void setxValue(Integer xValue) {
         this.xValue = xValue;
     }
 
-    public Float getyValue() {
+    public Integer getyValue() {
         return yValue;
     }
 
-    public void setyValue(Float yValue) {
+    public void setyValue(Integer yValue) {
         this.yValue = yValue;
+    }
+
+    public MeasParamSys getMeasParamSys() {
+        return measParamSys;
+    }
+
+    public void setMeasParamSys(MeasParamSys measParamSys) {
+        this.measParamSys = measParamSys;
     }
 
     public Double getCurrentValue() {
@@ -140,11 +137,11 @@ public class PassportParamSys extends AbstractEntry {
             sb.append("id:").append(idSensors);
         }
 
-        if (sensorsType != null) {
+        if (name != null) {
             if (!sb.toString().isEmpty()) {
                 sb.append(",");
             }
-            sb.append("name:").append("\"").append(sensorsType).append("\"");
+            sb.append("name:").append("\"").append(name).append("\"");
         }
 
         if (xValue != null) {
