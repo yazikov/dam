@@ -24,9 +24,9 @@ public class PassportParamSysDAO extends AbstractDAO<PassportParamSys> {
         return query.getResultList();
     }
 
-    public List<PassportParamSys> getSensorByRootName(String name) {
-        TypedQuery<PassportParamSys> query = em.createQuery("SELECT pps FROM PassportParamSys pps WHERE pps.number != '' ", PassportParamSys.class);
-
+    public List<PassportParamSys> getSensorByType(Integer type) {
+        TypedQuery<PassportParamSys> query = em.createQuery("SELECT pps FROM PassportParamSys pps WHERE pps.measParamTypeSig.id_type = :measParamType ", PassportParamSys.class);
+        query.setParameter("measParamType",type);
         return query.getResultList();
     }
 

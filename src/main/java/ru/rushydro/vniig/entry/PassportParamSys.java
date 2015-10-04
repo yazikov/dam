@@ -11,8 +11,9 @@ public class PassportParamSys extends AbstractEntry {
     @Column(name = "OBJ_MONITOR")
     String objMonitor;
 
-    @Column(name = "MEAS_PARAM_TYPE_SIG")
-    Integer measParamTypeSig;
+    @ManyToOne
+    @JoinColumn(name = "id_type")
+    MeasParamTypeSig measParamTypeSig;
 
     @Column(name = "NAME_SENSORS")
     String name;
@@ -38,7 +39,17 @@ public class PassportParamSys extends AbstractEntry {
     @JoinColumn(name = "id_sensors")
     MeasParamSys measParamSys;
 
-    Double currentValue;
+    public SignSys getSignSys() {
+        return signSys;
+    }
+
+    public void setSignSys(SignSys signSys) {
+        this.signSys = signSys;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_sensors")
+    SignSys signSys;
 
     public PassportParamSys() {
     }

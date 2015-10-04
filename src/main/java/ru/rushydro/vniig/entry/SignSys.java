@@ -18,10 +18,9 @@ public class SignSys extends AbstractEntry {
     @Column(name = "time_sign")
     @Temporal(value=TemporalType.DATE)
     Date timeSign;
-    @Column(name = "sort_sign")
-    Integer sortSign;
-    @Column(name = "text_sign")
-    Integer textSign;
+    @ManyToOne
+    @JoinColumn(name = "sort_sign")
+    TypeSignalTable sortSign;
     @Column(name = "id_sensors")
     Integer idSensors;
 
