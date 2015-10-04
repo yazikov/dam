@@ -30,8 +30,8 @@ create table MEAS_PARAM_SYS
 (
   ID_SENSORS INTEGER,
   STATUS_SENSORS INTEGER,
---   1)роботоспособен 2)отказ 3)замаскирован
---   реальный или вертуальный не требуется SORT_SENSORS INTEGER,
+--   1)СЂРѕР±РѕС‚РѕСЃРїРѕСЃРѕР±РµРЅ 2)РѕС‚РєР°Р· 3)Р·Р°РјР°СЃРєРёСЂРѕРІР°РЅ
+--   СЂРµР°Р»СЊРЅС‹Р№ РёР»Рё РІРµСЂС‚СѓР°Р»СЊРЅС‹Р№ РЅРµ С‚СЂРµР±СѓРµС‚СЃСЏ SORT_SENSORS INTEGER,
   DATE_MEAS DATE,
   TIME_MEAS TIME,
   VALUE_MEAS float,
