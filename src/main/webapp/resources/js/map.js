@@ -3,11 +3,13 @@ var mapContainer;
 var color = {
     green : "#0FEB00",
     red: "red",
-    yellow: "yellow"
-
+    yellow: "yellow",
+    gray: "gray"
 };
 
-var colors = [color.green, color.red, color.yellow];
+var colors = [color.green, color.yellow, color.red, color.gray];
+
+var circles = [];
 
 $(document).ready(function() {
     drawMap();
@@ -19,23 +21,41 @@ function drawMap() {
         var context = map[0].getContext("2d");
 
         for (var i=0; i < sensors.length; i++) {
-            drawSensor(context, sensors[i], colors[i%3]);
+            var sensor = sensors[i];
+            drawSensor(context, sensor, colors[sensor.type - 1]);
         }
 
         var container = $('.map_container')[0];
         var headerHeight = $('header').height();
+
+        map.mousemove(function(e) {
+            var x = e.pageX - this.offsetLeft + container.scrollLeft;
+            var y = e.pageY - this.offsetTop + container.scrollTop - headerHeight;
+            var isCursor = false;
+            for (var i = 0; i < circles.length; i++) {
+                if (context.isPointInPath(circles[i],x,y)) {
+                    isCursor = true;
+                }
+            }
+            if (isCursor) {
+                map.css("cursor", "pointer");
+            } else {
+                map.css("cursor", "auto");
+            }
+
+        });
 
         map.click(function (e) {
 
             var x = e.pageX - this.offsetLeft + container.scrollLeft;
             var y = e.pageY - this.offsetTop + container.scrollTop - headerHeight;
 
-            alert("x: " + x+ " y: " + y);
+            //alert("x: " + x+ " y: " + y);
 
             for (var i = 0; i < sensors.length; i++) {
                 var sensor = sensors[i];
-                if (x < (sensor.x + 3) && x > (sensor.x - 3) && y < (sensor.y + 3) && y > (sensor.y - 3)) {
-                    alert ('clicked number: ' + sensor.id);
+                if (context.isPointInPath(circles[i],x,y)) {
+                    //alert ('clicked number: ' + sensor.id);
                     clickSensor(sensor.id, true);
                 }
             }
@@ -44,14 +64,15 @@ function drawMap() {
 }
 
 var drawSensor = function (context, sensor, color) {
-    context.beginPath();
+    var circle = new Path2D();
+    circles.push(circle);
     context.fontWeight = "normal";
-    context.arc(sensor.x, sensor.y, 5, 0, 2 * Math.PI, false);
+    circle.arc(sensor.x, sensor.y, 5, 0, 2 * Math.PI, false);
     context.fillStyle = color;
-    context.fill();
+    context.fill(circle);
     context.lineWidth = 1;
     context.strokeStyle = "black";
-    context.stroke();
+    context.stroke(circle);
     context.fillStyle = "black";
     context.font = "bold 14px Arial";
     context.fillText(sensor.name, sensor.x + 7, sensor.y + 5);
@@ -59,12 +80,22 @@ var drawSensor = function (context, sensor, color) {
 
 function clickSensor (id, isMap) {
     var sensor = getSensorById(id);
-    var info = $('#sensor-info');
-    var tree = $('#tree');
-    if (isMap) {
-        tree.jstree('deselect_all');
-        tree.jstree('select_node', 'tree-sensor-' + sensor.id);
-        info.html(sensor.name + ": ");
+    if (sensor.type != 4) {
+        var info = $('#sensor-info');
+        var tree = $('#tree');
+        if (isMap) {
+            tree.jstree('deselect_all');
+            tree.jstree('close_all');
+            tree.jstree('select_node', 'tree-sensor-' + sensor.id);
+        } else {
+            switch (sensor.type) {
+                case 1: info.removeClass("alert-danger"); info.removeClass("alert-warning"); info.addClass("alert-success"); break;
+                case 2: info.removeClass("alert-success"); info.removeClass("alert-danger"); info.addClass("alert-warning"); break;
+                case 3: info.removeClass("alert-success"); info.removeClass("alert-warning"); info.addClass("alert-danger"); break;
+            }
+            info.html(sensor.name + ": " + sensor.text);
+        }
+
     }
 }
 

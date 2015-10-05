@@ -162,6 +162,32 @@ public class PassportParamSys extends AbstractEntry {
             sb.append("y:").append(yValue);
         }
 
+        if (measParamSys != null && measParamSys.getWorkSensors() != null && !measParamSys.getWorkSensors()) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("type:").append(4);
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("text:").append("\'\'");
+        } else {
+            if (signSys != null) {
+                if (signSys.getSortSign() != null && signSys.getSortSign().getTextSignal() != null) {
+                    if (!sb.toString().isEmpty()) {
+                        sb.append(",");
+                    }
+                    sb.append("text:").append("\'").append(signSys.getSortSign().getTextSignal()).append("\'");
+                }
+                if (signSys.getSortSign() != null && signSys.getSortSign().getIdSignal() != null) {
+                    if (!sb.toString().isEmpty()) {
+                        sb.append(",");
+                    }
+                    sb.append("type:").append(signSys.getSortSign().getIdSignal());
+                }
+            }
+        }
+
         return "{" + sb.toString() + "}";
     }
 }

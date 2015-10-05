@@ -15,9 +15,9 @@
       <div class="col1_resize"></div>
       <div class="block info_block">
         <div class="panel panel-default">
-          <div class="panel-heading">Информация о датчикам</div>
+          <div class="panel-heading">Информация о датчике</div>
           <div class="panel-body">
-            <div id="sensor-info"></div>
+            <div id="sensor-info" class="alert"></div>
           </div>
         </div>
       </div>

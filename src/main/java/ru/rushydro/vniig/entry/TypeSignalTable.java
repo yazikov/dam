@@ -18,12 +18,6 @@ public class TypeSignalTable {
     @Column(name = "text_signal")
     String textSignal;
 
-
-    public TypeSignalTable(Integer idSignal, String textSignal) {
-        this.idSignal = idSignal;
-        this.textSignal = textSignal;
-    }
-
     public Integer getIdSignal() {
         return idSignal;
     }

@@ -7,5 +7,12 @@ $(document).ready(function() {
 });
 
 function initTree() {
-    $('#tree').jstree();
+    $('#tree').on('changed.jstree', function (e, data) {
+        if (data.selected.length > 0) {
+            var id = data.selected[0];
+            id = id.replace("tree-sensor-", "");
+            clickSensor(id, false);
+        }
+
+    }).jstree();
 }

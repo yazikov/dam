@@ -22,14 +22,6 @@ public class UstavkaParamSys {
     @Column(name = "coeff_return")
     Float coeffReturn;
 
-    public UstavkaParamSys(String idUstavka, Date dateUstavka, Float valueUstavkaPre, Float valueUstavkaAv, Float coeffReturn) {
-        this.idUstavka = idUstavka;
-        this.dateUstavka = dateUstavka;
-        this.valueUstavkaPre = valueUstavkaPre;
-        this.valueUstavkaAv = valueUstavkaAv;
-        this.coeffReturn = coeffReturn;
-    }
-
     public String getIdUstavka() {
         return idUstavka;
     }
