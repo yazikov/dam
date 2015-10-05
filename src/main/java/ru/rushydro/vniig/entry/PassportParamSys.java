@@ -190,4 +190,16 @@ public class PassportParamSys extends AbstractEntry {
 
         return "{" + sb.toString() + "}";
     }
+
+    public int getType() {
+        if (measParamSys != null && measParamSys.getWorkSensors() != null && !measParamSys.getWorkSensors()) {
+            return 4;
+        } else {
+            if (signSys.getSortSign() != null && signSys.getSortSign().getIdSignal() != null) {
+                return signSys.getSortSign().getIdSignal();
+            } else {
+                return 1;
+            }
+        }
+    }
 }

@@ -5,6 +5,7 @@
 
 <spring:url value="/resources/js/jstree.js" var="jsTreeJs" />
 <spring:url value="/resources/css/tree/default/style.min.css" var="jsTreeCss" />
+<spring:url value="/resources/images/type-" var="typeImg" />
 <link href="${jsTreeCss}" rel="stylesheet" />
 <script src="${jsTreeJs}"></script>
 
@@ -16,7 +17,7 @@
                 <ul>
                     <c:forEach items="${sensors}" var="sensor">
                         <c:if test="${sensor.objMonitor == root}">
-                            <li id="tree-sensor-${sensor.idSensors}" data-jstree='{"id":"${sensor.idSensors}"}'><c:out value="${sensor.name}" /></li>
+                            <li id="tree-sensor-${sensor.idSensors}" data-jstree='{"icon":"${typeImg}${sensor.type}.png"}'><c:out value="${sensor.name}" /></li>
                         </c:if>
                     </c:forEach>
                 </ul>

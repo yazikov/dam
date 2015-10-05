@@ -4,12 +4,15 @@ var color = {
     green : "#0FEB00",
     red: "red",
     yellow: "yellow",
-    gray: "gray"
+    gray: "gray",
+    black: "black"
 };
 
 var colors = [color.green, color.yellow, color.red, color.gray];
 
 var circles = [];
+
+var context;
 
 $(document).ready(function() {
     drawMap();
@@ -18,11 +21,14 @@ $(document).ready(function() {
 function drawMap() {
     var map = $('#map');
     if (map != null) {
-        var context = map[0].getContext("2d");
+        context = map[0].getContext("2d");
 
         for (var i=0; i < sensors.length; i++) {
             var sensor = sensors[i];
-            drawSensor(context, sensor, colors[sensor.type - 1]);
+            var circle = drawSensor(sensor, colors[sensor.type - 1]);
+            if (sensor.type == 2 || sensor.type == 3) {
+                //setInterval(alertSensor(circle, colors[sensor.type - 1]), 51000);
+            }
         }
 
         var container = $('.map_container')[0];
@@ -63,7 +69,7 @@ function drawMap() {
     }
 }
 
-var drawSensor = function (context, sensor, color) {
+var drawSensor = function (sensor, color) {
     var circle = new Path2D();
     circles.push(circle);
     context.fontWeight = "normal";
@@ -76,7 +82,20 @@ var drawSensor = function (context, sensor, color) {
     context.fillStyle = "black";
     context.font = "bold 14px Arial";
     context.fillText(sensor.name, sensor.x + 7, sensor.y + 5);
+    return circle;
 };
+
+function redrawSensor(circle, color) {
+    context.fillStyle = color;
+    context.fill(circle);
+    context.strokeStyle = "black";
+    context.stroke(circle);
+}
+
+function alertSensor(circle, color) {
+    redrawSensor(circle, colors.black);
+    setTimeout(redrawSensor(circle, color), 2500);
+}
 
 function clickSensor (id, isMap) {
     var sensor = getSensorById(id);
