@@ -21,6 +21,12 @@
     <script src="${jqueryJs}"></script>
     <script src="${bootstrapJs}"></script>
 
+    <spring:url value="/" var="baseURL"/>
+
+    <script>
+        var baseURL = '${baseURL}';
+    </script>
+
 </head>
 
 <body>

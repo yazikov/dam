@@ -12,7 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TYPE_SIGNAL_TABLE")
-public class TypeSignalTable {
+public class TypeSignalTable extends AbstractEntry {
     @Id@Column(name = "id_signal")
     Integer idSignal;
     @Column(name = "text_signal")

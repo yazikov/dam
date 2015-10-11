@@ -8,7 +8,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "USTAVKA_PARAM_SYS")
-public class UstavkaParamSys {
+public class UstavkaParamSys extends AbstractEntry {
     @Id
     @Column(name = "id_ustavka")
     String idUstavka;

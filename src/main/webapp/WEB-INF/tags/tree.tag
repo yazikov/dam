@@ -11,8 +11,14 @@
 
 <div id="tree">
     <ul>
-        <c:forEach items="${roots}" var="root">
-            <li>
+        <c:forEach items="${roots}" var="root" varStatus="i">
+            <c:set var="type" value="1" />
+            <c:forEach var="sensor" items="${sensors}">
+                <c:if test="${sensor.objMonitor == root && sensor.type > type && sensor.type != 4}">
+                    <c:set var="type" value="${sensor.type}" />
+                </c:if>
+            </c:forEach>
+            <li data-jstree='{"icon":"${typeImg}${type}.png"}'>
                 <c:out value="${root}" />
                 <ul>
                     <c:forEach items="${sensors}" var="sensor">

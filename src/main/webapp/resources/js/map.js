@@ -5,16 +5,23 @@ var color = {
     red: "red",
     yellow: "yellow",
     gray: "gray",
-    black: "black"
+    black: "black",
+    white: "white"
 };
 
 var colors = [color.green, color.yellow, color.red, color.gray];
 
 var circles = [];
 
+var kventColor = true;
+var kvent = [];
+
 var context;
 
+var alertSound;
+
 $(document).ready(function() {
+    alertSound = $('#alert_sound');
     drawMap();
 });
 
@@ -27,7 +34,7 @@ function drawMap() {
             var sensor = sensors[i];
             var circle = drawSensor(sensor, colors[sensor.type - 1]);
             if (sensor.type == 2 || sensor.type == 3) {
-                //setInterval(alertSensor(circle, colors[sensor.type - 1]), 51000);
+                kvent.push(sensor.id);
             }
         }
 
@@ -56,16 +63,16 @@ function drawMap() {
             var x = e.pageX - this.offsetLeft + container.scrollLeft;
             var y = e.pageY - this.offsetTop + container.scrollTop - headerHeight;
 
-            //alert("x: " + x+ " y: " + y);
-
             for (var i = 0; i < sensors.length; i++) {
                 var sensor = sensors[i];
                 if (context.isPointInPath(circles[i],x,y)) {
-                    //alert ('clicked number: ' + sensor.id);
                     clickSensor(sensor.id, true);
                 }
             }
         });
+
+        setInterval(updateSensors, 15000);
+        setTimeout(kventSensor, 500);
     }
 }
 
@@ -92,6 +99,65 @@ function redrawSensor(circle, color) {
     context.stroke(circle);
 }
 
+function updateSensors () {
+    $.get("ajax/updateSensor", function (data) {
+        if (data.update) {
+
+           for (var i = 0; i < sensors.length; i++) {
+               var sensor = sensors[i];
+               var dataSensor;
+               for (var j = 0; j < data.sensors.length; j++) {
+                   if (data.sensors[j] != null && data.sensors[j].idSensors == sensor.id) {
+                       dataSensor = data.sensors[j];
+                       break;
+                   }
+               }
+               var redraw = sensor.type != dataSensor.type;
+               sensor.value = dataSensor.value;
+               sensor.type = dataSensor.type;
+               sensor.text = dataSensor.text;
+               if (redraw) {
+                   redrawSensor(circles[i], colors[sensor.type - 1]);
+                   if (sensor.type == 2 || sensor.type == 3) {
+                       kvent.push(sensor.id);
+                   }
+               }
+           }
+
+        }
+    }).fail(function(jqXHR, textStatus, e ) {
+        alert("Ошибка при получение данных с сервера: " + textStatus);
+    });
+}
+
+function kventSensor () {
+    if (kvent.length != 0) {
+        if (alertSound[0].paused == true) {
+            alertSound.trigger('play');
+        }
+    } else {
+        if (alertSound[0].paused == false) {
+            alertSound.trigger('pause');
+        }
+    }
+
+    kventColor = !kventColor;
+    for (var i=0;i<kvent.length;i++) {
+        var id = kvent[i];
+        var sensor;
+        var circle;
+        for (var j=0; j<sensors.length; j++) {
+            if (sensors[j].id == id) {
+                sensor = sensors[j];
+                circle = circles[j];
+            }
+        }
+
+        redrawSensor(circle, kventColor ? color.white : colors[sensor.type - 1]);
+    }
+    setTimeout(kventSensor, 1000);
+}
+
 function alertSensor(circle, color) {
     redrawSensor(circle, colors.black);
     setTimeout(redrawSensor(circle, color), 2500);
@@ -113,6 +179,11 @@ function clickSensor (id, isMap) {
                 case 3: info.removeClass("alert-success"); info.removeClass("alert-warning"); info.addClass("alert-danger"); break;
             }
             info.html(sensor.name + ": " + sensor.text);
+        }
+        var index = kvent.indexOf(sensor.id);
+        if (index != -1) {
+            kvent.splice(index, 1);
+            redrawSensor(getCircleById(sensor.id), colors[sensor.type - 1]);
         }
 
     }
