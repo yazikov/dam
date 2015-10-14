@@ -51,8 +51,7 @@ public class PassportParamSys extends AbstractEntry {
         this.signSys = signSys;
     }
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_sensors")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "passportParamSys")
     SignSys signSys;
 
     public PassportParamSys() {
@@ -171,6 +170,13 @@ public class PassportParamSys extends AbstractEntry {
                 sb.append(",");
             }
             sb.append("y:").append(yValue);
+        }
+
+        if (objMonitor != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("objMonitor:").append("\"").append(objMonitor).append("\"");
         }
 
         if (measParamSys != null && measParamSys.getWorkSensors() != null && !measParamSys.getWorkSensors()) {

@@ -102,7 +102,7 @@ function redrawSensor(circle, color) {
 function updateSensors () {
     $.get("ajax/updateSensor", function (data) {
         if (data.update) {
-
+            var update = false;
            for (var i = 0; i < sensors.length; i++) {
                var sensor = sensors[i];
                var dataSensor;
@@ -117,12 +117,19 @@ function updateSensors () {
                sensor.type = dataSensor.type;
                sensor.text = dataSensor.text;
                if (redraw) {
+                   update = true;
                    redrawSensor(circles[i], colors[sensor.type - 1]);
                    if (sensor.type == 2 || sensor.type == 3) {
                        kvent.push(sensor.id);
+                   } else {
+                       kvent.splice(kvent.indexOf(sensor.id), 1);
                    }
                }
            }
+
+            if (update) {
+                updateSensorTree();
+            }
 
         }
     }).fail(function(jqXHR, textStatus, e ) {
@@ -156,11 +163,6 @@ function kventSensor () {
         redrawSensor(circle, kventColor ? color.white : colors[sensor.type - 1]);
     }
     setTimeout(kventSensor, 1000);
-}
-
-function alertSensor(circle, color) {
-    redrawSensor(circle, colors.black);
-    setTimeout(redrawSensor(circle, color), 2500);
 }
 
 function clickSensor (id, isMap) {
