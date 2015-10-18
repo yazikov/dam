@@ -44,6 +44,7 @@ function drawMap() {
         map.mousemove(function(e) {
             var x = e.pageX - this.offsetLeft + container.scrollLeft;
             var y = e.pageY - this.offsetTop + container.scrollTop - headerHeight;
+
             var isCursor = false;
             for (var i = 0; i < circles.length; i++) {
                 if (context.isPointInPath(circles[i],x,y)) {
@@ -62,7 +63,7 @@ function drawMap() {
 
             var x = e.pageX - this.offsetLeft + container.scrollLeft;
             var y = e.pageY - this.offsetTop + container.scrollTop - headerHeight;
-
+            alert("x: " + x + " y: " + y);
             for (var i = 0; i < sensors.length; i++) {
                 var sensor = sensors[i];
                 if (context.isPointInPath(circles[i],x,y)) {

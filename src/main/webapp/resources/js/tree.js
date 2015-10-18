@@ -14,10 +14,12 @@ function initTree() {
             clickSensor(id, false);
         }
 
+    }).on('before_open.jstree', function (e, data) {
+        updateSensorTreeChildren();
     }).jstree();
 }
 
-function updateSensorTree () {
+function updateSensorTreeChildren ()  {
     var tree = $('#tree');
     for (var i=0; i<sensors.length; i++) {
         var sensor = sensors[i];
@@ -25,6 +27,11 @@ function updateSensorTree () {
         treeSensor.data('type', sensor.type);
         tree.jstree('set_icon', treeSensor, typeImg + sensor.type + '.png');
     }
+}
+
+function updateSensorTree () {
+    var tree = $('#tree');
+    updateSensorTreeChildren();
     tree.find('li').each(function(index, elem) {
         var root = $(elem);
         if (root.data('litype') == 'root') {
@@ -33,7 +40,7 @@ function updateSensorTree () {
             for (var i=0; i<sensors.length; i++) {
                 var sensor = sensors[i];
                 if (sensor.objMonitor == name && sensor.type > type && sensor.type != 4) {
-                    type = eType;
+                    type = sensor.type;
                 }
             }
 

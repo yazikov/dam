@@ -32,7 +32,16 @@
     </div>
     <div class="col3">
       <div class="col3_resize"></div>
-      <div class="block data_block"></div>
+      <div class="block data_block">
+        <div class="panel panel-default">
+          <div class="panel-heading">Оперативный журнал событий</div>
+          <div class="panel-body">
+            <div id="sensor-logging">
+
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="block info_block"></div>
     </div>
     <div class="col2">
