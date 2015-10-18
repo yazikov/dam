@@ -47,10 +47,18 @@ header {
 
 .block {
     border-bottom: 2px solid gray;
-    /*border-left: 2px solid gray;*/
-    /*border-right: 2px solid gray;*/
     width: 200px;
     overflow: auto;
+}
+
+.block .panel-body {
+    padding: 0;
+}
+
+.block .alert {
+    padding: 5px;
+    border-radius: 0;
+    margin-bottom: 0;
 }
 
 .info_block {
@@ -65,15 +73,43 @@ header {
 
 .map_container {
     height: 580px;
-    overflow: scroll;
+    overflow: auto;
 }
 
 #map {
-    background: url("../images/map.jpg");
+    /*background: url("../images/map.jpg");*/
+}
+
+.map_0 {
+    background: url("../images/map.jpg") no-repeat;
+}
+
+.map_1 {
+    background: url("../images/map_1.jpg") no-repeat;
+}
+
+.map_2 {
+    background: url("../images/map_2.jpg") no-repeat;
+}
+
+.map_3 {
+    background: url("../images/map_3.jpg") no-repeat;
+}
+
+.map_4 {
+    background: url("../images/map_4.jpg") no-repeat;
+}
+
+.map_5 {
+    background: url("../images/map_5.jpg") no-repeat;
+}
+
+.map_6 {
+    background: url("../images/map_6.jpg") no-repeat;
 }
 
 .jstree-default a {
-    white-space:normal !important; height: auto;
+    white-space:normal !important; height: auto; width: 85%;
 }
 .jstree-anchor {
     height: auto !important;

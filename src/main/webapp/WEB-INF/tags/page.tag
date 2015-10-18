@@ -37,6 +37,20 @@
             <div class="btn-group" role="group" aria-label="...">
                 <div class="btn-group">
                     <button class="btn btn-default dropdown-toggle menu_btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Состояние КИА в разрезах
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="<spring:url value="/cut/1" />" target="_blank">Разрез (пп) А-А</a></li>
+                        <li><a href="<spring:url value="/cut/2" />" target="_blank">Разрез (пп) А-Б</a></li>
+                        <li><a href="<spring:url value="/cut/3" />" target="_blank">Разрез (пп) А-В</a></li>
+                        <li><a href="<spring:url value="/cut/4" />" target="_blank">Разрез (пп) А-Г</a></li>
+                        <li><a href="<spring:url value="/cut/5" />" target="_blank">Разрез (пп) А-Д</a></li>
+                        <li><a href="<spring:url value="/cut/6" />" target="_blank">Разрез (пп) А-Е</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-default dropdown-toggle menu_btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         Ввод данных
                         <span class="caret"></span>
                     </button>

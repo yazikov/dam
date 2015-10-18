@@ -179,6 +179,21 @@ public class PassportParamSys extends AbstractEntry {
             sb.append("objMonitor:").append("\"").append(objMonitor).append("\"");
         }
 
+        if (measParamTypeSig != null) {
+            if (measParamTypeSig.getValueUstavkaPre() != null) {
+                if (!sb.toString().isEmpty()) {
+                    sb.append(",");
+                }
+                sb.append("setPre:").append(measParamTypeSig.getValueUstavkaPre());
+            }
+            if (measParamTypeSig.getValueUstavkaAv() != null) {
+                if (!sb.toString().isEmpty()) {
+                    sb.append(",");
+                }
+                sb.append("setAv:").append(measParamTypeSig.getValueUstavkaAv());
+            }
+        }
+
         if (measParamSys != null && measParamSys.getWorkSensors() != null && !measParamSys.getWorkSensors()) {
             if (!sb.toString().isEmpty()) {
                 sb.append(",");

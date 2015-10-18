@@ -32,7 +32,7 @@ function drawMap() {
 
         for (var i=0; i < sensors.length; i++) {
             var sensor = sensors[i];
-            var circle = drawSensor(sensor, colors[sensor.type - 1]);
+            drawSensor(sensor, colors[sensor.type - 1]);
             if (sensor.type == 2 || sensor.type == 3) {
                 kvent.push(sensor.id);
             }
@@ -72,6 +72,8 @@ function drawMap() {
             }
         });
 
+        updateSensorLog();
+
         setInterval(updateSensors, 15000);
         setTimeout(kventSensor, 500);
     }
@@ -101,7 +103,7 @@ function redrawSensor(circle, color) {
 }
 
 function updateSensors () {
-    $.get("ajax/updateSensor", function (data) {
+    $.get("/ajax/updateSensor", function (data) {
         if (data.update) {
             var update = false;
            for (var i = 0; i < sensors.length; i++) {
@@ -128,6 +130,8 @@ function updateSensors () {
                }
            }
 
+            updateSensorLog();
+
             if (update) {
                 updateSensorTree();
             }
@@ -136,6 +140,21 @@ function updateSensors () {
     }).fail(function(jqXHR, textStatus, e ) {
         alert("Ошибка при получение данных с сервера: " + textStatus);
     });
+}
+
+function updateSensorLog() {
+    var sensorLog = $('#sensor-logging');
+    if (sensorLog.length > 0) {
+        sensorLog.empty();
+        for (var i=0; i< sensors.length; i++) {
+            var sensor = sensors[i];
+            if (sensor.type == 2 || sensor.type == 3) {
+                var sensorClass = sensor.type == 2 ? 'alert-warning' : 'alert-danger';
+                var sensorAlert = $('<div class="alert ' + sensorClass + '">' + sensor.name + ": " + sensor.text + '</div>');
+                sensorAlert.appendTo(sensorLog);
+            }
+        }
+    }
 }
 
 function kventSensor () {
@@ -181,7 +200,7 @@ function clickSensor (id, isMap) {
                 case 2: info.removeClass("alert-success"); info.removeClass("alert-danger"); info.addClass("alert-warning"); break;
                 case 3: info.removeClass("alert-success"); info.removeClass("alert-warning"); info.addClass("alert-danger"); break;
             }
-            info.html(sensor.name + ": " + sensor.text);
+            info.html(sensor.name + ": " + sensor.text + "<br/>" + "Значение: " + sensor.value + "<br/>" + "Уставка: " + sensor.setting);
         }
         var index = kvent.indexOf(sensor.id);
         if (index != -1) {
