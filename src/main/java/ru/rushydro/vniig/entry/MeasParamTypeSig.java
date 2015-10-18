@@ -1,9 +1,6 @@
 package ru.rushydro.vniig.entry;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by alyon on 04.10.2015.
@@ -18,6 +15,7 @@ public class MeasParamTypeSig extends AbstractEntry {
 
     @Column(name = "discription")
     String discription;
+
 
     public String getDiscription() {
         return discription;

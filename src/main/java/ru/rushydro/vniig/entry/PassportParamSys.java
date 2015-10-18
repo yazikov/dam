@@ -17,7 +17,7 @@ public class PassportParamSys extends AbstractEntry {
 
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "MEAS_PARAM_TYPE_SIG")
-    MeasParamTypeSig measParamTypeSig;
+    UstavkaParamSys measParamTypeSig;
 
     @Column(name = "NAME_SENSORS")
     String name;
@@ -54,10 +54,6 @@ public class PassportParamSys extends AbstractEntry {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "passportParamSys")
     SignSys signSys;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_INS")
-    Insision insision;
-
     public PassportParamSys() {
     }
 
@@ -69,11 +65,11 @@ public class PassportParamSys extends AbstractEntry {
         this.objMonitor = objMonitor;
     }
 
-    public MeasParamTypeSig getMeasParamTypeSig() {
+    public UstavkaParamSys getMeasParamTypeSig() {
         return measParamTypeSig;
     }
 
-    public void setMeasParamTypeSig(MeasParamTypeSig measParamTypeSig) {
+    public void setMeasParamTypeSig(UstavkaParamSys measParamTypeSig) {
         this.measParamTypeSig = measParamTypeSig;
     }
 

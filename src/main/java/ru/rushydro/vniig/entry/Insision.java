@@ -10,13 +10,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "INSISION_PARAM")
-public class Insision {
+public class Insision extends AbstractEntry{
     @Id
     @Column(name = "ID_INSISION")
     Integer idInsision;
-
-    @Column(name = "ID_SENSOR")
-    Integer idSensor;
 
     @Column(name = "NAME_INS")
     String nameIns;
@@ -39,14 +36,6 @@ public class Insision {
 
     public void setIdInsision(Integer idInsision) {
         this.idInsision = idInsision;
-    }
-
-    public Integer getIdSensor() {
-        return idSensor;
-    }
-
-    public void setIdSensor(Integer idSensor) {
-        this.idSensor = idSensor;
     }
 
     public String getNameIns() {

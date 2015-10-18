@@ -20,7 +20,6 @@ public class AbstractDAO<T extends AbstractEntry> {
     @PersistenceContext
     EntityManager em;
 
-
     public AbstractDAO() {
     }
 

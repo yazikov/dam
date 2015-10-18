@@ -11,22 +11,21 @@ import java.util.Date;
 public class UstavkaParamSys extends AbstractEntry {
     @Id
     @Column(name = "id_ustavka")
-    String idUstavka;
+    Integer idUstavka;
+    @Column(name = "discription")
+    String discription;
     @Column(name = "date_ustavka")
-    @Temporal(value= TemporalType.DATE)
     Date dateUstavka;
     @Column(name = "value_ustavka_pre")
     Float valueUstavkaPre;
     @Column(name = "value_ustavka_av")
     Float valueUstavkaAv;
-    @Column(name = "coeff_return")
-    Float coeffReturn;
 
-    public String getIdUstavka() {
+    public Integer getIdUstavka() {
         return idUstavka;
     }
 
-    public void setIdUstavka(String idUstavka) {
+    public void setIdUstavka(Integer idUstavka) {
         this.idUstavka = idUstavka;
     }
 
@@ -54,11 +53,11 @@ public class UstavkaParamSys extends AbstractEntry {
         this.valueUstavkaAv = valueUstavkaAv;
     }
 
-    public Float getCoeffReturn() {
-        return coeffReturn;
+    public String getDiscription() {
+        return discription;
     }
 
-    public void setCoeffReturn(Float coeffReturn) {
-        this.coeffReturn = coeffReturn;
+    public void setDiscription(String discription) {
+        this.discription = discription;
     }
 }
