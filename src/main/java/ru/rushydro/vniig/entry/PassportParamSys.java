@@ -51,6 +51,10 @@ public class PassportParamSys extends AbstractEntry {
     @JoinColumn(name = "id_sensors")
     SignSys signSys;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_sensors")
+    Insision insision;
+
     public PassportParamSys() {
     }
 
