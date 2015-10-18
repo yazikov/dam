@@ -81,6 +81,15 @@ function getSensorById(id) {
     }
 }
 
+function getCircleById(id) {
+    for (var i = 0; i < sensors.length; i++) {
+        var sensor = sensors[i];
+        if (sensor.id == id) {
+            return circles[i];
+        }
+    }
+}
+
 function scrollToCenter(elem) {
     var childrens = elem.children();
     if (childrens != null && childrens.length > 0) {

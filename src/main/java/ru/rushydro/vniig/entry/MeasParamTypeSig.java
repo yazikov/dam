@@ -10,7 +10,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "meas_param_type_sig")
-public class MeasParamTypeSig {
+public class MeasParamTypeSig extends AbstractEntry {
 
     @Id
     @Column(name = "id_type")

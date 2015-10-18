@@ -1,5 +1,7 @@
 package ru.rushydro.vniig.entry;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -21,8 +23,11 @@ public class SignSys extends AbstractEntry {
     @ManyToOne
     @JoinColumn(name = "sort_sign")
     TypeSignalTable sortSign;
-    @Column(name = "id_sensors")
-    Integer idSensors;
+
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_sensors")
+    PassportParamSys passportParamSys;
 
     public Integer getIdSign() {
         return idSign;
@@ -56,11 +61,11 @@ public class SignSys extends AbstractEntry {
         this.sortSign = sortSign;
     }
 
-    public Integer getIdSensors() {
-        return idSensors;
+    public PassportParamSys getPassportParamSys() {
+        return passportParamSys;
     }
 
-    public void setIdSensors(Integer idSensors) {
-        this.idSensors = idSensors;
+    public void setPassportParamSys(PassportParamSys passportParamSys) {
+        this.passportParamSys = passportParamSys;
     }
 }

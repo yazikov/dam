@@ -30,6 +30,29 @@ public class PassportParamSysDAO extends AbstractDAO<PassportParamSys> {
         return query.getResultList();
     }
 
+    public PassportParamSys getById(Integer id) {
+        TypedQuery<PassportParamSys> query = em.createQuery("SELECT pps FROM PassportParamSys pps WHERE pps.idSensors = :id ", PassportParamSys.class);
+        query.setParameter("id", id);
+        query.setMaxResults(1);
+        return query.getSingleResult();
+    }
+
+    public PassportParamSys save(PassportParamSys passportParamSys) {
+        try {
+            em.getTransaction().begin();
+            if (passportParamSys.getIdSensors() == null) {
+                em.persist(passportParamSys);
+            } else {
+                em.merge(passportParamSys);
+            }
+            em.flush();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return passportParamSys;
+    }
+
     public Collection getAvandPreSign() throws SQLException
     {
         return null;

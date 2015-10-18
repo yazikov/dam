@@ -1,5 +1,8 @@
 package ru.rushydro.vniig.entry;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 
 /**
@@ -7,11 +10,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "PASSPORT_PARAM_SYS")
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class PassportParamSys extends AbstractEntry {
     @Column(name = "OBJ_MONITOR")
     String objMonitor;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "MEAS_PARAM_TYPE_SIG")
     MeasParamTypeSig measParamTypeSig;
 
@@ -35,7 +39,7 @@ public class PassportParamSys extends AbstractEntry {
     @Column(name = "y_value")
     Integer yValue;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_sensors")
     MeasParamSys measParamSys;
 
@@ -47,8 +51,7 @@ public class PassportParamSys extends AbstractEntry {
         this.signSys = signSys;
     }
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_sensors")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "passportParamSys")
     SignSys signSys;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -152,6 +155,13 @@ public class PassportParamSys extends AbstractEntry {
             sb.append("name:").append("\"").append(name).append("\"");
         }
 
+        if (getValue() != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("value:").append("\"").append(getValue()).append("\"");
+        }
+
         if (xValue != null) {
             if (!sb.toString().isEmpty()) {
                 sb.append(",");
@@ -164,6 +174,13 @@ public class PassportParamSys extends AbstractEntry {
                 sb.append(",");
             }
             sb.append("y:").append(yValue);
+        }
+
+        if (objMonitor != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("objMonitor:").append("\"").append(objMonitor).append("\"");
         }
 
         if (measParamSys != null && measParamSys.getWorkSensors() != null && !measParamSys.getWorkSensors()) {
@@ -205,5 +222,13 @@ public class PassportParamSys extends AbstractEntry {
                 return 1;
             }
         }
+    }
+
+    public String getText () {
+        return signSys != null && signSys.getSortSign() != null ? signSys.getSortSign().getTextSignal() : "";
+    }
+
+    public Float getValue () {
+        return measParamSys != null && measParamSys.getValueMeas() != null ? measParamSys.getValueMeas() : 0;
     }
 }
