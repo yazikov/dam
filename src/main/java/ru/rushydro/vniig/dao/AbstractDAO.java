@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by nikolay on 20.09.15.
  */
-@Transactional
+//@Transactional
 public class AbstractDAO<T extends AbstractEntry> {
 
     @PersistenceContext

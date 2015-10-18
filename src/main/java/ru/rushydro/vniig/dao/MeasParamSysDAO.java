@@ -1,6 +1,7 @@
 package ru.rushydro.vniig.dao;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ru.rushydro.vniig.entry.MeasParamSys;
 import ru.rushydro.vniig.entry.PassportParamSys;
 
@@ -12,6 +13,7 @@ import javax.persistence.TypedQuery;
 @Component
 public class MeasParamSysDAO extends AbstractDAO<MeasParamSys> {
 
+//    @Transactional
     public MeasParamSys getById(Integer id) {
         TypedQuery<MeasParamSys> query = em.createQuery("SELECT mps FROM MeasParamSys mps WHERE mps.idSensors = :id ", MeasParamSys.class);
         query.setParameter("id", id);
@@ -19,6 +21,7 @@ public class MeasParamSysDAO extends AbstractDAO<MeasParamSys> {
         return query.getSingleResult();
     }
 
+//    @Transactional
     public MeasParamSys save(MeasParamSys measParamSys) {
         try {
             em.getTransaction().begin();
