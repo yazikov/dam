@@ -15,9 +15,77 @@ public class Insision {
     @Column(name = "ID_INSISION")
     Integer idInsision;
 
-    @Column(name = "ID_INSISION")
-    Integer idInsision;
+    @Column(name = "ID_SENSOR")
+    Integer idSensor;
 
+    @Column(name = "NAME_INS")
+    String nameIns;
 
+    @Column(name = "X_START")
+    Integer xStart;
 
+    @Column(name = "Y_START")
+    Integer yStart;
+
+    @Column(name = "X_END")
+    Integer xEnd;
+
+    @Column(name = "Y_END")
+    Integer yEnd;
+
+    public Integer getIdInsision() {
+        return idInsision;
+    }
+
+    public void setIdInsision(Integer idInsision) {
+        this.idInsision = idInsision;
+    }
+
+    public Integer getIdSensor() {
+        return idSensor;
+    }
+
+    public void setIdSensor(Integer idSensor) {
+        this.idSensor = idSensor;
+    }
+
+    public String getNameIns() {
+        return nameIns;
+    }
+
+    public void setNameIns(String nameIns) {
+        this.nameIns = nameIns;
+    }
+
+    public Integer getxStart() {
+        return xStart;
+    }
+
+    public void setxStart(Integer xStart) {
+        this.xStart = xStart;
+    }
+
+    public Integer getyStart() {
+        return yStart;
+    }
+
+    public void setyStart(Integer yStart) {
+        this.yStart = yStart;
+    }
+
+    public Integer getxEnd() {
+        return xEnd;
+    }
+
+    public void setxEnd(Integer xEnd) {
+        this.xEnd = xEnd;
+    }
+
+    public Integer getyEnd() {
+        return yEnd;
+    }
+
+    public void setyEnd(Integer yEnd) {
+        this.yEnd = yEnd;
+    }
 }
