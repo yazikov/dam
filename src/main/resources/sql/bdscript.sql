@@ -59,6 +59,7 @@ create table SIGN_SYS
   SORT_SIGN INTEGER,
   ID_SENSORS  INTEGER,
   DATE_KVINT DATE,
+  TIME_KVINT TIME,
   primary key(ID_SIGN),
   foreign key(ID_SENSORS) references  PASSPORT_PARAM_SYS(ID_SENSORS) on delete cascade
 );
