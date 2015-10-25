@@ -3,13 +3,11 @@ package ru.rushydro.vniig.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import org.springframework.transaction.annotation.Transactional;
+import ru.rushydro.vniig.TypeSignalTableDAO;
 import ru.rushydro.vniig.entry.SignSys;
-import ru.rushydro.vniig.entry.TypeSignalTable;
 
 import javax.persistence.TypedQuery;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by alyon on 18.10.2015.
