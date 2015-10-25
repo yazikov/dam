@@ -24,9 +24,22 @@ public class PassportParamSysDAO extends AbstractDAO<PassportParamSys> {
         return query.getResultList();
     }
 
+    public List<String> getRootNodesByInsision(Integer insision) {
+        TypedQuery<String> query = em.createQuery("SELECT DISTINCT pps.objMonitor FROM PassportParamSys pps JOIN pps.insisionSensorsList ins WHERE ins.insision = :insision and pps.number != ''  order by pps.objMonitor ", String.class);
+        query.setParameter("insision", insision);
+        return query.getResultList();
+    }
+
     public List<PassportParamSys> getSensorByType(Integer type) {
         TypedQuery<PassportParamSys> query = em.createQuery("SELECT pps FROM PassportParamSys pps WHERE pps.measParamTypeSig.idUstavka = :measParamType ", PassportParamSys.class);
         query.setParameter("measParamType",type);
+        return query.getResultList();
+    }
+
+    public List<PassportParamSys> getSensorByTypeAndInsision(Integer type, Integer insision) {
+        TypedQuery<PassportParamSys> query = em.createQuery("SELECT pps FROM PassportParamSys pps JOIN pps.insisionSensorsList ins WHERE ins.insision = :insision and pps.measParamTypeSig.idUstavka = :measParamType ", PassportParamSys.class);
+        query.setParameter("measParamType",type);
+        query.setParameter("insision", insision);
         return query.getResultList();
     }
 
@@ -57,5 +70,6 @@ public class PassportParamSysDAO extends AbstractDAO<PassportParamSys> {
     {
         return null;
     }
+
 
 }

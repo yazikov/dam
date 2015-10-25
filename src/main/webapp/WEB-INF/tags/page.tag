@@ -32,7 +32,7 @@
 <body>
 <div class="wrapper">
     <header>
-        <div class="header_logo">РусГидро</div>
+        <div class="header_logo" onclick="location.href = baseURL"></div>
         <div class="header_content">
             <div class="btn-group" role="group" aria-label="...">
                 <div class="btn-group">
@@ -58,7 +58,7 @@
                         <li><a href="#">Данные натурных наблюдений</a></li>
                         <li><a href="#">Контрольный лист замеров глубин</a></li>
                         <li><a href="#">Журнал технического надзора</a></li>
-                        <li><a href="<spring:url value="/enter/operateJournal" />">Оперативный диспетчерский журнал</a></li>
+                        <li><a href="<spring:url value="/enter/operateJournal" />" target="_blank">Оперативный диспетчерский журнал</a></li>
                     </ul>
                 </div>
                 <div class="btn-group">
@@ -126,7 +126,7 @@
 </div>
 
 <footer>
-    <div>Русгидро</div>
+    <div>Inversion sensor</div>
 </footer>
 
 

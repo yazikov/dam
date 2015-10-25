@@ -1,6 +1,7 @@
 package ru.rushydro.vniig.entry;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by alyon on 27.09.2015.
@@ -39,6 +40,9 @@ public class PassportParamSys extends AbstractEntry {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_sensors")
     MeasParamSys measParamSys;
+
+    @OneToMany(mappedBy = "passportParamSys", fetch = FetchType.EAGER)
+    List<InsisionSensors> insisionSensorsList;
 
     public SignSys getSignSys() {
         return signSys;
@@ -134,6 +138,13 @@ public class PassportParamSys extends AbstractEntry {
         this.measParamSys = measParamSys;
     }
 
+    public List<InsisionSensors> getInsisionSensorsList() {
+        return insisionSensorsList;
+    }
+
+    public void setInsisionSensorsList(List<InsisionSensors> insisionSensorsList) {
+        this.insisionSensorsList = insisionSensorsList;
+    }
 
     public String toJSON() {
         StringBuilder sb = new StringBuilder();
@@ -217,6 +228,11 @@ public class PassportParamSys extends AbstractEntry {
             }
         }
 
+        if (!sb.toString().isEmpty()) {
+            sb.append(",");
+        }
+        sb.append("isKvint:").append(isKvint());
+
         return "{" + sb.toString() + "}";
     }
 
@@ -238,5 +254,9 @@ public class PassportParamSys extends AbstractEntry {
 
     public Float getValue () {
         return measParamSys != null && measParamSys.getValueMeas() != null ? measParamSys.getValueMeas() : 0;
+    }
+
+    public boolean isKvint () {
+        return signSys == null || (signSys.getTimeKvint() != null && signSys.getDateKvint() != null);
     }
 }

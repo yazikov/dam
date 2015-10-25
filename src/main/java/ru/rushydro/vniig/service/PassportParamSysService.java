@@ -22,7 +22,15 @@ public class PassportParamSysService extends AbstractService<PassportParamSys, P
         return dao.getAllRootNodes();
     }
 
+    public List<String> getRootNodesByInsision(Integer insision) {
+        return dao.getRootNodesByInsision (insision);
+    }
+
     public List<PassportParamSys> getSensorByType(Integer type) {
-        return dao.getSensorByType(1);
+        return dao.getSensorByType(type);
+    }
+
+    public List<PassportParamSys> getSensorByTypeAndInsision (Integer type, Integer insision) {
+        return dao.getSensorByTypeAndInsision(type, insision);
     }
 }

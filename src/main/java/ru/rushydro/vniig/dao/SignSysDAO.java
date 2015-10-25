@@ -17,7 +17,6 @@ public class SignSysDAO extends AbstractDAO<SignSys>{
     @Autowired
     TypeSignalTblDAO typeSignalTableDao;
 
-//    @Transactional
     public SignSys getById(Integer id) {
         TypedQuery<SignSys> query = em.createQuery("SELECT mps FROM SignSys mps WHERE mps.passportParamSys.idSensors = :id ", SignSys.class);
         query.setParameter("id", id);
@@ -25,7 +24,6 @@ public class SignSysDAO extends AbstractDAO<SignSys>{
         return query.getSingleResult();
     }
 
-//    @Transactional
     public SignSys save(SignSys signSys) {
         try {
             em.getTransaction().begin();
@@ -42,7 +40,6 @@ public class SignSysDAO extends AbstractDAO<SignSys>{
         return signSys;
     }
 
-//    @Transactional
     public SignSys updateValues(Integer id, Double value)
     {
         SignSys signSys = getById(id);
@@ -57,5 +54,12 @@ public class SignSysDAO extends AbstractDAO<SignSys>{
         signSys.setDateSign(new Date());
         signSys.setTimeSign(new Date());
         return save(signSys);
+    }
+
+    public boolean kventSensor(Integer id) {
+        SignSys signSys = getById(id);
+        signSys.setTimeKvint(new Date());
+        signSys.setDateKvint(new Date());
+        return true;
     }
 }

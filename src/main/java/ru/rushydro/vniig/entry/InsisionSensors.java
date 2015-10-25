@@ -1,9 +1,8 @@
 package ru.rushydro.vniig.entry;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 /**
  * Created by alyon on 18.10.2015.
@@ -19,8 +18,10 @@ public class InsisionSensors extends AbstractEntry {
     @Column(name = "id_insision")
     Integer insision;
 
-    @Column(name = "id_sensors")
-    Integer sensors;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "id_sensors")
+    PassportParamSys passportParamSys;
 
     @Column(name = "x_value")
     Integer xValue;
@@ -44,14 +45,6 @@ public class InsisionSensors extends AbstractEntry {
         this.insision = insision;
     }
 
-    public Integer getSensors() {
-        return sensors;
-    }
-
-    public void setSensors(Integer sensors) {
-        this.sensors = sensors;
-    }
-
     public Integer getxValue() {
         return xValue;
     }
@@ -66,5 +59,13 @@ public class InsisionSensors extends AbstractEntry {
 
     public void setyValue(Integer yValue) {
         this.yValue = yValue;
+    }
+
+    public PassportParamSys getPassportParamSys() {
+        return passportParamSys;
+    }
+
+    public void setPassportParamSys(PassportParamSys passportParamSys) {
+        this.passportParamSys = passportParamSys;
     }
 }

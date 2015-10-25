@@ -40,7 +40,7 @@ function drawMap() {
         for (var i=0; i < sensors.length; i++) {
             var sensor = sensors[i];
             drawSensor(sensor, colors[sensor.type - 1]);
-            if (sensor.type == 2 || sensor.type == 3) {
+            if ((sensor.type == 2 || sensor.type == 3) && !sensor.isKvint) {
                 kvent.push(sensor.id);
             }
         }
@@ -75,7 +75,7 @@ function drawMap() {
 
             var x = e.pageX - this.offsetLeft + container.scrollLeft;
             var y = e.pageY - this.offsetTop + container.scrollTop - headerHeight;
-            alert("x: " + x + " y: " + y);
+            //alert("x: " + x + " y: " + y);
             var isSensor = false;
             for (var i = 0; i < sensors.length; i++) {
                 var sensor = sensors[i];
@@ -105,7 +105,15 @@ var drawSensor = function (sensor, color) {
     var circle = new Path2D();
     circles.push(circle);
     context.fontWeight = "normal";
-    circle.arc(sensor.x, sensor.y, 5, 0, 2 * Math.PI, false);
+    if (cutId == 0) {
+        circle.arc(sensor.x, sensor.y, 5, 0, 2 * Math.PI, false);
+    } else {
+        circle.moveTo(sensor.x, sensor.y);
+        circle.lineTo(sensor.x, sensor.y + 10);
+        circle.lineTo(sensor.x + 6, sensor.y + 10);
+        circle.lineTo(sensor.x + 6, sensor.y);
+        circle.lineTo(sensor.x, sensor.y);
+    }
     context.fillStyle = color;
     context.fill(circle);
     context.lineWidth = 1;
@@ -113,7 +121,11 @@ var drawSensor = function (sensor, color) {
     context.stroke(circle);
     context.fillStyle = "black";
     context.font = "bold 14px Arial";
-    context.fillText(sensor.name, sensor.x + 7, sensor.y + 5);
+    if (cutId == 0) {
+        context.fillText(sensor.name, sensor.x + 7, sensor.y + 5);
+    } else {
+        context.fillText(sensor.name, sensor.x + 8, sensor.y + 10);
+    }
     return circle;
 };
 
@@ -121,12 +133,21 @@ var drawInsision = function (insision) {
     var insisionObj = new Path2D();
     insisionObjs.push(insisionObj);
     context.fontWeight = "normal";
-    insisionObj.moveTo(insision.x1 - 1, insision.y1 - 1);
-    insisionObj.lineTo(insision.x1 + 3, insision.y1 + 3);
-    insisionObj.lineTo(insision.x2 + 3, insision.y2 + 3);
-    insisionObj.lineTo(insision.x2 - 1, insision.y2 - 1);
-    insisionObj.lineTo(insision.x1 - 1, insision.y1 - 1);
-    context.fillStyle = "#9e229e";
+    if (insision.x2 - insision.x1 > 100) {
+        insisionObj.moveTo(insision.x1 - 1, insision.y1 - 1);
+        insisionObj.lineTo(insision.x1 + 3, insision.y1 + 3);
+        insisionObj.lineTo(insision.x2 + 3, insision.y2 + 3);
+        insisionObj.lineTo(insision.x2 - 1, insision.y2 - 1);
+        insisionObj.lineTo(insision.x1 - 1, insision.y1 - 1);
+    } else {
+        insisionObj.moveTo(insision.x1 - 1, insision.y1 - 1);
+        insisionObj.lineTo(insision.x1 + 2, insision.y1 + 2);
+        insisionObj.lineTo(insision.x2 + 2, insision.y2 + 2);
+        insisionObj.lineTo(insision.x2 - 1, insision.y2 - 1);
+        insisionObj.lineTo(insision.x1 - 1, insision.y1 - 1);
+    }
+
+    context.fillStyle = "dodgerblue";
     context.fill(insisionObj);
     return insisionObj;
 };
@@ -139,7 +160,7 @@ function redrawSensor(circle, color) {
 }
 
 function updateSensors () {
-    $.get("/ajax/updateSensor", function (data) {
+    $.get("/ajax/updateSensor/" + cutId, function (data) {
         if (data.update) {
             var update = false;
            for (var i = 0; i < sensors.length; i++) {
@@ -158,7 +179,7 @@ function updateSensors () {
                if (redraw) {
                    update = true;
                    redrawSensor(circles[i], colors[sensor.type - 1]);
-                   if (sensor.type == 2 || sensor.type == 3) {
+                   if ((sensor.type == 2 || sensor.type == 3) && !sensor.isKvint) {
                        kvent.push(sensor.id);
                    } else {
                        kvent.splice(kvent.indexOf(sensor.id), 1);
@@ -251,8 +272,17 @@ function clickSensor (id, isMap) {
         if (index != -1) {
             kvent.splice(index, 1);
             redrawSensor(getCircleById(sensor.id), colors[sensor.type - 1]);
+            kvintSensorInDB(sensor.id);
         }
 
     }
+}
+
+function kvintSensorInDB (sensorId) {
+    $.post("/ajax/kvintSensor", {id : sensorId}, function (data) {
+
+    }).fail(function(jqXHR, textStatus, e ) {
+        alert("Ошибка квентирования датчика: " + textStatus);
+    });
 }
 

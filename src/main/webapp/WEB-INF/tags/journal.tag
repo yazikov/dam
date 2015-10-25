@@ -14,37 +14,45 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th rowspan="3">Кв</th>
-            <th rowspan="3">Дата</th>
-            <th rowspan="3">Время</th>
-            <th rowspan="3" width="120">Участок объекта автоматизации</th>
-            <th rowspan="3">Тип объекта автоматизации</th>
-            <th colspan="3">Состояние элементов сооружений</th>
-            <th rowspan="3">Дата квинтирования</th>
-            <th rowspan="3">Время квинтирования</th>
+            <th rowspan="2">Дата</th>
+            <th rowspan="2">Время</th>
+            <th rowspan="2" width="200">Участок объекта автоматизации</th>
+            <th rowspan="2">Тип объекта автоматизации</th>
+            <th colspan="2">Состояние элементов сооружений</th>
+            <th rowspan="2">Дата квинтирования</th>
+            <th rowspan="2">Время квинтирования</th>
         </tr>
         <tr>
-            <th colspan="2">Сигнал</th>
-            <th rowspan="2">Статус</th>
-        </tr>
-        <tr>
-            <th>K1/const</th>
-            <th>K2/const</th>
+            <th>Сигнал</th>
+            <th>Статус</th>
         </tr>
     </thead>
     <tbody>
         <c:forEach items="${sensors}" var="sensor">
-            <tr>
-                <td><c:out value="${sensor.type}" /></td>
+            <tr class="sensor_type_${sensor.type}">
                 <td><c:out value="${df.format(sensor.signSys.dateSign)}" /></td>
                 <td><c:out value="${hf.format(sensor.signSys.timeSign)}" /></td>
                 <td><c:out value="${sensor.objMonitor}" /></td>
                 <td><c:out value="${sensor.name}" /></td>
                 <td><c:out value="${sensor.text}" /></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                    <c:choose>
+                        <c:when test="${(sensor.type==2 || sensor.type==3) && sensor.isKvint()}">
+                            Квит.
+                        </c:when>
+                        <c:when test="${(sensor.type==2 || sensor.type==3) && !sensor.isKvint()}">
+                            Не квит.
+                        </c:when>
+                        <c:when test="${sensor.type==1}">
+                            Норма
+                        </c:when>
+                        <c:when test="${sensor.type==4}">
+                            Отключен
+                        </c:when>
+                    </c:choose>
+                </td>
+                <td><c:out value="${sensor.signSys.dateKvint != null ? df.format(sensor.signSys.dateKvint) : ''}" /></td>
+                <td><c:out value="${sensor.signSys.timeKvint != null ? hf.format(sensor.signSys.timeKvint) : ''}" /></td>
             </tr>
         </c:forEach>
     </tbody>

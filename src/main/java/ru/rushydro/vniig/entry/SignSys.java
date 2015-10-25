@@ -15,14 +15,17 @@ public class SignSys extends AbstractEntry {
     @Column(name = "id_sign")
     Integer idSign;
     @Column(name = "date_sign")
-    @Temporal(value= TemporalType.DATE)
     Date dateSign;
     @Column(name = "time_sign")
-    @Temporal(value=TemporalType.DATE)
     Date timeSign;
     @ManyToOne
     @JoinColumn(name = "sort_sign")
     TypeSignalTable sortSign;
+
+    @Column(name = "date_kvint")
+    Date dateKvint;
+    @Column(name = "time_kvint")
+    Date timeKvint;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.EAGER)
@@ -67,5 +70,21 @@ public class SignSys extends AbstractEntry {
 
     public void setPassportParamSys(PassportParamSys passportParamSys) {
         this.passportParamSys = passportParamSys;
+    }
+
+    public Date getDateKvint() {
+        return dateKvint;
+    }
+
+    public void setDateKvint(Date dateKvint) {
+        this.dateKvint = dateKvint;
+    }
+
+    public Date getTimeKvint() {
+        return timeKvint;
+    }
+
+    public void setTimeKvint(Date timeKvint) {
+        this.timeKvint = timeKvint;
     }
 }
