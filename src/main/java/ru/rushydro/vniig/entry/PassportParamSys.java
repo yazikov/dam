@@ -38,7 +38,7 @@ public class PassportParamSys extends AbstractEntry {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_sensors")
-    Insision.MeasParamSys measParamSys;
+    MeasParamSys measParamSys;
 
     public SignSys getSignSys() {
         return signSys;
@@ -126,11 +126,11 @@ public class PassportParamSys extends AbstractEntry {
         this.yValue = yValue;
     }
 
-    public Insision.MeasParamSys getMeasParamSys() {
+    public MeasParamSys getMeasParamSys() {
         return measParamSys;
     }
 
-    public void setMeasParamSys(Insision.MeasParamSys measParamSys) {
+    public void setMeasParamSys(MeasParamSys measParamSys) {
         this.measParamSys = measParamSys;
     }
 
