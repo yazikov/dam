@@ -15,7 +15,7 @@ import java.util.Date;
 public class SignSysDAO extends AbstractDAO<SignSys>{
 
     @Autowired
-    TypeSignalTableDAO typeSignalTableDao;
+    TypeSignalTblDAO typeSignalTableDao;
 
 //    @Transactional
     public SignSys getById(Integer id) {
