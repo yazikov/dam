@@ -3,7 +3,6 @@ package ru.rushydro.vniig.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import ru.rushydro.vniig.TypeSignalTableDAO;
 import ru.rushydro.vniig.entry.SignSys;
 
 import javax.persistence.TypedQuery;
