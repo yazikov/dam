@@ -1,8 +1,5 @@
 package ru.rushydro.vniig.entry;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import javax.persistence.*;
 
 /**
@@ -41,7 +38,7 @@ public class PassportParamSys extends AbstractEntry {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_sensors")
-    MeasParamSys measParamSys;
+    Insision.MeasParamSys measParamSys;
 
     public SignSys getSignSys() {
         return signSys;
@@ -129,11 +126,11 @@ public class PassportParamSys extends AbstractEntry {
         this.yValue = yValue;
     }
 
-    public MeasParamSys getMeasParamSys() {
+    public Insision.MeasParamSys getMeasParamSys() {
         return measParamSys;
     }
 
-    public void setMeasParamSys(MeasParamSys measParamSys) {
+    public void setMeasParamSys(Insision.MeasParamSys measParamSys) {
         this.measParamSys = measParamSys;
     }
 

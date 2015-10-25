@@ -10,7 +10,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "insision_sensors")
-public class InsisionSensors {
+public class InsisionSensors extends AbstractEntry {
 
     @Id
     @Column(name = "id")
