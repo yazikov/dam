@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.rushydro.vniig.dao.MeasParamSysDAO;
-import ru.rushydro.vniig.entry.MeasParamSys;
 import ru.rushydro.vniig.entry.PassportParamSys;
 import ru.rushydro.vniig.service.PassportParamSysService;
 
@@ -21,9 +19,6 @@ public class IndexController {
 
     @Autowired
     PassportParamSysService sensorService;
-
-    @Autowired
-    MeasParamSysDAO measParamSysDAO;
     
     @RequestMapping(path = "/")
     public String indexPage(Model model) {
