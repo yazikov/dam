@@ -13,6 +13,8 @@ var colors = [color.green, color.yellow, color.red, color.gray];
 
 var circles = [];
 
+var insisionObjs = [];
+
 var kventColor = true;
 var kvent = [];
 
@@ -29,6 +31,11 @@ function drawMap() {
     var map = $('#map');
     if (map != null) {
         context = map[0].getContext("2d");
+
+        for (var i = 0; i < insisions.length; i++) {
+            var insision = insisions[i];
+            drawInsision(insision);
+        }
 
         for (var i=0; i < sensors.length; i++) {
             var sensor = sensors[i];
@@ -51,6 +58,11 @@ function drawMap() {
                     isCursor = true;
                 }
             }
+            for (var i = 0; i < insisionObjs.length; i++) {
+                if (context.isPointInPath(insisionObjs[i],x,y)) {
+                    isCursor = true;
+                }
+            }
             if (isCursor) {
                 map.css("cursor", "pointer");
             } else {
@@ -64,10 +76,20 @@ function drawMap() {
             var x = e.pageX - this.offsetLeft + container.scrollLeft;
             var y = e.pageY - this.offsetTop + container.scrollTop - headerHeight;
             alert("x: " + x + " y: " + y);
+            var isSensor = false;
             for (var i = 0; i < sensors.length; i++) {
                 var sensor = sensors[i];
                 if (context.isPointInPath(circles[i],x,y)) {
+                    isSensor = true;
                     clickSensor(sensor.id, true);
+                }
+            }
+            if (!isSensor) {
+                for (var i = 0; i < insisions.length; i++) {
+                    var insision = insisions[i];
+                    if (context.isPointInPath(insisionObjs[i],x,y)) {
+                        openCut(insision);
+                    }
                 }
             }
         });
@@ -93,6 +115,20 @@ var drawSensor = function (sensor, color) {
     context.font = "bold 14px Arial";
     context.fillText(sensor.name, sensor.x + 7, sensor.y + 5);
     return circle;
+};
+
+var drawInsision = function (insision) {
+    var insisionObj = new Path2D();
+    insisionObjs.push(insisionObj);
+    context.fontWeight = "normal";
+    insisionObj.moveTo(insision.x1 - 1, insision.y1 - 1);
+    insisionObj.lineTo(insision.x1 + 3, insision.y1 + 3);
+    insisionObj.lineTo(insision.x2 + 3, insision.y2 + 3);
+    insisionObj.lineTo(insision.x2 - 1, insision.y2 - 1);
+    insisionObj.lineTo(insision.x1 - 1, insision.y1 - 1);
+    context.fillStyle = "#9e229e";
+    context.fill(insisionObj);
+    return insisionObj;
 };
 
 function redrawSensor(circle, color) {
@@ -185,6 +221,15 @@ function kventSensor () {
     setTimeout(kventSensor, 1000);
 }
 
+function openCut(insision) {
+    openInNewTab("/cut/" + insision.id);
+}
+
+function openInNewTab(url) {
+    var win = window.open(url, '_blank');
+    win.focus();
+}
+
 function clickSensor (id, isMap) {
     var sensor = getSensorById(id);
     if (sensor.type != 4) {
@@ -200,7 +245,7 @@ function clickSensor (id, isMap) {
                 case 2: info.removeClass("alert-success"); info.removeClass("alert-danger"); info.addClass("alert-warning"); break;
                 case 3: info.removeClass("alert-success"); info.removeClass("alert-warning"); info.addClass("alert-danger"); break;
             }
-            info.html(sensor.name + ": " + sensor.text + "<br/>" + "Значение: " + sensor.value + "<br/>" + "Уставка: " + sensor.setting);
+            info.html(sensor.name + ": " + sensor.text + "<br/>" + "Значение: " + sensor.value + "<br/>" + "Уставка k1: " + sensor.setPre + "<br/>" + "Уставка k2: " + sensor.setAv);
         }
         var index = kvent.indexOf(sensor.id);
         if (index != -1) {

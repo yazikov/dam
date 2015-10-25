@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Component
 public class InsisionDao extends AbstractDAO<Insision>{
-    public List<Insision> getAllInsision(Integer type) {
+    public List<Insision> getAllInsision() {
         TypedQuery<Insision> query = em.createQuery("SELECT ins FROM Insision ins", Insision.class);
         return query.getResultList();
     }

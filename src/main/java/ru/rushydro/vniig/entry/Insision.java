@@ -77,4 +77,48 @@ public class Insision extends AbstractEntry{
     public void setyEnd(Integer yEnd) {
         this.yEnd = yEnd;
     }
+
+    public String toJSON () {
+        StringBuilder sb = new StringBuilder();
+        if (idInsision != null) {
+            sb.append("id:").append(idInsision);
+        }
+
+        if (nameIns != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("name:").append("\"").append(nameIns).append("\"");
+        }
+
+        if (xStart != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("x1:").append(xStart);
+        }
+
+        if (yStart != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("y1:").append(yStart);
+        }
+
+        if (xEnd != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("x2:").append(xEnd);
+        }
+
+        if (yEnd != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("y2:").append(yEnd);
+        }
+
+        return "{" + sb.toString() + "}";
+    }
 }

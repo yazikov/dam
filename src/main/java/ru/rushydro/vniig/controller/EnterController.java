@@ -4,38 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.rushydro.vniig.entry.Insision;
 import ru.rushydro.vniig.entry.PassportParamSys;
-import ru.rushydro.vniig.service.InsisionService;
 import ru.rushydro.vniig.service.PassportParamSysService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by nikolay on 06.09.15.
+ * Created by nikolay on 25.10.15.
  */
+@RequestMapping("/enter")
 @Controller
-@RequestMapping(path = "/")
-public class IndexController {
+public class EnterController {
 
     @Autowired
     PassportParamSysService sensorService;
 
-    @Autowired
-    InsisionService insisionService;
-    
-    @RequestMapping(path = "/")
-    public String indexPage(Model model) {
+    @RequestMapping("/operateJournal")
+    public String showOperateJournal (Model model) {
 
-        List<String> roots = sensorService.getAllRootNodes();
         List<PassportParamSys> passportParamSysList = sensorService.getSensorByType(1);
-
-        List<Insision> insisions = insisionService.getAllInsision();
-
-        model.addAttribute("roots", roots);
         model.addAttribute("sensors", passportParamSysList);
-        model.addAttribute("insisions", insisions);
-        return "index";
+
+        return "operateJournal";
     }
+
 }

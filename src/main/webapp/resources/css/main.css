@@ -41,6 +41,9 @@ header {
 .col2 { margin-left: 200px; margin-right: 200px; padding: 10px; }
 .col3 { float: right; width: 200px; min-height: 600px; height: 600px; position: relative; }
 
+.no_left {margin-left: 0;}
+.no_right {margin-right: 0;}
+
 .col1_resize, .col3_resize { position: absolute; height: 100%; top: 0; width: 2px; cursor: col-resize; background: gray; }
 .col1_resize { right: 0 }
 .col3_resize { left: 0 }
@@ -144,6 +147,10 @@ header {
     background: gray;
 }
 
+.journal_container {
+    overflow-x: auto;
+}
+
 footer {
     background-color: #0039a6;
     /*bottom: 0;*/
@@ -157,4 +164,8 @@ footer div {
     margin: 0 auto;
     width: 80%;
     text-align: center;
+}
+
+table th {
+
 }

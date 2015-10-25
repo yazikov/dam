@@ -42,11 +42,11 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li><a href="<spring:url value="/cut/1" />" target="_blank">Разрез (пп) А-А</a></li>
-                        <li><a href="<spring:url value="/cut/2" />" target="_blank">Разрез (пп) А-Б</a></li>
-                        <li><a href="<spring:url value="/cut/3" />" target="_blank">Разрез (пп) А-В</a></li>
-                        <li><a href="<spring:url value="/cut/4" />" target="_blank">Разрез (пп) А-Г</a></li>
-                        <li><a href="<spring:url value="/cut/5" />" target="_blank">Разрез (пп) А-Д</a></li>
-                        <li><a href="<spring:url value="/cut/6" />" target="_blank">Разрез (пп) А-Е</a></li>
+                        <li><a href="<spring:url value="/cut/2" />" target="_blank">Разрез (пп) Б-Б</a></li>
+                        <li><a href="<spring:url value="/cut/3" />" target="_blank">Разрез (пп) В-В</a></li>
+                        <li><a href="<spring:url value="/cut/4" />" target="_blank">Разрез (пп) Г-Г</a></li>
+                        <li><a href="<spring:url value="/cut/5" />" target="_blank">Разрез (пп) Д-Д</a></li>
+                        <li><a href="<spring:url value="/cut/6" />" target="_blank">Разрез (пп) Е-Е</a></li>
                     </ul>
                 </div>
                 <div class="btn-group">
@@ -58,7 +58,7 @@
                         <li><a href="#">Данные натурных наблюдений</a></li>
                         <li><a href="#">Контрольный лист замеров глубин</a></li>
                         <li><a href="#">Журнал технического надзора</a></li>
-                        <li><a href="#">Оперативный диспетчерский журнал</a></li>
+                        <li><a href="<spring:url value="/enter/operateJournal" />">Оперативный диспетчерский журнал</a></li>
                     </ul>
                 </div>
                 <div class="btn-group">

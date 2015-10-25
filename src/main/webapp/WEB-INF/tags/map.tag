@@ -16,6 +16,13 @@
     <c:if test="${!i.last}">,</c:if>
     </c:forEach>
     ];
+
+    var insisions = [
+        <c:forEach items="${insisions}" var="insision" varStatus="i">
+        <c:out value="${insision.toJSON()}" escapeXml="false" />
+        <c:if test="${!i.last}">,</c:if>
+        </c:forEach>
+    ];
 </script>
 
 <canvas id="map" width="1024" height="${height}" class="map_${cutId}"></canvas>
