@@ -8,6 +8,8 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import ru.rushydro.vniig.dao.MeasParamSysDAO;
 import ru.rushydro.vniig.dao.SignSysDAO;
+import ru.rushydro.vniig.service.MeasParamSysService;
+import ru.rushydro.vniig.service.SignSysService;
 
 /**
  * Created by nikolay on 12.09.15.
@@ -17,10 +19,10 @@ public class SensorValueEndpoint {
     private static final String NAMESPACE_URI = "http://192.168.0.11:8080/ws/sensorsService";
 
     @Autowired
-    MeasParamSysDAO measParamSysDAO;
+    MeasParamSysService measParamSysService;
 
     @Autowired
-    SignSysDAO signSysDAO;
+    SignSysService signSysService;
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "sendSensorValuesRequest")
     @ResponsePayload
@@ -34,8 +36,8 @@ public class SensorValueEndpoint {
                 && request.getSensorValues().getSensorValue() != null) {
             for (SensorValue sensorValue : request.getSensorValues().getSensorValue()) {
                 System.out.println("Sensor ID: " + sensorValue.getSensorId() + " sensor value: " + sensorValue.getSensorValue());
-                measParamSysDAO.updateValue((int) sensorValue.getSensorId(), sensorValue.getSensorValue());
-                signSysDAO.updateValues((int) sensorValue.getSensorId(), sensorValue.getSensorValue());
+                measParamSysService.updateValue((int) sensorValue.getSensorId(), sensorValue.getSensorValue());
+                signSysService.updateValues((int) sensorValue.getSensorId(), sensorValue.getSensorValue());
             }
         }
 
