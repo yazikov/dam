@@ -1,11 +1,13 @@
 package ru.rushydro.vniig.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import ru.rushydro.vniig.entry.SignSys;
 
 import javax.persistence.TypedQuery;
+import javax.sql.DataSource;
 import java.util.Date;
 
 /**
@@ -13,6 +15,7 @@ import java.util.Date;
  */
 @Component
 public class SignSysDAO extends AbstractDAO<SignSys>{
+
 
     @Autowired
     TypeSignalTblDAO typeSignalTableDao;
@@ -45,16 +48,20 @@ public class SignSysDAO extends AbstractDAO<SignSys>{
         SignSys signSys = getById(id);
         Float ustavkaPre = signSys.getPassportParamSys().getMeasParamTypeSig().getValueUstavkaPre();
         Float ustavkaAv = signSys.getPassportParamSys().getMeasParamTypeSig().getValueUstavkaAv();
+        int val = 1;
         if(value<ustavkaPre)
-            signSys.setSortSign(typeSignalTableDao.getById(1));
+            val = 1;
         else if(value>ustavkaPre&&value<ustavkaAv)
-            signSys.setSortSign(typeSignalTableDao.getById(2));
+            val = 2;
         else if(value>ustavkaAv)
-            signSys.setSortSign(typeSignalTableDao.getById(3));
-        signSys.setDateSign(new Date());
-        signSys.setTimeSign(new Date());
-        return save(signSys);
+            val = 3;
+
+        int rowCount = getJdbcTemplate().update("update SIGN_SYS set sort_sign = ?, date_sign = CURRENT_DATE, time_sign = CURRENT_TIME where id_sensors = ?", val, id);
+        System.out.println("Row count: " + rowCount);
+        return getById(id);
     }
+
+
 
     public boolean kventSensor(Integer id) {
         SignSys signSys = getById(id);

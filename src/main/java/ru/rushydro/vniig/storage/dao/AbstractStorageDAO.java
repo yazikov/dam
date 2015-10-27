@@ -1,38 +1,35 @@
-package ru.rushydro.vniig.dao;
+package ru.rushydro.vniig.storage.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rushydro.vniig.entry.AbstractEntry;
+import ru.rushydro.vniig.storage.entry.AbstractStorageEntry;
 
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
-import java.util.List;
 
 /**
  * Created by nikolay on 20.09.15.
  */
-@Transactional("transactionManager")
-public class AbstractDAO<T extends AbstractEntry> {
+@Transactional("transactionManagerStorage")
+public class AbstractStorageDAO<T extends AbstractStorageEntry> {
 
 
     @Autowired
-    @Qualifier("dataSource")
+    @Qualifier("dataSourceStorage")
     DataSource dataSource;
 
     JdbcTemplate jdbcTemplate;
 
 
-    @PersistenceContext(unitName = "myEmf")
-    @Qualifier("myEmf")
+    @PersistenceContext(unitName = "myEmfStorage")
+    @Qualifier("myEmfStorage")
     EntityManager em;
 
-    public AbstractDAO() {
+    public AbstractStorageDAO() {
     }
 
     public boolean delete(T object) {

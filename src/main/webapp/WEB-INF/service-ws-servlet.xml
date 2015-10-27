@@ -35,9 +35,9 @@
                       transportUri="http://schemas.xmlsoap.org/soap/http"
                       serviceName="getSensorValues"
                       portTypeName="getSensorValuesPort"
-                      targetNamespace="http://192.168.0.11:8080/ws/sensorsService"
+                      targetNamespace="http://localhost:8080/ws/sensorsService"
                       createSoap11Binding="true"
-                      locationUri="http://192.168.0.11:8080/ws/sensorsService" >
+                      locationUri="http://localhost:8080/ws/sensorsService" >
         <sws:xsd location="/WEB-INF/wsdl/sensors.xsd" />
     </sws:dynamic-wsdl>
 
