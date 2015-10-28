@@ -14,41 +14,41 @@ import javax.sql.DataSource;
 /**
  * Created by nikolay on 20.09.15.
  */
-@Transactional("transactionManagerStorage")
+//@Transactional("transactionManagerStorage")
 public class AbstractStorageDAO<T extends AbstractStorageEntry> {
 
 
-    @Autowired
-    @Qualifier("dataSourceStorage")
-    DataSource dataSource;
-
-    JdbcTemplate jdbcTemplate;
-
-
-    @PersistenceContext(unitName = "myEmfStorage")
-    @Qualifier("myEmfStorage")
-    EntityManager em;
-
-    public AbstractStorageDAO() {
-    }
-
-    public boolean delete(T object) {
-        try {
-            em.getTransaction().begin();
-            em.remove(object);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    public JdbcTemplate getJdbcTemplate () {
-        if (jdbcTemplate == null) {
-            jdbcTemplate = new JdbcTemplate(dataSource);
-        }
-        return jdbcTemplate;
-    }
+//    @Autowired
+//    @Qualifier("dataSourceStorage")
+//    DataSource dataSource;
+//
+//    JdbcTemplate jdbcTemplate;
+//
+//
+//    @PersistenceContext(unitName = "myEmfStorage")
+//    @Qualifier("myEmfStorage")
+//    EntityManager em;
+//
+//    public AbstractStorageDAO() {
+//    }
+//
+//    public boolean delete(T object) {
+//        try {
+//            em.getTransaction().begin();
+//            em.remove(object);
+//            em.getTransaction().commit();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    public JdbcTemplate getJdbcTemplate () {
+//        if (jdbcTemplate == null) {
+//            jdbcTemplate = new JdbcTemplate(dataSource);
+//        }
+//        return jdbcTemplate;
+//    }
 
 }
