@@ -2,6 +2,7 @@ package ru.rushydro.vniig.dao;
 
 import org.springframework.stereotype.Component;
 import ru.rushydro.vniig.entry.PassportParamSys;
+import ru.rushydro.vniig.model.Page;
 
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
@@ -34,6 +35,18 @@ public class PassportParamSysDAO extends AbstractDAO<PassportParamSys> {
         TypedQuery<PassportParamSys> query = em.createQuery("SELECT pps FROM PassportParamSys pps WHERE pps.measParamTypeSig.idUstavka = :measParamType ", PassportParamSys.class);
         query.setParameter("measParamType",type);
         return query.getResultList();
+    }
+
+    public Page<PassportParamSys> getSensorPageByType(int type, Long page, Integer pageSize) {
+        TypedQuery<PassportParamSys> query = em.createQuery("SELECT pps FROM PassportParamSys pps WHERE pps.measParamTypeSig.idUstavka = :measParamType ", PassportParamSys.class);
+        query.setParameter("measParamType",type);
+        query.setFirstResult((page.intValue() - 1) * pageSize);
+        query.setMaxResults(pageSize);
+
+        TypedQuery<Long> countQuery = em.createQuery("SELECT count(pps) FROM PassportParamSys pps WHERE pps.measParamTypeSig.idUstavka = :measParamType ", Long.class);
+        countQuery.setParameter("measParamType",type);
+
+        return new Page<>(page, pageSize, countQuery.getSingleResult(), query.getResultList());
     }
 
     public List<PassportParamSys> getSensorByTypeAndInsision(Integer type, Integer insision) {
@@ -70,6 +83,7 @@ public class PassportParamSysDAO extends AbstractDAO<PassportParamSys> {
     {
         return null;
     }
+
 
 
 }

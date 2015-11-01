@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.rushydro.vniig.dao.PassportParamSysDAO;
 import ru.rushydro.vniig.entry.PassportParamSys;
+import ru.rushydro.vniig.model.Page;
 
 import java.util.List;
 
@@ -32,5 +33,10 @@ public class PassportParamSysService extends AbstractService<PassportParamSys, P
 
     public List<PassportParamSys> getSensorByTypeAndInsision (Integer type, Integer insision) {
         return dao.getSensorByTypeAndInsision(type, insision);
+    }
+
+
+    public Page<PassportParamSys> getSensorPageByType(int type, Long page, Integer pageSize) {
+        return dao.getSensorPageByType(type, page, pageSize);
     }
 }

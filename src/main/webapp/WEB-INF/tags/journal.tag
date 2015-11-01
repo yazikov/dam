@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+
 
 <%
     SimpleDateFormat df = new SimpleDateFormat("dd.MM.yy");
@@ -28,7 +30,7 @@
         </tr>
     </thead>
     <tbody>
-        <c:forEach items="${sensors}" var="sensor">
+        <c:forEach items="${page.content}" var="sensor">
             <tr class="sensor_type_${sensor.type}">
                 <td><c:out value="${df.format(sensor.signSys.dateSign)}" /></td>
                 <td><c:out value="${hf.format(sensor.signSys.timeSign)}" /></td>
@@ -57,3 +59,6 @@
         </c:forEach>
     </tbody>
 </table>
+
+<%--@elvariable id="page" type="ru.rushydro.vniig.model.Page"--%>
+<t:paging pageNumber="${page.page}" count="${page.count}" size="${page.size}" pageCount="${page.pageCount}" />
