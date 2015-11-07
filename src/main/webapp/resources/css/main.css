@@ -82,6 +82,11 @@ header {
     min-height: 75%;
 }
 
+.middle_block {
+    height: 50%;
+    min-height: 50%;
+}
+
 .map_container {
     height: 580px;
     overflow: auto;
