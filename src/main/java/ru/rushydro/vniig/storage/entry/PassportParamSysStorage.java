@@ -15,9 +15,6 @@ public class PassportParamSysStorage extends AbstractStorageEntry {
     @Column(name = "OBJ_MONITOR")
     String objMonitor;
 
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "MEAS_PARAM_TYPE_SIG")
-    UstavkaParamSys measParamTypeSig;
 
     @Column(name = "NAME_SENSORS")
     String name;
@@ -57,23 +54,12 @@ public class PassportParamSysStorage extends AbstractStorageEntry {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "passportParamSys")
     List<SignSysStorage> signSys;
 
-    public PassportParamSysStorage() {
-    }
-
     public String getObjMonitor() {
         return objMonitor;
     }
 
     public void setObjMonitor(String objMonitor) {
         this.objMonitor = objMonitor;
-    }
-
-    public UstavkaParamSys getMeasParamTypeSig() {
-        return measParamTypeSig;
-    }
-
-    public void setMeasParamTypeSig(UstavkaParamSys measParamTypeSig) {
-        this.measParamTypeSig = measParamTypeSig;
     }
 
     public String getName() {

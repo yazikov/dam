@@ -17,13 +17,18 @@
     <spring:url value="/resources/js/main.js" var="mainJs" />
     <spring:url value="/resources/js/bootstrap.min.js" var="bootstrapJs" />
 
-    <spring:url value="/resources/select2/select2.min.css" var="select2Css" />
-    <spring:url value="/resources/select2/select2.min.js" var="select2Js" />
+    <spring:url value="/resources/js/select2/select2.min.css" var="select2Css" />
+    <spring:url value="/resources/js/select2/select2.min.js" var="select2Js" />
 
     <link href="${bootstrapCss}" rel="stylesheet" />
     <link href="${jqueryUICss}" rel="stylesheet" />
     <link href="${select2Css}" rel="stylesheet" />
     <link href="${mainCss}" rel="stylesheet" />
+
+    <script src="${jqueryJs}"></script>
+    <script src="${jqueryUIJs}"></script>
+    <script src="${select2Js}"></script>
+    <script src="${bootstrapJs}"></script>
 
     <spring:url value="/" var="baseURL"/>
 
@@ -133,10 +138,7 @@
     <div>Inversion sensor</div>
 </footer>
 
-<script src="${jqueryJs}"></script>
-<script src="${jqueryUIJs}"></script>
-<script src="${select2Js}"></script>
-<script src="${bootstrapJs}"></script>
+
 <script src="${mainJs}"></script>
 
 </body>
