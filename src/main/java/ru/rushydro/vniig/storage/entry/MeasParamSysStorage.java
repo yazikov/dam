@@ -15,6 +15,7 @@ public class MeasParamSysStorage extends AbstractStorageEntry {
     @Column(name = "id")
     Integer id;
 
+    @ManyToOne
     @JoinColumn(name = "id_sensors")
     PassportParamSysStorage passportParamSys;
 

@@ -1,7 +1,9 @@
 package ru.rushydro.vniig.storage.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.rushydro.vniig.dao.AbstractDAO;
+import ru.rushydro.vniig.dao.MeasParamSysDAO;
 import ru.rushydro.vniig.entry.MeasParamSys;
 import ru.rushydro.vniig.storage.entry.MeasParamSysStorage;
 
@@ -14,8 +16,11 @@ import java.util.List;
 @Component
 public class MeasParamSysStorageDAO extends AbstractStorageDAO<MeasParamSysStorage> {
 
+    @Autowired
+    MeasParamSysDAO measParamSysDAO;
+
     public List<MeasParamSysStorage> getById(Integer id) {
-        TypedQuery<MeasParamSysStorage> query = em.createQuery("SELECT mps FROM MeasParamSysStorage mps WHERE mps.idSensors = :id ", MeasParamSysStorage.class);
+        TypedQuery<MeasParamSysStorage> query = em.createQuery("SELECT mps FROM MeasParamSysStorage mps WHERE mps.passportParamSys.idSensors = :id ", MeasParamSysStorage.class);
         query.setParameter("id", id);
         query.setMaxResults(1);
         return query.getResultList();
@@ -37,9 +42,11 @@ public class MeasParamSysStorageDAO extends AbstractStorageDAO<MeasParamSysStora
         return measParamSys;
     }
 
-//    public MeasParamSysStorage updateValue (Integer id, Double value) {
-//        getJdbcTemplate().update("update meas_param_sys set value_meas = ?, date_meas = CURRENT_DATE, time_meas = CURRENT_TIME where id_sensors = ?", value, id);
-//        return getById(id);
-//    }
+    public void insertValue (Integer id, Double value) {
+        MeasParamSys measParamSys = measParamSysDAO.getById(id);
+        getJdbcTemplate().update("INSERT into meas_param_sys(id_sensors, status_sensors, date_meas, time_meas, value_meas, relative_value_meas, trust_meas, work_sensors) VALUES(?,?,CURRENT_DATE,CURRENT_TIME,?,?,?,?) ",
+                id, measParamSys.getStatusSensors() , value, measParamSys.getRelativeValueMeas(), measParamSys.getTrustMeas(), measParamSys.getWorkSensors());
+
+    }
 
 }

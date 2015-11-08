@@ -24,10 +24,10 @@
             <div class="panel-body">
               <form action='${formAction}' method="get" style="padding: 3px;">
 
-                <t:calendar name="startDate" text="Дата с" />
-                <t:calendar name="endDate" text="Дата по" />
-                <t:combobox name="signal" text="Сигнал" />
-                <t:combobox name="type" text="Тип объекта" />
+                <t:calendar name="startDate" text="Дата с" value="${startDate}" />
+                <t:calendar name="endDate" text="Дата по" value="${endDate}" />
+                <t:combobox name="signal" text="Сигнал" items="${signals}" value="${signal}" />
+                <t:combobox name="type" text="Тип объекта" items="${types}" value="${type}" />
 
                 <div class="form-group"  style="margin-bottom: 5px;">
                     <button type="submit" class="btn btn-default">Фильтрация</button>

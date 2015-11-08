@@ -90,4 +90,20 @@ public class SignSysStorage extends AbstractStorageEntry {
     public void setTimeKvint(Date timeKvint) {
         this.timeKvint = timeKvint;
     }
+
+    public int getType() {
+        if (getSortSign() != null && getSortSign().getIdSignal() != null) {
+            return getSortSign().getIdSignal();
+        } else {
+            return 1;
+        }
+    }
+
+    public String getText () {
+        return getSortSign() != null ? getSortSign().getTextSignal() : "";
+    }
+
+    public boolean isKvint () {
+        return getTimeKvint() != null && getDateKvint() != null;
+    }
 }

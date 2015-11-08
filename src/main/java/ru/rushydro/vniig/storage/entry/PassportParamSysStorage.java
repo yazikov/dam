@@ -37,11 +37,7 @@ public class PassportParamSysStorage extends AbstractStorageEntry {
     Integer yValue;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "passportParamSys")
-//    @JoinColumn(name = "id_sensors")
     List<MeasParamSysStorage> measParamSys;
-//
-//    @OneToMany(mappedBy = "passportParamSys", fetch = FetchType.EAGER)
-//    List<InsisionSensors> insisionSensorsList;
 
     public List<SignSysStorage> getSignSys() {
         return signSys;

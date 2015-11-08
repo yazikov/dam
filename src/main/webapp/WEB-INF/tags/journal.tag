@@ -60,29 +60,14 @@
     <tbody>
         <c:forEach items="${page.content}" var="sensor">
             <tr class="sensor_type_${sensor.type}">
-                <td><c:out value="${df.format(sensor.signSys.dateSign)}" /></td>
-                <td><c:out value="${hf.format(sensor.signSys.timeSign)}" /></td>
+                <td><c:out value="${df.format(sensor.date)}" /></td>
+                <td><c:out value="${hf.format(sensor.time)}" /></td>
                 <td><c:out value="${sensor.objMonitor}" /></td>
                 <td><c:out value="${sensor.name}" /></td>
                 <td><c:out value="${sensor.text}" /></td>
-                <td>
-                    <c:choose>
-                        <c:when test="${(sensor.type==2 || sensor.type==3) && sensor.isKvint()}">
-                            Квит.
-                        </c:when>
-                        <c:when test="${(sensor.type==2 || sensor.type==3) && !sensor.isKvint()}">
-                            Не квит.
-                        </c:when>
-                        <c:when test="${sensor.type==1}">
-                            Норма
-                        </c:when>
-                        <c:when test="${sensor.type==4}">
-                            Отключен
-                        </c:when>
-                    </c:choose>
-                </td>
-                <td><c:out value="${sensor.signSys.dateKvint != null ? df.format(sensor.signSys.dateKvint) : ''}" /></td>
-                <td><c:out value="${sensor.signSys.timeKvint != null ? hf.format(sensor.signSys.timeKvint) : ''}" /></td>
+                <td><c:out value="${sensor.status}" /></td>
+                <td><c:out value="${sensor.kvintDate != null ? df.format(sensor.kvintDate) : ''}" /></td>
+                <td><c:out value="${sensor.kvintTime != null ? hf.format(sensor.kvintTime) : ''}" /></td>
             </tr>
         </c:forEach>
     </tbody>
