@@ -2,6 +2,7 @@
 <%@ tag import="java.util.List" %>
 <%@ tag import="java.util.HashMap" %>
 <%@ tag import="java.util.Map" %>
+<%@ tag import="java.net.URLDecoder" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
@@ -13,7 +14,11 @@
 <%
     String url = (String) request.getAttribute("javax.servlet.forward.request_uri");
     String baseURL = url;
-    if (url.contains("?")) {
+    if (request.getQueryString() != null && !request.getQueryString().isEmpty()) {
+        String decodedQueryString = URLDecoder.decode(request.getQueryString(), "UTF-8");
+        baseURL = baseURL + "?" + decodedQueryString;
+    }
+    if (baseURL.contains("?")) {
         if (baseURL.contains("&")) {
             baseURL = baseURL.replaceAll("&page=" + pageNumber, "").replaceAll("page=" + pageNumber + "&", "");
             baseURL = baseURL + "&page=";
@@ -47,6 +52,7 @@
 
 %>
 
+<c:if test="${pageCount > 1}">
 <div class="pagination_container">
     <ul class="pagination pagination-lg">
         <c:set var="disabled" value='${(pageNumber == 1) ? "disabled" : ""}' />
@@ -70,14 +76,15 @@
 
         <c:set var="disabled" value='${(pageNumber == pageCount) ? "disabled" : ""}' />
         <li class="${disabled}">
-            <a href='<%= pageNumber == pageCount ? "#" : next %>' aria-label="Next">
+            <a href='<%= pageNumber.equals(pageCount) ? "#" : next %>' aria-label="Next">
                 <span aria-hidden="true">></span>
             </a>
         </li>
         <li class="${disabled}">
-            <a href='<%= pageNumber == pageCount ? "#" : last %>' aria-label="Last">
+            <a href='<%= pageNumber.equals(pageCount) ? "#" : last %>' aria-label="Last">
                 <span aria-hidden="true">>></span>
             </a>
         </li>
     </ul>
 </div>
+</c:if>

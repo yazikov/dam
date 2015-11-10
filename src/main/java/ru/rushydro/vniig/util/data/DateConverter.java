@@ -10,11 +10,11 @@ import java.util.Date;
 public class DateConverter {
     private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
-    private static Date parse (String date) throws ParseException {
+    public static Date parse (String date) throws ParseException {
         return simpleDateFormat.parse(date);
     }
 
-    private static String format (Date date) {
+    public static String format (Date date) {
         return simpleDateFormat.format(date);
     }
 

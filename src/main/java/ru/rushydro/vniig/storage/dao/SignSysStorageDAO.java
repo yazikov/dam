@@ -9,9 +9,12 @@ import ru.rushydro.vniig.entry.SignSys;
 import ru.rushydro.vniig.model.Page;
 import ru.rushydro.vniig.storage.entry.PassportParamSysStorage;
 import ru.rushydro.vniig.storage.entry.SignSysStorage;
+import ru.rushydro.vniig.util.data.DateConverter;
 
 import javax.persistence.TypedQuery;
-import java.util.Date;
+import java.text.ParseException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by alyon on 18.10.2015.
@@ -66,12 +69,95 @@ public class SignSysStorageDAO extends AbstractStorageDAO<SignSysStorage>{
 //        return getById(id);
     }
 
-    public Page<SignSysStorage> filter(Long page, Integer pageSize) {
-        TypedQuery<SignSysStorage> query = em.createQuery("SELECT sss FROM SignSysStorage sss ", SignSysStorage.class);
+    public Page<SignSysStorage> filter(String startDateStr, String endDateStr, String type, String signal, Long page, Integer pageSize) {
+        List<Integer> signals = null;
+        List<String> types = null;
+        Date startDate = null;
+        Date endDate = null;
+        if (type != null && !type.isEmpty()) {
+            if (type.contains(",")) {
+                types = Arrays.asList(type.split(","));
+            } else {
+                types = new ArrayList<>();
+                types.add(type);
+            }
+        }
+        if (signal != null && !signal.isEmpty()) {
+            if (signal.contains(",")) {
+                signals = Arrays.asList(signal.split(",")).stream().map(Integer::parseInt).collect(Collectors.toList());
+            } else {
+                signals = new ArrayList<>();
+                signals.add(Integer.parseInt(signal));
+            }
+        }
+        if (startDateStr != null && !startDateStr.isEmpty()) {
+            try {
+                startDate = DateConverter.parse(startDateStr);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        if (endDateStr != null && !endDateStr.isEmpty()) {
+            try {
+                endDate = DateConverter.parse(endDateStr);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        StringBuilder where = new StringBuilder();
+        if (startDate != null && endDate != null) {
+            where.append(" where ");
+            where.append(" sss.dateSign between :startDate and :endDate ");
+        } else if (startDate != null) {
+            where.append(" where ");
+            where.append(" sss.dateSign >= :startDate ");
+        } else if (endDate != null) {
+            where.append(" where ");
+            where.append(" sss.dateSign <= :endDate ");
+        }
+
+        if (types != null) {
+            if (where.toString().isEmpty()) {
+                where.append(" where ");
+            } else {
+                where.append(" and ");
+            }
+            where.append(" sss.passportParamSys.objMonitor in :types ");
+        }
+
+        if (signals != null) {
+            if (where.toString().isEmpty()) {
+                where.append(" where ");
+            } else {
+                where.append(" and ");
+            }
+            where.append(" sss.sortSign.idSignal in :signals ");
+        }
+
+
+        TypedQuery<SignSysStorage> query = em.createQuery("SELECT sss FROM SignSysStorage sss " + where, SignSysStorage.class);
         query.setFirstResult((page.intValue() - 1) * pageSize);
         query.setMaxResults(pageSize);
 
-        TypedQuery<Long> countQuery = em.createQuery("SELECT count(sss) FROM SignSysStorage sss ", Long.class);
+        TypedQuery<Long> countQuery = em.createQuery("SELECT count(sss) FROM SignSysStorage sss " + where, Long.class);
+
+        if (startDate != null) {
+            query.setParameter("startDate", startDate);
+            countQuery.setParameter("startDate", startDate);
+        }
+        if (endDate != null) {
+            query.setParameter("endDate", endDate);
+            countQuery.setParameter("endDate", endDate);
+        }
+        if (types != null) {
+            query.setParameter("types", types);
+            countQuery.setParameter("types", types);
+        }
+        if (signals != null) {
+            query.setParameter("signals", signals);
+            countQuery.setParameter("signals", signals);
+        }
 
         return new Page<>(page, pageSize, countQuery.getSingleResult(), query.getResultList());
 

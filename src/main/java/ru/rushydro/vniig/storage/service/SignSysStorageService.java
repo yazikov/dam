@@ -20,12 +20,12 @@ public class SignSysStorageService extends AbstractStorageService<SignSysStorage
         super(dao);
     }
 
-    public Page<SignSysStorage> filter(Long page, Integer pageSize) {
-        return dao.filter(page, pageSize);
+    public Page<SignSysStorage> filter(String startDate, String endDate, String type, String signal, Long page, Integer pageSize) {
+        return dao.filter(startDate, endDate, type, signal, page, pageSize);
     }
 
-    public Page<JournalItem> filterJournalItem (Long page, Integer pageSize) {
-        Page<SignSysStorage> signSysStoragePage = filter(page, pageSize);
+    public Page<JournalItem> filterJournalItem(String startDate, String endDate, String type, String signal, Long page, Integer pageSize) {
+        Page<SignSysStorage> signSysStoragePage = filter(startDate, endDate, type, signal, page, pageSize);
         List<JournalItem> journalItems = signSysStoragePage.getContent().stream().map(JournalItem::new).collect(Collectors.toList());
 
         return new Page<>(page, pageSize, signSysStoragePage.getCount(), journalItems);

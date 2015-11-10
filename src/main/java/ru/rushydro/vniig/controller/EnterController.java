@@ -50,7 +50,7 @@ public class EnterController {
                                @RequestParam(value = "page", defaultValue = "1") Long page,
                                @RequestParam(value = "size", defaultValue = "5") Integer pageSize) {
 
-        model.addAttribute("page", signSysStorageService.filterJournalItem(page, pageSize));
+        model.addAttribute("page", signSysStorageService.filterJournalItem(startDate, endDate, type, signal, page, pageSize));
         model.addAttribute("operate", false);
 
         model.addAttribute("startDate", startDate);
