@@ -1,5 +1,6 @@
 package ru.rushydro.vniig.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +10,6 @@ import ru.rushydro.vniig.entry.PassportParamSys;
 import ru.rushydro.vniig.service.InsisionService;
 import ru.rushydro.vniig.service.PassportParamSysService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +18,7 @@ import java.util.List;
 @Controller
 @RequestMapping(path = "/")
 public class IndexController {
+    final static Logger log = Logger.getLogger(IndexController.class);
 
     @Autowired
     PassportParamSysService sensorService;
@@ -27,6 +28,9 @@ public class IndexController {
     
     @RequestMapping(path = "/")
     public String indexPage(Model model) {
+
+        log.info("test");
+        log.debug("test debug");
 
         List<String> roots = sensorService.getAllRootNodes();
         List<PassportParamSys> passportParamSysList = sensorService.getSensorByType(1);
