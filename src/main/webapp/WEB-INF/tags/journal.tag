@@ -5,6 +5,8 @@
 
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
+<%@ attribute name="operate" required="false" type="java.lang.Boolean" %>
+
 
 <%
     SimpleDateFormat df = new SimpleDateFormat("dd.MM.yy");
@@ -13,6 +15,32 @@
     request.setAttribute("hf", hf);
 %>
 
+<c:choose>
+    <c:when test="${operate}">
+        <div class="row" style="margin-bottom: 5px;">
+            <div class="col-md-2">
+                <a class="btn btn-default" href="<spring:url value="/enter/history" />" role="button">
+                    <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> &nbsp;&nbsp;Архив событий
+                </a>
+            </div>
+            <div class="col-md-10"></div>
+        </div>
+    </c:when>
+    <c:otherwise>
+        <div class="row" style="margin-bottom: 5px;">
+            <div class="col-md-3">
+                <a class="btn btn-default" href="<spring:url value="/enter/operateJournal" />" role="button">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> &nbsp;&nbsp;Оперативный журнал
+                </a>
+            </div>
+            <div class="col-md-9">
+
+            </div>
+        </div>
+    </c:otherwise>
+</c:choose>
+
+<div>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -62,3 +90,4 @@
 
 <%--@elvariable id="page" type="ru.rushydro.vniig.model.Page"--%>
 <t:paging pageNumber="${page.page}" count="${page.count}" size="${page.size}" pageCount="${page.pageCount}" />
+</div>

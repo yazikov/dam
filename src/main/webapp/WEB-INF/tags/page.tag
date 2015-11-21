@@ -7,19 +7,23 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>DAM</title>
+    <title>АСИУ</title>
 
     <spring:url value="/resources/css/main.css" var="mainCss" />
     <spring:url value="/resources/css/bootstrap.min.css" var="bootstrapCss" />
     <spring:url value="/resources/js/jquery-1.11.3.min.js" var="jqueryJs" />
+    <spring:url value="/resources/js/jquery-ui/jquery-ui.min.js" var="jqueryUIJs" />
+    <spring:url value="/resources/css/jquery-ui/jquery-ui.min.css" var="jqueryUICss" />
     <spring:url value="/resources/js/main.js" var="mainJs" />
     <spring:url value="/resources/js/bootstrap.min.js" var="bootstrapJs" />
 
-    <link href="${bootstrapCss}" rel="stylesheet" />
-    <link href="${mainCss}" rel="stylesheet" />
+    <spring:url value="/resources/select2/select2.min.css" var="select2Css" />
+    <spring:url value="/resources/select2/select2.min.js" var="select2Js" />
 
-    <script src="${jqueryJs}"></script>
-    <script src="${bootstrapJs}"></script>
+    <link href="${bootstrapCss}" rel="stylesheet" />
+    <link href="${jqueryUICss}" rel="stylesheet" />
+    <link href="${select2Css}" rel="stylesheet" />
+    <link href="${mainCss}" rel="stylesheet" />
 
     <spring:url value="/" var="baseURL"/>
 
@@ -36,11 +40,11 @@
         <div class="header_content">
             <div class="btn-group" role="group" aria-label="...">
                 <div class="btn-group">
-                    <button class="btn btn-default dropdown-toggle menu_btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <button class="btn btn-default dropdown-toggle menu_btn" type="button" id="dropdownMenu0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         Состояние КИА в разрезах
                         <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu0">
                         <li><a href="<spring:url value="/cut/1" />" target="_blank">Разрез (пп) А-А</a></li>
                         <li><a href="<spring:url value="/cut/2" />" target="_blank">Разрез (пп) Б-Б</a></li>
                         <li><a href="<spring:url value="/cut/3" />" target="_blank">Разрез (пп) В-В</a></li>
@@ -129,7 +133,10 @@
     <div>Inversion sensor</div>
 </footer>
 
-
+<script src="${jqueryJs}"></script>
+<script src="${jqueryUIJs}"></script>
+<script src="${select2Js}"></script>
+<script src="${bootstrapJs}"></script>
 <script src="${mainJs}"></script>
 
 </body>

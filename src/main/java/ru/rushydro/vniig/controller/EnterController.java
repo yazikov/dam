@@ -28,8 +28,20 @@ public class EnterController {
 
         Page<PassportParamSys> passportParamSysPage = sensorService.getSensorPageByType(1, page, pageSize);
         model.addAttribute("page", passportParamSysPage);
+        model.addAttribute("operate", true);
 
-        return "operateJournal";
+        return "journal";
+    }
+
+    @RequestMapping("/history")
+    public String showHistory (Model model, @RequestParam(value = "page", defaultValue = "1") Long page,
+                                      @RequestParam(value = "size", defaultValue = "5") Integer pageSize) {
+
+        Page<PassportParamSys> passportParamSysPage = sensorService.getSensorPageByType(1, page, pageSize);
+        model.addAttribute("page", passportParamSysPage);
+        model.addAttribute("operate", false);
+
+        return "journal";
     }
 
 }
