@@ -32,12 +32,14 @@ create table SIGN_SYS
   SORT_SIGN INTEGER,
   ID_SENSORS  INTEGER,
   DATE_KVINT DATE,
+  TIME_KVINT TIME,
   primary key(ID_SIGN),
   foreign key(ID_SENSORS) references  PASSPORT_PARAM_SYS(ID_SENSORS) on delete cascade
 );
 
 create table MEAS_PARAM_SYS
 (
+  ID SERIAL,
   ID_SENSORS INTEGER,
   STATUS_SENSORS INTEGER,
 --   1)роботоспособен 2)отказ 3)замаскирован
@@ -48,7 +50,7 @@ create table MEAS_PARAM_SYS
   RELATIVE_VALUE_MEAS float,
   TRUST_MEAS INTEGER,
   WORK_SENSORS  boolean,
-  primary key(ID_SENSORS),
+  primary key(ID),
   foreign key(ID_SENSORS) references  PASSPORT_PARAM_SYS(ID_SENSORS) on delete cascade
 );
 
