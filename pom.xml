@@ -111,7 +111,7 @@
 
         <resources>
             <resource>
-                <directory>${project.name}/src/main/resources</directory>
+                <directory>${project.basedir}/src/main/resources</directory>
             </resource>
         </resources>
 

@@ -56,7 +56,7 @@ public class SignSysDAO extends AbstractDAO<SignSys>{
         else if(value>ustavkaAv)
             val = 3;
 
-        int rowCount = getJdbcTemplate().update("update SIGN_SYS set sort_sign = ?, date_sign = CURRENT_DATE, time_sign = CURRENT_TIME where id_sensors = ?", val, id);
+        int rowCount = getJdbcTemplate().update("update SIGN_SYS set sort_sign = ?, date_sign = CURRENT_DATE, time_sign = CURRENT_TIME, date_kvint = null, time_kvint = null where id_sensors = ?", val, id);
         System.out.println("Row count: " + rowCount);
         return getById(id);
     }

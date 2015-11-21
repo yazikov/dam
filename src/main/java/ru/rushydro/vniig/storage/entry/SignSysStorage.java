@@ -23,7 +23,7 @@ public class SignSysStorage extends AbstractStorageEntry {
     Date timeSign;
     @ManyToOne
     @JoinColumn(name = "sort_sign")
-    TypeSignalTable sortSign;
+    TypeSignalTableStorage sortSign;
 
     @Column(name = "date_kvint")
     Date dateKvint;
@@ -59,11 +59,11 @@ public class SignSysStorage extends AbstractStorageEntry {
         this.timeSign = timeSign;
     }
 
-    public TypeSignalTable getSortSign() {
+    public TypeSignalTableStorage getSortSign() {
         return sortSign;
     }
 
-    public void setSortSign(TypeSignalTable sortSign) {
+    public void setSortSign(TypeSignalTableStorage sortSign) {
         this.sortSign = sortSign;
     }
 
@@ -89,5 +89,21 @@ public class SignSysStorage extends AbstractStorageEntry {
 
     public void setTimeKvint(Date timeKvint) {
         this.timeKvint = timeKvint;
+    }
+
+    public int getType() {
+        if (getSortSign() != null && getSortSign().getIdSignal() != null) {
+            return getSortSign().getIdSignal();
+        } else {
+            return 1;
+        }
+    }
+
+    public String getText () {
+        return getSortSign() != null ? getSortSign().getTextSignal() : "";
+    }
+
+    public boolean isKvint () {
+        return getTimeKvint() != null && getDateKvint() != null;
     }
 }

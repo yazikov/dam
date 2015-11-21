@@ -10,6 +10,9 @@ import ru.rushydro.vniig.dao.MeasParamSysDAO;
 import ru.rushydro.vniig.dao.SignSysDAO;
 import ru.rushydro.vniig.service.MeasParamSysService;
 import ru.rushydro.vniig.service.SignSysService;
+import ru.rushydro.vniig.storage.entry.MeasParamSysStorage;
+import ru.rushydro.vniig.storage.service.MeasParamSysStorageService;
+import ru.rushydro.vniig.storage.service.SignSysStorageService;
 
 /**
  * Created by nikolay on 12.09.15.
@@ -23,6 +26,12 @@ public class SensorValueEndpoint {
 
     @Autowired
     SignSysService signSysService;
+
+    @Autowired
+    MeasParamSysStorageService measParamSysStorageService;
+
+    @Autowired
+    SignSysStorageService signSysStorageService;
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "sendSensorValuesRequest")
     @ResponsePayload
@@ -38,6 +47,9 @@ public class SensorValueEndpoint {
                 System.out.println("Sensor ID: " + sensorValue.getSensorId() + " sensor value: " + sensorValue.getSensorValue());
                 measParamSysService.updateValue((int) sensorValue.getSensorId(), sensorValue.getSensorValue());
                 signSysService.updateValues((int) sensorValue.getSensorId(), sensorValue.getSensorValue());
+
+                measParamSysStorageService.insertValue((int) sensorValue.getSensorId(), sensorValue.getSensorValue());
+                signSysStorageService.insertValues((int) sensorValue.getSensorId(), sensorValue.getSensorValue());
             }
         }
 

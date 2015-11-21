@@ -12,8 +12,13 @@ import java.util.Date;
 @Table(name = "MEAS_PARAM_SYS")
 public class MeasParamSysStorage extends AbstractStorageEntry {
     @Id
-    @Column(name = "id_sensors")
-    Integer idSensors;
+    @Column(name = "id")
+    Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_sensors")
+    PassportParamSysStorage passportParamSys;
+
     @Column(name = "status_sensors")
     Integer statusSensors;
     @Column(name = "date_meas")
@@ -30,14 +35,6 @@ public class MeasParamSysStorage extends AbstractStorageEntry {
     Integer trustMeas;
     @Column(name = "work_sensors")
     Boolean workSensors;
-
-    public Integer getIdSensors() {
-        return idSensors;
-    }
-
-    public void setIdSensors(Integer idSensors) {
-        this.idSensors = idSensors;
-    }
 
     public Integer getStatusSensors() {
         return statusSensors;
@@ -93,5 +90,21 @@ public class MeasParamSysStorage extends AbstractStorageEntry {
 
     public void setWorkSensors(Boolean workSensors) {
         this.workSensors = workSensors;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public PassportParamSysStorage getPassportParamSys() {
+        return passportParamSys;
+    }
+
+    public void setPassportParamSys(PassportParamSysStorage passportParamSys) {
+        this.passportParamSys = passportParamSys;
     }
 }
