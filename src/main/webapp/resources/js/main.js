@@ -121,7 +121,6 @@ function scrollToCenter(elem) {
 }
 
 function setMapContainerSize() {
-    var canvasHeight = $('')
     var viewportHeight = $(window).height();
     mapContainer.height(viewportHeight);
 }

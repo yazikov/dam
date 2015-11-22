@@ -15,6 +15,9 @@ public class PassportParamSysStorage extends AbstractStorageEntry {
     @Column(name = "OBJ_MONITOR")
     String objMonitor;
 
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "MEAS_PARAM_TYPE_SIG")
+    UstavkaParamSysStorage measParamTypeSig;
 
     @Column(name = "NAME_SENSORS")
     String name;
@@ -122,7 +125,15 @@ public class PassportParamSysStorage extends AbstractStorageEntry {
         this.measParamSys = measParamSys;
     }
 
-//    public List<InsisionSensors> getInsisionSensorsList() {
+    public UstavkaParamSysStorage getMeasParamTypeSig() {
+        return measParamTypeSig;
+    }
+
+    public void setMeasParamTypeSig(UstavkaParamSysStorage measParamTypeSig) {
+        this.measParamTypeSig = measParamTypeSig;
+    }
+
+    //    public List<InsisionSensors> getInsisionSensorsList() {
 //        return insisionSensorsList;
 //    }
 //
