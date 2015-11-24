@@ -12,6 +12,8 @@
 
     <context:component-scan base-package="ru.rushydro.vniig" />
 
+    <context:property-placeholder location="classpath:jdbc.properties" />
+
     <sws:annotation-driven />
 
     <sws:interceptors>
@@ -35,9 +37,9 @@
                       transportUri="http://schemas.xmlsoap.org/soap/http"
                       serviceName="getSensorValues"
                       portTypeName="getSensorValuesPort"
-                      targetNamespace="http://localhost:8080/ws/sensorsService"
+                      targetNamespace="http://i-sensor/webservice"
                       createSoap11Binding="true"
-                      locationUri="http://localhost:8080/ws/sensorsService" >
+                      locationUri="${webservice.host}/ws/sensorsService" >
         <sws:xsd location="/WEB-INF/wsdl/sensors.xsd" />
     </sws:dynamic-wsdl>
 

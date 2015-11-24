@@ -19,7 +19,7 @@ import ru.rushydro.vniig.storage.service.SignSysStorageService;
  */
 @Endpoint
 public class SensorValueEndpoint {
-    private static final String NAMESPACE_URI = "http://localhost:8080/ws/sensorsService";
+    private static final String NAMESPACE_URI = "http://i-sensor/webservice";
 
     @Autowired
     MeasParamSysService measParamSysService;
