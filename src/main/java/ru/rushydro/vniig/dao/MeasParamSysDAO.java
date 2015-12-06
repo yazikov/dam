@@ -40,4 +40,16 @@ public class MeasParamSysDAO extends AbstractDAO<MeasParamSys> {
         return getById(id);
     }
 
+    public Boolean onSensor(Integer id) {
+
+        MeasParamSys measParamSys = getById(id);
+        measParamSys.setWorkSensors(true);
+        return save(measParamSys).getWorkSensors();
+    }
+
+    public Boolean offSensor(Integer id) {
+        MeasParamSys measParamSys = getById(id);
+        measParamSys.setWorkSensors(false);
+        return save(measParamSys).getWorkSensors();
+    }
 }

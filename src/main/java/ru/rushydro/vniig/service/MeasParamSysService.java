@@ -27,4 +27,12 @@ public class MeasParamSysService extends AbstractService<MeasParamSys, MeasParam
     public MeasParamSys updateValue (Integer id, Double value) {
         return dao.updateValue(id, value);
     }
+
+    public Boolean onSensor(Integer id) {
+        return dao.onSensor(id);
+    }
+
+    public Boolean offSensor(Integer id) {
+        return dao.offSensor(id);
+    }
 }

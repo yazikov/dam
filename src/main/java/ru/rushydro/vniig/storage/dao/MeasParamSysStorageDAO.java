@@ -34,6 +34,13 @@ public class MeasParamSysStorageDAO extends AbstractStorageDAO<MeasParamSysStora
         return query.getResultList();
     }
 
+    public MeasParamSysStorage getOneById(Integer id) {
+        TypedQuery<MeasParamSysStorage> query = em.createQuery("SELECT mps FROM MeasParamSysStorage mps WHERE mps.passportParamSys.idSensors = :id order by mps.dateMeas desc, mps.timeMeas desc", MeasParamSysStorage.class);
+        query.setParameter("id", id);
+        query.setMaxResults(1);
+        return query.getSingleResult();
+    }
+
     public MeasParamSysStorage save(MeasParamSysStorage measParamSys) {
         try {
             em.getTransaction().begin();
@@ -113,4 +120,15 @@ public class MeasParamSysStorageDAO extends AbstractStorageDAO<MeasParamSysStora
 
     }
 
+    public boolean onSensor(Integer id) {
+        MeasParamSysStorage measParamSys = getOneById(id);
+        measParamSys.setWorkSensors(true);
+        return save(measParamSys).getWorkSensors();
+    }
+
+    public boolean offSensor(Integer id) {
+        MeasParamSysStorage measParamSys = getOneById(id);
+        measParamSys.setWorkSensors(false);
+        return save(measParamSys).getWorkSensors();
+    }
 }

@@ -117,4 +117,12 @@ public class MeasParamSysStorageService extends AbstractStorageService<MeasParam
 
         return graphicModel;
     }
+
+    public boolean onSensor(Integer id) {
+        return dao.onSensor(id);
+    }
+
+    public boolean offSensor(Integer id) {
+        return dao.offSensor(id);
+    }
 }

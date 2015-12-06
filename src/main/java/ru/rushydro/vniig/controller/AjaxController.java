@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.rushydro.vniig.dao.PassportParamSysDAO;
 import ru.rushydro.vniig.entry.SignSys;
 import ru.rushydro.vniig.model.SensorUpdateData;
+import ru.rushydro.vniig.service.MeasParamSysService;
 import ru.rushydro.vniig.service.SignSysService;
+import ru.rushydro.vniig.storage.service.MeasParamSysStorageService;
 import ru.rushydro.vniig.util.data.UpdateTimeUtil;
 
 import java.beans.PropertyEditorSupport;
@@ -28,6 +30,12 @@ public class AjaxController {
     @Autowired
     SignSysService signSysService;
 
+    @Autowired
+    MeasParamSysService measParamSysService;
+
+    @Autowired
+    MeasParamSysStorageService measParamSysStorageService;
+
     @RequestMapping(value = "/updateSensor/{insId}", method = RequestMethod.GET)
     public @ResponseBody SensorUpdateData getSensorUpdateData(@PathVariable("insId") Integer insId) {
         SensorUpdateData sensorUpdateData = new SensorUpdateData();
@@ -46,6 +54,20 @@ public class AjaxController {
     @RequestMapping(value = "/kvintSensor", method = RequestMethod.POST)
     public @ResponseBody Boolean kventSensor(@RequestParam("id") Integer id) {
         return signSysService.kventSensor(id);
+    }
+
+    @RequestMapping(value = "/onSensor/{id}", method = RequestMethod.GET)
+    public @ResponseBody Boolean onSensor(@PathVariable("id") Integer id) {
+        measParamSysService.onSensor(id);
+        measParamSysStorageService.onSensor(id);
+        return  false;
+    }
+
+    @RequestMapping(value = "/offSensor/{id}", method = RequestMethod.GET)
+    public @ResponseBody Boolean ofSensor(@PathVariable("id") Integer id) {
+        measParamSysService.offSensor(id);
+        measParamSysStorageService.offSensor(id);
+        return true;
     }
 
 //    @InitBinder

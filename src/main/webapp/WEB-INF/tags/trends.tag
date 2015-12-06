@@ -39,6 +39,7 @@
                                     <th>Пьезометр</th>
                                     <th>Измеряемый параметр</th>
                                     <th>Выбрано</th>
+                                    <th>Действия</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,6 +49,20 @@
                                     <td><c:out value="${sensor.name}" /></td>
                                     <td><c:out value="${sensor.measParamTypeSig.discription}" /></td>
                                     <td><input name="sensor_${sensor.idSensors}" type="checkbox"></td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${sensor.type == 4}">
+                                                <div data-id="${sensor.idSensors}" class="btn btn-default btn-on">
+                                                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span> <span class="text">Включить</span>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div data-id="${sensor.idSensors}" class="btn btn-default btn-off">
+                                                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span> <span class="text">Выключить</span>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -71,5 +86,30 @@
         $('#btnTable').click(function() {
             $('form').attr('action', table);
         });
+
+        $('body').on('click','.btn-off',function() {
+            var me = $(this);
+            var id = me.data('id');
+            $.get("/ajax/offSensor/" + id, function (data) {
+                me.removeClass('btn-off');
+                me.addClass('btn-on');
+                me.find('.text').html('Включить');
+            }).fail(function(jqXHR, textStatus, e ) {
+                alert("Ошибка при сохранении данных датчика: " + textStatus);
+            });
+        });
+
+        $('body').on('click','.btn-on',function() {
+            var me = $(this);
+            var id = me.data('id');
+            $.get("/ajax/onSensor/"+ id , function (data) {
+                me.removeClass('btn-on');
+                me.addClass('btn-off');
+                me.find('.text').html('Выключить');
+            }).fail(function(jqXHR, textStatus, e ) {
+                alert("Ошибка при сохранении данных датчика: " + textStatus);
+            });
+        });
+
     });
 </script>
