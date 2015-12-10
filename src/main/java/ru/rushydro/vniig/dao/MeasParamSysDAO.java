@@ -52,4 +52,8 @@ public class MeasParamSysDAO extends AbstractDAO<MeasParamSys> {
         measParamSys.setWorkSensors(false);
         return save(measParamSys).getWorkSensors();
     }
+
+    public Boolean updateLevel(double level) {
+        return getJdbcTemplate().update("update meas_param_sys set value_meas = ?, date_meas = CURRENT_DATE, time_meas = CURRENT_TIME where id_sensors = 61", level) > 0;
+    }
 }

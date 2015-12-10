@@ -131,4 +131,10 @@ public class MeasParamSysStorageDAO extends AbstractStorageDAO<MeasParamSysStora
         measParamSys.setWorkSensors(false);
         return save(measParamSys).getWorkSensors();
     }
+
+    public boolean insertLevel(double level) {
+        MeasParamSys measParamSys = measParamSysDAO.getById(61);
+        return getJdbcTemplate().update("INSERT into meas_param_sys(id_sensors, status_sensors, date_meas, time_meas, value_meas, relative_value_meas, trust_meas, work_sensors) VALUES(?,?,CURRENT_DATE,CURRENT_TIME,?,?,?,?) ",
+                61, measParamSys.getStatusSensors() , level, measParamSys.getRelativeValueMeas(), measParamSys.getTrustMeas(), measParamSys.getWorkSensors()) > 0;
+    }
 }

@@ -33,6 +33,10 @@ public class MeasParamSysStorageService extends AbstractStorageService<MeasParam
         dao.insertValue(id, value);
     }
 
+    public boolean insertLevel(double level) {
+        return dao.insertLevel(level);
+    }
+
     public List<MeasParamSysStorage> filter (String startDate, String endDate, List<Integer> sensors) {
         return dao.filter(startDate, endDate, sensors);
     }

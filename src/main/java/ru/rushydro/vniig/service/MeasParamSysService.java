@@ -35,4 +35,6 @@ public class MeasParamSysService extends AbstractService<MeasParamSys, MeasParam
     public Boolean offSensor(Integer id) {
         return dao.offSensor(id);
     }
+
+    public Boolean updateLevel(double level) { return dao.updateLevel(level);}
 }

@@ -10,20 +10,23 @@ package ru.rushydro.vniig.ws;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for sensorValue complex type.
+ * <p>Java class for sensorInfoValue complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="sensorValue">
+ * &lt;complexType name="sensorInfoValue">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="sensorId" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="sensorNumber" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="sensorParameter" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="sensorValue" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -34,13 +37,19 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "sensorValue", propOrder = {
+@XmlType(name = "sensorInfoValue", propOrder = {
     "sensorId",
+    "sensorNumber",
+    "sensorParameter",
     "sensorValue"
 })
-public class SensorValue {
+public class SensorInfoValue {
 
     protected long sensorId;
+    @XmlElement(required = true)
+    protected String sensorNumber;
+    @XmlElement(required = true)
+    protected String sensorParameter;
     protected double sensorValue;
 
     /**
@@ -57,6 +66,54 @@ public class SensorValue {
      */
     public void setSensorId(long value) {
         this.sensorId = value;
+    }
+
+    /**
+     * Gets the value of the sensorNumber property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getSensorNumber() {
+        return sensorNumber;
+    }
+
+    /**
+     * Sets the value of the sensorNumber property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSensorNumber(String value) {
+        this.sensorNumber = value;
+    }
+
+    /**
+     * Gets the value of the sensorParameter property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getSensorParameter() {
+        return sensorParameter;
+    }
+
+    /**
+     * Sets the value of the sensorParameter property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSensorParameter(String value) {
+        this.sensorParameter = value;
     }
 
     /**

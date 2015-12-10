@@ -25,8 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="statusCode" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="statusDescription" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="sensorValues" type="{http://i-sensor/webservice}sensorInfoValues"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,54 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "statusCode",
-    "statusDescription"
+    "sensorValues"
 })
-@XmlRootElement(name = "sendSensorValuesResponse")
-public class SendSensorValuesResponse {
+@XmlRootElement(name = "getSensorValuesResponse")
+public class GetSensorValuesResponse {
 
-    protected int statusCode;
     @XmlElement(required = true)
-    protected String statusDescription;
+    protected SensorInfoValues sensorValues;
 
     /**
-     * Gets the value of the statusCode property.
-     * 
-     */
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    /**
-     * Sets the value of the statusCode property.
-     * 
-     */
-    public void setStatusCode(int value) {
-        this.statusCode = value;
-    }
-
-    /**
-     * Gets the value of the statusDescription property.
+     * Gets the value of the sensorValues property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link SensorInfoValues }
      *     
      */
-    public String getStatusDescription() {
-        return statusDescription;
+    public SensorInfoValues getSensorValues() {
+        return sensorValues;
     }
 
     /**
-     * Sets the value of the statusDescription property.
+     * Sets the value of the sensorValues property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link SensorInfoValues }
      *     
      */
-    public void setStatusDescription(String value) {
-        this.statusDescription = value;
+    public void setSensorValues(SensorInfoValues value) {
+        this.sensorValues = value;
     }
 
 }

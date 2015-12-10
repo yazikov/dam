@@ -40,8 +40,8 @@ import javax.xml.bind.annotation.XmlType;
     "statusCode",
     "statusDescription"
 })
-@XmlRootElement(name = "sendSensorValuesResponse")
-public class SendSensorValuesResponse {
+@XmlRootElement(name = "sendLevelResponse")
+public class SendLevelResponse {
 
     protected int statusCode;
     @XmlElement(required = true)

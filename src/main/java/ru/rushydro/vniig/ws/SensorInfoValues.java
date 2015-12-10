@@ -16,16 +16,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for sensorValues complex type.
+ * <p>Java class for sensorInfoValues complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="sensorValues">
+ * &lt;complexType name="sensorInfoValues">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="sensorValue" type="{http://i-sensor/webservice}sensorValue" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="sensorValue" type="{http://i-sensor/webservice}sensorInfoValue" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,12 +35,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "sensorValues", propOrder = {
+@XmlType(name = "sensorInfoValues", propOrder = {
     "sensorValue"
 })
-public class SensorValues {
+public class SensorInfoValues {
 
-    protected List<SensorValue> sensorValue;
+    protected List<SensorInfoValue> sensorValue;
 
     /**
      * Gets the value of the sensorValue property.
@@ -60,13 +60,13 @@ public class SensorValues {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link SensorValue }
+     * {@link SensorInfoValue }
      * 
      * 
      */
-    public List<SensorValue> getSensorValue() {
+    public List<SensorInfoValue> getSensorValue() {
         if (sensorValue == null) {
-            sensorValue = new ArrayList<SensorValue>();
+            sensorValue = new ArrayList<SensorInfoValue>();
         }
         return this.sensorValue;
     }

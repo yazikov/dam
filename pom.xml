@@ -150,7 +150,7 @@
                     <packageName>ru.rushydro.vniig.ws</packageName>
                     <clearOutputDir>false</clearOutputDir>
                     <schemaFiles>
-                        sensors.xsd
+                        sensors.xsd,info.xsd
                     </schemaFiles>
                 </configuration>
             </plugin>

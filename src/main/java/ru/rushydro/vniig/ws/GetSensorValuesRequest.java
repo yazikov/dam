@@ -10,7 +10,6 @@ package ru.rushydro.vniig.ws;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -25,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="sensorValues" type="{http://i-sensor/webservice}sensorValues"/>
+ *         &lt;element name="type" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +35,27 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "sensorValues"
+    "type"
 })
-@XmlRootElement(name = "sendSensorValuesRequest")
-public class SendSensorValuesRequest {
+@XmlRootElement(name = "getSensorValuesRequest")
+public class GetSensorValuesRequest {
 
-    @XmlElement(required = true)
-    protected SensorValues sensorValues;
+    protected int type;
 
     /**
-     * Gets the value of the sensorValues property.
+     * Gets the value of the type property.
      * 
-     * @return
-     *     possible object is
-     *     {@link SensorValues }
-     *     
      */
-    public SensorValues getSensorValues() {
-        return sensorValues;
+    public int getType() {
+        return type;
     }
 
     /**
-     * Sets the value of the sensorValues property.
+     * Sets the value of the type property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link SensorValues }
-     *     
      */
-    public void setSensorValues(SensorValues value) {
-        this.sensorValues = value;
+    public void setType(int value) {
+        this.type = value;
     }
 
 }

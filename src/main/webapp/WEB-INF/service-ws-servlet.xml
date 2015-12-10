@@ -22,7 +22,13 @@
                 This interceptor validates both incoming and outgoing message contents according to the 'echo.xsd' XML
                 Schema file.
             </description>
-            <property name="schema" value="/WEB-INF/wsdl/sensors.xsd"/>
+            <property name="schemas">
+                <array>
+                    <value>/WEB-INF/wsdl/sensors.xsd</value>
+                    <value>/WEB-INF/wsdl/info.xsd</value>
+                </array>
+            </property>
+            <!--<property name="schema" value="/WEB-INF/wsdl/sensors.xsd"/>-->
             <property name="validateRequest" value="true"/>
             <property name="validateResponse" value="true"/>
         </bean>
@@ -41,6 +47,16 @@
                       createSoap11Binding="true"
                       locationUri="${webservice.host}/ws/sensorsService" >
         <sws:xsd location="/WEB-INF/wsdl/sensors.xsd" />
+    </sws:dynamic-wsdl>
+
+    <sws:dynamic-wsdl id="sensorsInfoService"
+                      transportUri="http://schemas.xmlsoap.org/soap/http"
+                      serviceName="getSensorInfoValues"
+                      portTypeName="getSensorInfoValuesPort"
+                      targetNamespace="http://i-sensor/webservice"
+                      createSoap11Binding="true"
+                      locationUri="${webservice.host}/ws/sensorsInfoService" >
+        <sws:xsd location="/WEB-INF/wsdl/info.xsd" />
     </sws:dynamic-wsdl>
 
 </beans>
