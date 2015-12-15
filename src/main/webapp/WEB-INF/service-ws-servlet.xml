@@ -16,28 +16,47 @@
 
     <sws:annotation-driven />
 
-    <sws:interceptors>
-        <bean class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
-            <description>
-                This interceptor validates both incoming and outgoing message contents according to the 'echo.xsd' XML
-                Schema file.
-            </description>
-            <property name="schemas">
-                <array>
-                    <value>/WEB-INF/wsdl/sensors.xsd</value>
-                    <value>/WEB-INF/wsdl/info.xsd</value>
-                </array>
-            </property>
-            <!--<property name="schema" value="/WEB-INF/wsdl/sensors.xsd"/>-->
-            <property name="validateRequest" value="true"/>
-            <property name="validateResponse" value="true"/>
-        </bean>
-        <bean class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor">
-            <description>
-                This interceptor logs the message payload.
-            </description>
-        </bean>
-    </sws:interceptors>
+    <!--<sws:interceptors>-->
+
+        <!--<bean class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">-->
+            <!--<property name="interceptors">-->
+                <!--<list>-->
+                    <!--<ref bean="sensorValidateInterceptor"/>-->
+                    <!--<ref bean="infoValidateInterceptor"/>-->
+                <!--</list>-->
+            <!--</property>-->
+        <!--</bean>-->
+
+        <!--<bean id="sensorValidateInterceptor" class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">-->
+            <!--<description>-->
+                <!--This interceptor validates both incoming and outgoing message contents according to the 'echo.xsd' XML-->
+                <!--Schema file.-->
+            <!--</description>-->
+            <!--<property name="schema">-->
+                    <!--<value>/WEB-INF/wsdl/sensors.xsd</value>-->
+            <!--</property>-->
+            <!--&lt;!&ndash;<property name="schema" value="/WEB-INF/wsdl/sensors.xsd"/>&ndash;&gt;-->
+            <!--<property name="validateRequest" value="true"/>-->
+            <!--<property name="validateResponse" value="true"/>-->
+        <!--</bean>-->
+        <!--<bean id="infoValidateInterceptor" class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">-->
+            <!--<description>-->
+                <!--This interceptor validates both incoming and outgoing message contents according to the 'echo.xsd' XML-->
+                <!--Schema file.-->
+            <!--</description>-->
+            <!--<property name="schema">-->
+                    <!--<value>/WEB-INF/wsdl/info.xsd</value>-->
+            <!--</property>-->
+            <!--&lt;!&ndash;<property name="schema" value="/WEB-INF/wsdl/sensors.xsd"/>&ndash;&gt;-->
+            <!--<property name="validateRequest" value="true"/>-->
+            <!--<property name="validateResponse" value="true"/>-->
+        <!--</bean>-->
+        <!--<bean class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor">-->
+            <!--<description>-->
+                <!--This interceptor logs the message payload.-->
+            <!--</description>-->
+        <!--</bean>-->
+    <!--</sws:interceptors>-->
 
     <sws:dynamic-wsdl id="sensorsService"
                       transportUri="http://schemas.xmlsoap.org/soap/http"
