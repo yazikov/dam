@@ -266,7 +266,7 @@ function clickSensor (id, isMap) {
                 case 2: info.removeClass("alert-success"); info.removeClass("alert-danger"); info.addClass("alert-warning"); break;
                 case 3: info.removeClass("alert-success"); info.removeClass("alert-warning"); info.addClass("alert-danger"); break;
             }
-            info.html(sensor.name + ": " + sensor.text + "<br/>" + "Значение: " + sensor.value + "<br/>" + "Уставка k1: " + sensor.setPre + "<br/>" + "Уставка k2: " + sensor.setAv);
+            info.html(sensor.name + ": " + sensor.text + "<br/>" + "Значение: " + sensor.value + "<br/>" + "Уставка k1: " + sensor.setPre);
         }
         var index = kvent.indexOf(sensor.id);
         if (index != -1) {

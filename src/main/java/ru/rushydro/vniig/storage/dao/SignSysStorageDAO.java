@@ -54,14 +54,18 @@ public class SignSysStorageDAO extends AbstractStorageDAO<SignSysStorage>{
     public void insertValues(Integer id, Double value)
     {
         PassportParamSys sensor = passportParamSysDAO.getById(id);
-        Float ustavkaPre = sensor.getMeasParamTypeSig().getValueUstavkaPre();
-        Float ustavkaAv = sensor.getMeasParamTypeSig().getValueUstavkaAv();
+
+        boolean isRelease = sensor.getIs_release();
+
+        Float ustavkaPre = isRelease ? sensor.getCriter_release().floatValue() : sensor.getCriterion().floatValue();
+        Float ustavkaAv = Float.MAX_VALUE;
+
         int val = 1;
-        if(value<ustavkaPre)
+        if(value < ustavkaPre)
             val = 1;
-        else if(value>ustavkaPre&&value<ustavkaAv)
+        else if(value > ustavkaPre && value < ustavkaAv)
             val = 2;
-        else if(value>ustavkaAv)
+        else if(value > ustavkaAv)
             val = 3;
 
         int rowCount = getJdbcTemplate().update("insert into SIGN_SYS(sort_sign, id_sensors, date_sign, time_sign) VALUES(?,?,CURRENT_DATE,CURRENT_TIME)", val, id);

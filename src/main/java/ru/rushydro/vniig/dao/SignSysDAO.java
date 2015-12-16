@@ -46,17 +46,23 @@ public class SignSysDAO extends AbstractDAO<SignSys>{
     public SignSys updateValues(Integer id, Double value)
     {
         SignSys signSys = getById(id);
-        Float ustavkaPre = signSys.getPassportParamSys().getMeasParamTypeSig().getValueUstavkaPre();
-        Float ustavkaAv = signSys.getPassportParamSys().getMeasParamTypeSig().getValueUstavkaAv();
+        boolean isRelease = signSys.getPassportParamSys().getIs_release();
+
+        Float ustavkaPre = isRelease ? signSys.getPassportParamSys().getCriter_release().floatValue() : signSys.getPassportParamSys().getCriterion().floatValue();
+        Float ustavkaAv = Float.MAX_VALUE;
         int val = 1;
-        if(value<ustavkaPre)
+        if(value < ustavkaPre) {
             val = 1;
-        else if(value>ustavkaPre&&value<ustavkaAv)
+            isRelease = false;
+        } else if(value > ustavkaPre && value < ustavkaAv) {
             val = 2;
-        else if(value>ustavkaAv)
+            isRelease = true;
+        } else if(value > ustavkaAv)
             val = 3;
 
-        int rowCount = getJdbcTemplate().update("update SIGN_SYS set sort_sign = ?, date_sign = CURRENT_DATE, time_sign = CURRENT_TIME, date_kvint = null, time_kvint = null where id_sensors = ?", val, id);
+        int rowCount = getJdbcTemplate().update("update PASSPORT_PARAM_SYS set IS_RELEASE = ? where id_sensors = ?", isRelease, id);
+        System.out.println("Row count: " + rowCount);
+        rowCount = getJdbcTemplate().update("update SIGN_SYS set sort_sign = ?, date_sign = CURRENT_DATE, time_sign = CURRENT_TIME, date_kvint = null, time_kvint = null where id_sensors = ?", val, id);
         System.out.println("Row count: " + rowCount);
         return getById(id);
     }

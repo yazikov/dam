@@ -13,9 +13,9 @@ public class PassportParamSys extends AbstractEntry {
     @Column(name = "OBJ_MONITOR")
     String objMonitor;
 
-//    @ManyToOne(fetch=FetchType.EAGER)
-//    @JoinColumn(name = "MEAS_PARAM_TYPE_SIG")
-//    UstavkaParamSys measParamTypeSig;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "MEAS_PARAM_TYPE_SIG")
+    UstavkaParamSys measParamTypeSig;
 
     @Column(name = "NAME_SENSORS")
     String name;
@@ -98,13 +98,13 @@ public class PassportParamSys extends AbstractEntry {
         this.objMonitor = objMonitor;
     }
 
-//    public UstavkaParamSys getMeasParamTypeSig() {
-//        return measParamTypeSig;
-//    }
-//
-//    public void setMeasParamTypeSig(UstavkaParamSys measParamTypeSig) {
-//        this.measParamTypeSig = measParamTypeSig;
-//    }
+    public UstavkaParamSys getMeasParamTypeSig() {
+        return measParamTypeSig;
+    }
+
+    public void setMeasParamTypeSig(UstavkaParamSys measParamTypeSig) {
+        this.measParamTypeSig = measParamTypeSig;
+    }
 
     public String getName() {
         return name;
@@ -219,19 +219,18 @@ public class PassportParamSys extends AbstractEntry {
             sb.append("objMonitor:").append("\"").append(objMonitor).append("\"");
         }
 
-//        if (measParamTypeSig != null) {
-//            if (measParamTypeSig.getValueUstavkaPre() != null) {
-//                if (!sb.toString().isEmpty()) {
-//                    sb.append(",");
-//                }
-//                sb.append("setPre:").append(measParamTypeSig.getValueUstavkaPre());
+        if (criterion != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(",");
+            }
+            sb.append("setPre:").append(criterion);
+        }
+
+//        if (criterion2 != null) {
+//            if (!sb.toString().isEmpty()) {
+//                sb.append(",");
 //            }
-//            if (measParamTypeSig.getValueUstavkaAv() != null) {
-//                if (!sb.toString().isEmpty()) {
-//                    sb.append(",");
-//                }
-//                sb.append("setAv:").append(measParamTypeSig.getValueUstavkaAv());
-//            }
+//            sb.append("setAv:").append(criterion2);
 //        }
 
         if (measParamSys != null && measParamSys.getWorkSensors() != null && !measParamSys.getWorkSensors()) {

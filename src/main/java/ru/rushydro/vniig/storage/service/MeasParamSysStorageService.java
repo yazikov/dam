@@ -83,41 +83,43 @@ public class MeasParamSysStorageService extends AbstractStorageService<MeasParam
         graphicModel.setStartDay(startDate);
         graphicModel.setEndDay(endDate);
 
-        List<PassportParamSys> passportParamSyses = passportParamSysService.getSensorByType(1);
-        if (passportParamSyses != null && !passportParamSyses.isEmpty()) {
-            PassportParamSys sensor = passportParamSyses.get(0);
-            Long minX = graphicModel.getMinX();
-            Long maxX = graphicModel.getMaxX();
+        //Убраны линии k1 и k2
 
-            GraphicItem graphicItem = new GraphicItem();
-            graphicItem.setName("k1");
-            graphicItem.setColor("yellow");
-            GraphicPoint graphicPoint = new GraphicPoint();
-            graphicPoint.setX(minX);
-            graphicPoint.setY(sensor.getMeasParamTypeSig().getValueUstavkaPre());
-            graphicItem.getPoints().add(graphicPoint);
-
-            graphicPoint = new GraphicPoint();
-            graphicPoint.setX(maxX);
-            graphicPoint.setY(sensor.getMeasParamTypeSig().getValueUstavkaPre());
-            graphicItem.getPoints().add(graphicPoint);
-            graphicModel.getItems().add(graphicItem);
-
-            graphicItem = new GraphicItem();
-            graphicItem.setName("k2");
-            graphicItem.setColor("red");
-            graphicPoint = new GraphicPoint();
-            graphicPoint.setX(minX);
-            graphicPoint.setY(sensor.getMeasParamTypeSig().getValueUstavkaAv());
-            graphicItem.getPoints().add(graphicPoint);
-
-            graphicPoint = new GraphicPoint();
-            graphicPoint.setX(maxX);
-            graphicPoint.setY(sensor.getMeasParamTypeSig().getValueUstavkaAv());
-            graphicItem.getPoints().add(graphicPoint);
-            graphicModel.getItems().add(graphicItem);
-
-        }
+//        List<PassportParamSys> passportParamSyses = passportParamSysService.getSensorByType(1);
+//        if (passportParamSyses != null && !passportParamSyses.isEmpty()) {
+//            PassportParamSys sensor = passportParamSyses.get(0);
+//            Long minX = graphicModel.getMinX();
+//            Long maxX = graphicModel.getMaxX();
+//
+//            GraphicItem graphicItem = new GraphicItem();
+//            graphicItem.setName("k1");
+//            graphicItem.setColor("yellow");
+//            GraphicPoint graphicPoint = new GraphicPoint();
+//            graphicPoint.setX(minX);
+//            graphicPoint.setY(sensor.getMeasParamTypeSig().getValueUstavkaPre());
+//            graphicItem.getPoints().add(graphicPoint);
+//
+//            graphicPoint = new GraphicPoint();
+//            graphicPoint.setX(maxX);
+//            graphicPoint.setY(sensor.getMeasParamTypeSig().getValueUstavkaPre());
+//            graphicItem.getPoints().add(graphicPoint);
+//            graphicModel.getItems().add(graphicItem);
+//
+//            graphicItem = new GraphicItem();
+//            graphicItem.setName("k2");
+//            graphicItem.setColor("red");
+//            graphicPoint = new GraphicPoint();
+//            graphicPoint.setX(minX);
+//            graphicPoint.setY(sensor.getMeasParamTypeSig().getValueUstavkaAv());
+//            graphicItem.getPoints().add(graphicPoint);
+//
+//            graphicPoint = new GraphicPoint();
+//            graphicPoint.setX(maxX);
+//            graphicPoint.setY(sensor.getMeasParamTypeSig().getValueUstavkaAv());
+//            graphicItem.getPoints().add(graphicPoint);
+//            graphicModel.getItems().add(graphicItem);
+//
+//        }
 
         return graphicModel;
     }
