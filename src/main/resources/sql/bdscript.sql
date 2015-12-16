@@ -16,6 +16,9 @@ create table PASSPORT_PARAM_SYS
   ID_SENSORS INTEGER,
   X_VALUE INTEGER,
   Y_VALUE INTEGER,
+  CRITERION float,
+  CRITER_RELEASE float,
+  IS_RELEASE boolean,
   primary key(ID_SENSORS)
 );
 

@@ -13,9 +13,9 @@ public class PassportParamSys extends AbstractEntry {
     @Column(name = "OBJ_MONITOR")
     String objMonitor;
 
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "MEAS_PARAM_TYPE_SIG")
-    UstavkaParamSys measParamTypeSig;
+//    @ManyToOne(fetch=FetchType.EAGER)
+//    @JoinColumn(name = "MEAS_PARAM_TYPE_SIG")
+//    UstavkaParamSys measParamTypeSig;
 
     @Column(name = "NAME_SENSORS")
     String name;
@@ -55,6 +55,38 @@ public class PassportParamSys extends AbstractEntry {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "passportParamSys")
     SignSys signSys;
 
+    @Column(name = "CRITERION")
+    Double criterion;
+
+    @Column(name = "CRITER_RELEASE")
+    Double criter_release;
+
+    @Column(name = "IS_RELEASE")
+    Boolean is_release;
+
+    public Boolean getIs_release() {
+        return is_release;
+    }
+
+    public void setIs_release(Boolean is_release) {
+        this.is_release = is_release;
+    }
+
+    public Double getCriter_release() {
+        return criter_release;
+    }
+
+    public void setCriter_release(Double criter_release) {
+        this.criter_release = criter_release;
+    }
+
+    public Double getCriterion() {
+        return criterion;
+    }
+
+    public void setCriterion(Double criterion) {
+        this.criterion = criterion;
+    }
     public PassportParamSys() {
     }
 
@@ -66,13 +98,13 @@ public class PassportParamSys extends AbstractEntry {
         this.objMonitor = objMonitor;
     }
 
-    public UstavkaParamSys getMeasParamTypeSig() {
-        return measParamTypeSig;
-    }
-
-    public void setMeasParamTypeSig(UstavkaParamSys measParamTypeSig) {
-        this.measParamTypeSig = measParamTypeSig;
-    }
+//    public UstavkaParamSys getMeasParamTypeSig() {
+//        return measParamTypeSig;
+//    }
+//
+//    public void setMeasParamTypeSig(UstavkaParamSys measParamTypeSig) {
+//        this.measParamTypeSig = measParamTypeSig;
+//    }
 
     public String getName() {
         return name;
@@ -187,20 +219,20 @@ public class PassportParamSys extends AbstractEntry {
             sb.append("objMonitor:").append("\"").append(objMonitor).append("\"");
         }
 
-        if (measParamTypeSig != null) {
-            if (measParamTypeSig.getValueUstavkaPre() != null) {
-                if (!sb.toString().isEmpty()) {
-                    sb.append(",");
-                }
-                sb.append("setPre:").append(measParamTypeSig.getValueUstavkaPre());
-            }
-            if (measParamTypeSig.getValueUstavkaAv() != null) {
-                if (!sb.toString().isEmpty()) {
-                    sb.append(",");
-                }
-                sb.append("setAv:").append(measParamTypeSig.getValueUstavkaAv());
-            }
-        }
+//        if (measParamTypeSig != null) {
+//            if (measParamTypeSig.getValueUstavkaPre() != null) {
+//                if (!sb.toString().isEmpty()) {
+//                    sb.append(",");
+//                }
+//                sb.append("setPre:").append(measParamTypeSig.getValueUstavkaPre());
+//            }
+//            if (measParamTypeSig.getValueUstavkaAv() != null) {
+//                if (!sb.toString().isEmpty()) {
+//                    sb.append(",");
+//                }
+//                sb.append("setAv:").append(measParamTypeSig.getValueUstavkaAv());
+//            }
+//        }
 
         if (measParamSys != null && measParamSys.getWorkSensors() != null && !measParamSys.getWorkSensors()) {
             if (!sb.toString().isEmpty()) {
