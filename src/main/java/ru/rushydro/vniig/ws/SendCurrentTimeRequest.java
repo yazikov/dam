@@ -12,7 +12,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -25,8 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="statusCode" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="statusDescription" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="time" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,54 +38,37 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "statusCode",
-    "statusDescription"
+    "time"
 })
-@XmlRootElement(name = "sendLevelResponse")
-public class SendLevelResponse {
+@XmlRootElement(name = "sendCurrentTimeRequest")
+public class SendCurrentTimeRequest {
 
-    protected int statusCode;
     @XmlElement(required = true)
-    protected String statusDescription;
+    @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar time;
 
     /**
-     * Gets the value of the statusCode property.
-     * 
-     */
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    /**
-     * Sets the value of the statusCode property.
-     * 
-     */
-    public void setStatusCode(int value) {
-        this.statusCode = value;
-    }
-
-    /**
-     * Gets the value of the statusDescription property.
+     * Gets the value of the time property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public String getStatusDescription() {
-        return statusDescription;
+    public XMLGregorianCalendar getTime() {
+        return time;
     }
 
     /**
-     * Sets the value of the statusDescription property.
+     * Sets the value of the time property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setStatusDescription(String value) {
-        this.statusDescription = value;
+    public void setTime(XMLGregorianCalendar value) {
+        this.time = value;
     }
 
 }

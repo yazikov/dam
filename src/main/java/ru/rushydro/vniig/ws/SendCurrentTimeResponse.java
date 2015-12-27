@@ -40,8 +40,8 @@ import javax.xml.bind.annotation.XmlType;
     "statusCode",
     "statusDescription"
 })
-@XmlRootElement(name = "sendLevelResponse")
-public class SendLevelResponse {
+@XmlRootElement(name = "sendCurrentTimeResponse")
+public class SendCurrentTimeResponse {
 
     protected int statusCode;
     @XmlElement(required = true)

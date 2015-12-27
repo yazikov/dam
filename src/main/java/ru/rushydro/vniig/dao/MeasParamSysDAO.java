@@ -37,6 +37,7 @@ public class MeasParamSysDAO extends AbstractDAO<MeasParamSys> {
 
     public MeasParamSys updateValue (Integer id, Double value) {
         getJdbcTemplate().update("update meas_param_sys set value_meas = ?, date_meas = CURRENT_DATE, time_meas = CURRENT_TIME where id_sensors = ?", value, id);
+
         return getById(id);
     }
 

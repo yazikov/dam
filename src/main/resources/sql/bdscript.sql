@@ -95,3 +95,14 @@ CREATE TABLE INSISION_SENSORS
   Y_VALUE INTEGER,
   PRIMARY KEY (ID)
 );
+
+create table parameters (
+  ID VARCHAR(64),
+  VALUE bigint,
+  PRIMARY KEY (ID)
+);
+
+insert into parameters VALUES ('send', 0);
+
+insert into parameters VALUES ('send_all', 0);
+
