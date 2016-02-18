@@ -19,6 +19,7 @@
     <spring:url value="/resources/css/jquery-ui/jquery-ui.min.css" var="jqueryUICss" />
     <spring:url value="/resources/js/main.js" var="mainJs" />
     <spring:url value="/resources/js/bootstrap.min.js" var="bootstrapJs" />
+    <spring:url value="/resources/js/validator.min.js" var="validatorJs" />
 
     <spring:url value="/resources/js/select2/select2.css" var="select2Css" />
     <spring:url value="/resources/js/select2/select2-bootstrap.css" var="select2BootstrapCss" />
@@ -35,6 +36,7 @@
     <script src="${jqueryUIJs}"></script>
     <script src="${select2Js}"></script>
     <script src="${bootstrapJs}"></script>
+    <script src="${validatorJs}"></script>
 
     <spring:url value="/" var="baseURL"/>
 
@@ -73,6 +75,11 @@
                 <div class="btn-group">
                     <a class="btn btn-default menu_btn" href="<spring:url value="/enter/trends" />" target="_blank">
                         Тренды
+                    </a>
+                </div>
+                <div class="btn-group">
+                    <a class="btn btn-default menu_btn" href="<spring:url value="/virtual/sensors" />" target="_blank">
+                        Неавт. КИА
                     </a>
                 </div>
 

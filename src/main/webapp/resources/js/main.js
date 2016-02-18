@@ -82,6 +82,8 @@ $(document).ready(function() {
         monthNamesShort: [ "Янв", "Фев", "Март", "Апр", "Май", "Июнь", "Июль", "Авг", "Сен", "Окт", "Нояб", "Дек" ]
     });
 
+    $(".validator-form").validator();
+
 });
 
 function getSensorById(id) {

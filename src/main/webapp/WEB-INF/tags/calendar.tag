@@ -17,6 +17,8 @@
         <div class="form-group" style="margin-bottom: 5px;">
             <label for="${name}">${text}</label>
             <input type="text" class="form-control datepicker" id="${name}" name="${name}" value="${value}" placeholder="дд.мм.гггг">
+            <span class="help-block with-errors"></span>
         </div>
+
     </c:otherwise>
 </c:choose>

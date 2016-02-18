@@ -3,13 +3,15 @@
 <%@ attribute name="text" required="true" type="java.lang.String" %>
 <%@ attribute name="value" required="false" type="java.lang.String" %>
 <%@ attribute name="items" required="true" type="java.util.List" %>
+<%@ attribute name="multiple" required="false" type="java.lang.Boolean" %>
 
 <div class="form-group" style="margin-bottom: 5px;">
     <label for="${name}">${text}</label>
-    <select class="form-control" id="${name}" name="${name}" multiple="multiple">
+    <select class="form-control" id="${name}" name="${name}" <c:if test="${multiple}">multiple="multiple"</c:if>>
         <option value=""></option>
         <c:forEach items="${items}" var="item">
             <option ${value.contains(item.id) ? "selected" : ''} value="${item.id}">${item.name}</option>
         </c:forEach>
     </select>
+    <span class="help-block with-errors"></span>
 </div>

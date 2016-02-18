@@ -166,6 +166,11 @@ header {
     overflow-x: auto;
 }
 
+.form_container {
+    margin: 0 auto;
+    width: 50%;
+}
+
 footer {
     background-color: #597da3;
     color: white;

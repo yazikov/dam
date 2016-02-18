@@ -88,4 +88,8 @@ public class PassportParamSysService extends AbstractService<PassportParamSys, P
 
         return map;
     }
+
+    public PassportParamSys getById(Integer id) {
+        return dao.getById(id);
+    }
 }

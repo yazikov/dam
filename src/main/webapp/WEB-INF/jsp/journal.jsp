@@ -26,8 +26,8 @@
 
                 <t:calendar name="startDate" text="Дата с" value="${startDate}" />
                 <t:calendar name="endDate" text="Дата по" value="${endDate}" />
-                <t:combobox name="signal" text="Сигнал" items="${signals}" value="${signal}" />
-                <t:combobox name="type" text="Тип объекта" items="${types}" value="${type}" />
+                <t:combobox name="signal" text="Сигнал" items="${signals}" value="${signal}" multiple="true"/>
+                <t:combobox name="type" text="Тип объекта" items="${types}" value="${type}" multiple="true"/>
 
                 <div class="form-group"  style="margin-bottom: 5px;">
                     <button type="submit" class="btn btn-default">Фильтрация</button>

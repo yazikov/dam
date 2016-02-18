@@ -88,7 +88,4 @@ public class PassportParamSysDAO extends AbstractDAO<PassportParamSys> {
     {
         return null;
     }
-
-
-
 }
