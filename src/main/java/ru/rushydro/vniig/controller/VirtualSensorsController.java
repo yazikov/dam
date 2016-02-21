@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.rushydro.vniig.entry.MeasParamTypeSig;
 import ru.rushydro.vniig.entry.PassportParamSys;
 import ru.rushydro.vniig.service.PassportParamSysService;
 import ru.rushydro.vniig.storage.entry.PassportParamSysStorage;
@@ -26,6 +27,12 @@ public class VirtualSensorsController {
 
     @Autowired
     PassportParamSysStorageService passportParamSysStorageService;
+
+//    @Autowired
+//    MeasParamTypeSigService measParamTypeSigService;
+//
+//    @Autowired
+//    MeasParamTypeSigStorageService measParamTypeSigService;
 
     @RequestMapping()
     public String showVirualSensors (Model model) {
@@ -80,6 +87,11 @@ public class VirtualSensorsController {
         sensor.setName(name);
         sensor.setObjMonitor(objMonitor);
         sensor.setNumber(number);
+//        sensor.setMeasParamTypeSig();
+
+        sensorStorage.setName(name);
+        sensorStorage.setObjMonitor(objMonitor);
+        sensorStorage.setNumber(number);
 
         return "sensor";
     }
