@@ -5,13 +5,17 @@
 
 
 <spring:url value="/virtual/sensors/add" var="addUrl" />
+<spring:url value="/virtual/sensors/type/add" var="addTypeUrl" />
 
 
 
 <div class="row" style="margin-bottom: 5px; width: 98%;">
-    <div class="col-sm-10"></div>
+    <div class="col-sm-8"></div>
     <div class="col-sm-2">
-        <a id="btnGraphic" class="btn btn-default" href="${addUrl}">Добавить сенсор</a>
+        <a class="btn btn-default" href="${addUrl}">Добавить датчик</a>
+    </div>
+    <div class="col-sm-2">
+        <a class="btn btn-default" href="${addTypeUrl}">Добавить тип датчика</a>
     </div>
 </div>
 

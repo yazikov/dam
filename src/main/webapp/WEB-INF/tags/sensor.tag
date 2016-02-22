@@ -9,16 +9,19 @@
 
 
 <form role="form" action="${editUrl}" method="post" class="form-horizontal validator-form" data-toggle="validator">
-    <input type="hidden" value="${sensor.idSensors}"/>
+    <input type="hidden" name="id" value="${sensor.idSensors}"/>
     <t:combobox items="${types}" name="objMonitor" text="Измерительный створ" value="${sensor.objMonitor}" multiple="false" />
-    <t:text name="name" text="Номер датчика" value="${sensor.number}" />
-    <t:text name="number" text="Пьезометр" value="${sensor.name}" />
+    <t:text name="name" text="Номер датчика" value="${sensor.number}" required="true" />
+    <t:text name="number" text="Пьезометр" value="${sensor.name}" required="true" />
     <t:text name="parametr" text="Измеряемый параметр" value="${sensor.measParamTypeSig.discription}" />
     <c:choose>
         <c:when test="${sensor.idSensors == null}">
-            <t:number name="value" text="Значение датчика" />
-            <t:calendar name="date" text="Дата измерения" />
-            <t:time name="time" text="Дата измерения" />
+            <t:number name="value" text="Значение датчика" required="true" />
+            <t:number name="value" text="Значение датчика" required="true" />
+
+            <t:number name="value" text="Значение датчика" required="true" />
+            <t:calendar name="date" text="Дата измерения" required="true" />
+            <t:time name="time" text="Дата измерения" required="true" />
         </c:when>
     </c:choose>
     <div class="form-group"  style="margin-bottom: 5px;">

@@ -10,7 +10,9 @@ import java.util.Date;
 @Table(name = "USTAVKA_PARAM_SYS")
 public class UstavkaParamSys extends AbstractEntry {
     @Id
-    @Column(name = "id_ustavka")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_ustavka", unique = true, nullable = false)
     Integer idUstavka;
     @Column(name = "discription")
     String discription;

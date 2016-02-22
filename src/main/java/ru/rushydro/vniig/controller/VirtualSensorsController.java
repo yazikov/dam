@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.rushydro.vniig.entry.MeasParamTypeSig;
 import ru.rushydro.vniig.entry.PassportParamSys;
+import ru.rushydro.vniig.entry.UstavkaParamSys;
 import ru.rushydro.vniig.service.PassportParamSysService;
+import ru.rushydro.vniig.service.UstavkaParamSysService;
 import ru.rushydro.vniig.storage.entry.PassportParamSysStorage;
+import ru.rushydro.vniig.storage.entry.UstavkaParamSysStorage;
 import ru.rushydro.vniig.storage.service.PassportParamSysStorageService;
+import ru.rushydro.vniig.storage.service.UstavkaParamSysStorageService;
 
 import java.util.Date;
 
@@ -28,11 +32,11 @@ public class VirtualSensorsController {
     @Autowired
     PassportParamSysStorageService passportParamSysStorageService;
 
-//    @Autowired
-//    MeasParamTypeSigService measParamTypeSigService;
-//
-//    @Autowired
-//    MeasParamTypeSigStorageService measParamTypeSigService;
+    @Autowired
+    UstavkaParamSysService ustavkaParamSysService;
+
+    @Autowired
+    UstavkaParamSysStorageService ustavkaParamSysStorageService;
 
     @RequestMapping()
     public String showVirualSensors (Model model) {
@@ -49,6 +53,14 @@ public class VirtualSensorsController {
         model.addAttribute("types", passportParamSysService.getRootComboItems());
 
         return "sensor";
+    }
+
+    @RequestMapping("/type/add")
+    public String addSensorType (Model model) {
+
+        model.addAttribute("type", new UstavkaParamSys());
+
+        return "type";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -94,6 +106,29 @@ public class VirtualSensorsController {
         sensorStorage.setNumber(number);
 
         return "sensor";
+    }
+
+    @RequestMapping("/type/save")
+    public String saveSensorType (Model model, @RequestParam(defaultValue = "-1", required = false) Integer id, @RequestParam String description) {
+
+        UstavkaParamSys ustavkaParamSys;
+        UstavkaParamSysStorage ustavkaParamSysStorage;
+        if (id != null && id != -1) {
+            ustavkaParamSys = ustavkaParamSysService.getById(id);
+            ustavkaParamSysStorage = ustavkaParamSysStorageService.getById(id);
+        } else {
+            ustavkaParamSys = new UstavkaParamSys();
+            ustavkaParamSysStorage = new UstavkaParamSysStorage();
+        }
+
+        ustavkaParamSys.setDiscription(description);
+        ustavkaParamSysStorage.setDiscription(description);
+
+        ustavkaParamSysService.save(ustavkaParamSys);
+        ustavkaParamSysStorageService.save(ustavkaParamSysStorage);
+
+
+        return "redirect:/virtual/sensors";
     }
 
 }
