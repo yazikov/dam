@@ -6,6 +6,7 @@
 
 <spring:url value="/virtual/sensors/add" var="addUrl" />
 <spring:url value="/virtual/sensors/type/add" var="addTypeUrl" />
+<spring:url value="/virtual/sensors/value/add/" var="addValueUrl" />
 
 
 
@@ -38,12 +39,9 @@
             <td><c:out value="${sensor.name}" /></td>
             <td><c:out value="${sensor.measParamTypeSig.discription}" /></td>
             <td>
-                <div data-id="${sensor.idSensors}" class="btn btn-default btn-on">
-                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span> <span class="text">Включить</span>
-                </div>
-                <div data-id="${sensor.idSensors}" class="btn btn-default btn-off">
-                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span> <span class="text">Выключить</span>
-                </div>
+                <a href="${addValueUrl}${sensor.idSensors}" class="btn btn-default btn-on">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span class="text">Добавить значение</span>
+                </a>
             </td>
         </tr>
     </c:forEach>

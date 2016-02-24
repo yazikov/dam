@@ -21,14 +21,14 @@ public class MeasParamSysDAO extends AbstractDAO<MeasParamSys> {
 
     public MeasParamSys save(MeasParamSys measParamSys) {
         try {
-            em.getTransaction().begin();
+//            em.getTransaction().begin();
             if (measParamSys.getIdSensors() == null) {
                 em.persist(measParamSys);
             } else {
                 em.merge(measParamSys);
             }
             em.flush();
-            em.getTransaction().commit();
+//            em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }

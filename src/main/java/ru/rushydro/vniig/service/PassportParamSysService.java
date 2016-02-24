@@ -92,4 +92,12 @@ public class PassportParamSysService extends AbstractService<PassportParamSys, P
     public PassportParamSys getById(Integer id) {
         return dao.getById(id);
     }
+
+    public PassportParamSys save(PassportParamSys passportParamSys) {
+        return dao.save(passportParamSys);
+    }
+
+    public Object getSensorByTypeUpper(int type) {
+        return dao.getSensorByTypeUpper(type);
+    }
 }

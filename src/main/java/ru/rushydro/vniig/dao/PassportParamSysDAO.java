@@ -68,16 +68,17 @@ public class PassportParamSysDAO extends AbstractDAO<PassportParamSys> {
         return query.getSingleResult();
     }
 
+
     public PassportParamSys save(PassportParamSys passportParamSys) {
         try {
-            em.getTransaction().begin();
+//            em.getTransaction().begin();
             if (passportParamSys.getIdSensors() == null) {
                 em.persist(passportParamSys);
             } else {
                 em.merge(passportParamSys);
             }
             em.flush();
-            em.getTransaction().commit();
+//            em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,5 +88,11 @@ public class PassportParamSysDAO extends AbstractDAO<PassportParamSys> {
     public Collection getAvandPreSign() throws SQLException
     {
         return null;
+    }
+
+    public Object getSensorByTypeUpper(int type) {
+        TypedQuery<PassportParamSys> query = em.createQuery("SELECT pps FROM PassportParamSys pps WHERE pps.measParamTypeSig.idUstavka >= :measParamType ", PassportParamSys.class);
+        query.setParameter("measParamType",type);
+        return query.getResultList();
     }
 }

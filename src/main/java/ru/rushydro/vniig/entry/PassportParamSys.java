@@ -30,6 +30,8 @@ public class PassportParamSys extends AbstractEntry {
     String number;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "id_sensors")
     Integer idSensors;
     @Column(name = "x_value")

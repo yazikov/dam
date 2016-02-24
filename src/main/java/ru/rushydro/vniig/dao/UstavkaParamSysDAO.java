@@ -6,6 +6,7 @@ import ru.rushydro.vniig.entry.MeasParamTypeSig;
 import ru.rushydro.vniig.entry.UstavkaParamSys;
 
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 /**
  * Created by nikolay on 21.02.16.
@@ -34,5 +35,10 @@ public class UstavkaParamSysDAO extends AbstractDAO<UstavkaParamSys> {
             e.printStackTrace();
         }
         return ustavkaParamSys;
+    }
+
+    public List<UstavkaParamSys> getComboItems() {
+        TypedQuery<UstavkaParamSys> query = em.createQuery("SELECT ups FROM UstavkaParamSys ups WHERE ups.idUstavka > 3 ", UstavkaParamSys.class);
+        return query.getResultList();
     }
 }

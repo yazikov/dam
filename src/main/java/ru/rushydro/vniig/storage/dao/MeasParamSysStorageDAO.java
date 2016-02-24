@@ -43,14 +43,14 @@ public class MeasParamSysStorageDAO extends AbstractStorageDAO<MeasParamSysStora
 
     public MeasParamSysStorage save(MeasParamSysStorage measParamSys) {
         try {
-            em.getTransaction().begin();
+//            em.getTransaction().begin();
             if (measParamSys.getId() == null) {
                 em.persist(measParamSys);
             } else {
                 em.merge(measParamSys);
             }
             em.flush();
-            em.getTransaction().commit();
+//            em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }

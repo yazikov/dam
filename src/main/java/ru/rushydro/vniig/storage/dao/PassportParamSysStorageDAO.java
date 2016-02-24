@@ -63,14 +63,14 @@ public class PassportParamSysStorageDAO extends AbstractStorageDAO<PassportParam
 
     public PassportParamSysStorage save(PassportParamSysStorage passportParamSys) {
         try {
-            em.getTransaction().begin();
+//            em.getTransaction().begin();
             if (passportParamSys.getIdSensors() == null) {
                 em.persist(passportParamSys);
             } else {
                 em.merge(passportParamSys);
             }
             em.flush();
-            em.getTransaction().commit();
+//            em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }

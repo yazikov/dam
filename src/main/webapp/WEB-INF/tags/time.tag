@@ -8,6 +8,6 @@
 
 <div class="form-group" style="margin-bottom: 5px;">
     <label for="${name}">${text}</label>
-    <input type="text" class="form-control" id="${name}" name="${name}" value="${value}" placeholder="hh:mm:ss" <c:if test="${required}">required</c:if>>
+    <input type="text" class="form-control" pattern="\d\d:\d\d:\d\d" id="${name}" name="${name}" value="${value}" placeholder="чч:мм:сс" <c:if test="${required}">required</c:if>>
     <span class="help-block with-errors"></span>
 </div>

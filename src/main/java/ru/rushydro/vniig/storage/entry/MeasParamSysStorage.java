@@ -12,6 +12,8 @@ import java.util.Date;
 @Table(name = "MEAS_PARAM_SYS")
 public class MeasParamSysStorage extends AbstractStorageEntry {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "id")
     Integer id;
 
