@@ -12,6 +12,8 @@ import java.util.Date;
 @Table(name = "SIGN_SYS")
 public class SignSys extends AbstractEntry {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "id_sign")
     Integer idSign;
     @Column(name = "date_sign")

@@ -2,6 +2,7 @@ package ru.rushydro.vniig.storage.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.rushydro.vniig.entry.MeasParamSys;
 import ru.rushydro.vniig.entry.PassportParamSys;
 import ru.rushydro.vniig.model.GraphicItem;
 import ru.rushydro.vniig.model.GraphicModel;
@@ -130,5 +131,9 @@ public class MeasParamSysStorageService extends AbstractStorageService<MeasParam
 
     public boolean offSensor(Integer id) {
         return dao.offSensor(id);
+    }
+
+    public MeasParamSysStorage save(MeasParamSysStorage measParamSysStorage) {
+        return dao.save(measParamSysStorage);
     }
 }

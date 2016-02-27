@@ -3,22 +3,16 @@ package ru.rushydro.vniig.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.rushydro.vniig.entry.MeasParamSys;
-import ru.rushydro.vniig.entry.MeasParamTypeSig;
-import ru.rushydro.vniig.entry.PassportParamSys;
-import ru.rushydro.vniig.entry.UstavkaParamSys;
-import ru.rushydro.vniig.service.MeasParamSysService;
-import ru.rushydro.vniig.service.PassportParamSysService;
-import ru.rushydro.vniig.service.UstavkaParamSysService;
-import ru.rushydro.vniig.storage.entry.PassportParamSysStorage;
-import ru.rushydro.vniig.storage.entry.UstavkaParamSysStorage;
-import ru.rushydro.vniig.storage.service.MeasParamSysStorageService;
-import ru.rushydro.vniig.storage.service.PassportParamSysStorageService;
-import ru.rushydro.vniig.storage.service.UstavkaParamSysStorageService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ru.rushydro.vniig.entry.*;
+import ru.rushydro.vniig.service.*;
+import ru.rushydro.vniig.storage.entry.*;
+import ru.rushydro.vniig.storage.service.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -49,10 +43,26 @@ public class VirtualSensorsController {
     @Autowired
     MeasParamSysStorageService measParamSysStorageService;
 
+    @Autowired
+    TypeSignalTableService typeSignalTableService;
+
+    @Autowired
+    TypeSignalTableStorageService typeSignalTableStorageService;
+
+    @Autowired
+    SignSysService signSysService;
+
+    @Autowired
+    SignSysStorageService signSysStorageService;
+
     @RequestMapping()
-    public String showVirualSensors (Model model) {
+    public String showVirualSensors (Model model,
+                                     @RequestParam(required = false) String message,
+                                     @RequestParam(required = false) String error) {
 
         model.addAttribute("sensors", passportParamSysService.getSensorByTypeUpper(4));
+        model.addAttribute("message", message);
+        model.addAttribute("error", error);
 
         return "virtualSensors";
     }
@@ -79,32 +89,91 @@ public class VirtualSensorsController {
     public String addSensorValue (Model model, @PathVariable Integer id) {
 
         PassportParamSys passportParamSys = passportParamSysService.getById(id);
-        if (passportParamSys == null || passportParamSys.getType() == 1 ||
-                passportParamSys.getType() == 2 || passportParamSys.getType() == 3) {
+        if (passportParamSys == null || passportParamSys.getMeasParamTypeSig().getIdUstavka() < 4) {
             return "redirect:/virtual/sensors";
         }
 
         model.addAttribute("sensor", passportParamSys);
 
-        return "type";
+        return "addValue";
     }
 
     @RequestMapping(value = "/value/add", method = RequestMethod.POST)
-    public String addSensorValue (Model model, @RequestParam Integer id,
+    public String addSensorValue (ModelMap modelMap, @RequestParam Integer id,
                                   @RequestParam(required = false) Float value, @RequestParam(required = false) String date,
-                                  @RequestParam(required = false) String time) {
+                                  @RequestParam(required = false) String time, RedirectAttributes redirectAttributes) {
 
 
-        MeasParamSys measParamSysStorage = new MeasParamSys();
-        measParamSysStorage.setIdSensors(id);
-        measParamSysStorage.setValueMeas(value);
-        try {
-            measParamSysStorage.setDateMeas(new SimpleDateFormat("dd.MM.yy").parse(date));
-            measParamSysStorage.setTimeMeas(new SimpleDateFormat("hh:mm:ss").parse(time));
-        } catch (ParseException e) {
-            e.printStackTrace();
+
+        PassportParamSys passportParamSys = passportParamSysService.getById(id);
+
+        PassportParamSysStorage passportParamSysStorage = passportParamSysStorageService.getById(id);
+
+        if (passportParamSys != null && passportParamSysStorage != null) {
+            //Сохранение в оперативную базу
+
+
+
+            MeasParamSys measParamSys = measParamSysService.getById(id);
+            try {
+                measParamSys.setDateMeas(new SimpleDateFormat("dd.MM.yy").parse(date));
+                measParamSys.setTimeMeas(new SimpleDateFormat("hh:mm:ss").parse(time));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            measParamSysService.save(measParamSys);
+
+            SignSys signSys = signSysService.getById(id);
+            try {
+                signSys.setTimeSign(new SimpleDateFormat("dd.MM.yy").parse(date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            int type = signSys.getSortSign().getIdSignal();
+
+            if (type == 2) {
+                if (value <= passportParamSys.getCriter_release()) {
+                    signSys.setSortSign(typeSignalTableService.getById(1));
+                }
+            } else if (type == 1) {
+                if (value > passportParamSys.getCriterion()) {
+                    signSys.setSortSign(typeSignalTableService.getById(2));
+                }
+            }
+
+            signSysService.save(signSys);
+
+            type = signSys.getSortSign().getIdSignal();
+
+            //Сохранение в хранилище
+            MeasParamSysStorage measParamSysStorage = new MeasParamSysStorage();
+            measParamSysStorage.setPassportParamSys(passportParamSysStorage);
+            measParamSysStorage.setValueMeas(value);
+            try {
+                measParamSysStorage.setDateMeas(new SimpleDateFormat("dd.MM.yy").parse(date));
+                measParamSysStorage.setTimeMeas(new SimpleDateFormat("hh:mm:ss").parse(time));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            measParamSysStorageService.save(measParamSysStorage);
+
+            SignSysStorage signSysStorage = new SignSysStorage();
+            try {
+                signSysStorage.setTimeSign(new SimpleDateFormat("dd.MM.yy").parse(date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            signSysStorage.setPassportParamSys(passportParamSysStorage);
+            signSysStorage.setSortSign(typeSignalTableStorageService.getById(type));
+
+            signSysStorageService.save(signSysStorage);
+
+            redirectAttributes.addAttribute("message", "Данные датчика были успешно сохранены!");
+        } else {
+            redirectAttributes.addAttribute("error", "Данные о датчике не были найдены!");
         }
-
 
         return "redirect:/virtual/sensors";
     }
@@ -114,8 +183,7 @@ public class VirtualSensorsController {
 
         PassportParamSys passportParamSys = passportParamSysService.getById(id);
 
-        if (passportParamSys == null || passportParamSys.getType() == 1 ||
-                passportParamSys.getType() == 2 || passportParamSys.getType() == 3) {
+        if (passportParamSys == null || passportParamSys.getMeasParamTypeSig().getIdUstavka() < 4) {
             passportParamSys = new PassportParamSys();
         }
 
@@ -131,7 +199,7 @@ public class VirtualSensorsController {
               @RequestParam String number, @RequestParam Integer measParamTypeSig,
               @RequestParam(required = false) Float value, @RequestParam(required = false) String date,
               @RequestParam(required = false) String time, @RequestParam(required = false) Double k1,
-                              @RequestParam(required = false) Double k1Low) {
+                              @RequestParam(required = false) Double k1Low, RedirectAttributes redirectAttributes) {
 
         PassportParamSys sensor;
         PassportParamSysStorage sensorStorage;
@@ -152,6 +220,27 @@ public class VirtualSensorsController {
 
         sensor = passportParamSysService.save(sensor);
 
+
+        TypeSignalTable typeSignalTable;
+
+        if (value > k1) {
+            typeSignalTable = typeSignalTableService.getById(2);
+        } else {
+            typeSignalTable = typeSignalTableService.getById(1);
+        }
+
+        SignSys signSys = new SignSys();
+        try {
+            signSys.setTimeSign(new SimpleDateFormat("dd.MM.yy").parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        signSys.setPassportParamSys(sensor);
+        signSys.setSortSign(typeSignalTable);
+
+        signSysService.save(signSys);
+
+
         MeasParamSys measParamSys = new MeasParamSys();
         measParamSys.setIdSensors(sensor.getIdSensors());
         measParamSys.setValueMeas(value);
@@ -164,6 +253,10 @@ public class VirtualSensorsController {
 
         measParamSysService.save(measParamSys);
 
+
+
+
+
         sensorStorage.setName(name);
         sensorStorage.setObjMonitor(objMonitor);
         sensorStorage.setNumber(number);
@@ -171,8 +264,31 @@ public class VirtualSensorsController {
 
         sensorStorage = passportParamSysStorageService.save(sensorStorage);
 
-        MeasParamSys measParamSysStorage = new MeasParamSys();
-        measParamSysStorage.setIdSensors(sensorStorage.getIdSensors());
+
+
+        TypeSignalTableStorage typeSignalTableStorage;
+
+        if (value > k1) {
+            typeSignalTableStorage = typeSignalTableStorageService.getById(2);
+        } else {
+            typeSignalTableStorage = typeSignalTableStorageService.getById(1);
+        }
+
+        SignSysStorage signSysStorage = new SignSysStorage();
+        try {
+            signSysStorage.setTimeSign(new SimpleDateFormat("dd.MM.yy").parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        signSysStorage.setPassportParamSys(sensorStorage);
+        signSysStorage.setSortSign(typeSignalTableStorage);
+
+        signSysStorageService.save(signSysStorage);
+
+
+
+        MeasParamSysStorage measParamSysStorage = new MeasParamSysStorage();
+        measParamSysStorage.setPassportParamSys(sensorStorage);
         measParamSysStorage.setValueMeas(value);
         try {
             measParamSysStorage.setDateMeas(new SimpleDateFormat("dd.MM.yy").parse(date));
@@ -181,6 +297,9 @@ public class VirtualSensorsController {
             e.printStackTrace();
         }
 
+        measParamSysStorageService.save(measParamSysStorage);
+
+        redirectAttributes.addAttribute("message", "Данные датчика были успешно сохранены!");
 
         return "redirect:/virtual/sensors";
     }

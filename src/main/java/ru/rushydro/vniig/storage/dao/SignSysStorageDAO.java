@@ -35,16 +35,16 @@ public class SignSysStorageDAO extends AbstractStorageDAO<SignSysStorage>{
         return query.getSingleResult();
     }
 
-    public SignSys save(SignSys signSys) {
+    public SignSysStorage save(SignSysStorage signSys) {
         try {
-            em.getTransaction().begin();
-            if (signSys.getPassportParamSys().getIdSensors() == null) {
+//            em.getTransaction().begin();
+            if (signSys.getPassportParamSys() == null || signSys.getPassportParamSys().getIdSensors() == null) {
                 em.persist(signSys);
             } else {
                 em.merge(signSys);
             }
             em.flush();
-            em.getTransaction().commit();
+//            em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }

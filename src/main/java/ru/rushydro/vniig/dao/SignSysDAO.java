@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.rushydro.vniig.entry.SignSys;
 
 import javax.persistence.TypedQuery;
@@ -27,16 +28,17 @@ public class SignSysDAO extends AbstractDAO<SignSys>{
         return query.getSingleResult();
     }
 
+    @Transactional
     public SignSys save(SignSys signSys) {
         try {
-            em.getTransaction().begin();
-            if (signSys.getPassportParamSys().getIdSensors() == null) {
+//            em.getTransaction().begin();
+            if (signSys.getPassportParamSys() == null || signSys.getPassportParamSys().getIdSensors() == null) {
                 em.persist(signSys);
             } else {
                 em.merge(signSys);
             }
             em.flush();
-            em.getTransaction().commit();
+//            em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }

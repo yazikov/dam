@@ -17,6 +17,16 @@
       <h3 style="text-align: center;">
             Неавтоматизированная КИА
       </h3>
+
+      <c:choose>
+        <c:when test="${message != null && !message.isEmpty()}">
+          <div class="alert alert-success" role="alert"><c:out value="${message}"/></div>
+        </c:when>
+        <c:when test="${error != null && !error.isEmpty()}">
+          <div class="alert alert-danger" role="alert"><c:out value="${error}"/></div>
+        </c:when>
+      </c:choose>
+
       <div class="journal_container">
         <t:virtualSensors />
       </div>

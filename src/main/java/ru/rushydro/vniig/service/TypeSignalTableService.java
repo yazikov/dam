@@ -24,6 +24,10 @@ public class TypeSignalTableService extends AbstractService<TypeSignalTable, Typ
         return dao.getAll();
     }
 
+    public TypeSignalTable getById(Integer id) {
+        return dao.getById(id);
+    }
+
     public List<ComboItem> getComboItems () {
         List<ComboItem> items = new ArrayList<>();
         for (TypeSignalTable type : getAll()) {

@@ -34,4 +34,8 @@ public class SignSysStorageService extends AbstractStorageService<SignSysStorage
     public void insertValues(Integer id, Double value) {
         dao.insertValues(id, value);
     }
+
+    public SignSysStorage save(SignSysStorage signSysStorage) {
+        return dao.save(signSysStorage);
+    }
 }
