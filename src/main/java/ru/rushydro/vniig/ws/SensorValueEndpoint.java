@@ -64,12 +64,12 @@ public class SensorValueEndpoint {
                 parametrService.update("send", 0l);
                 parametrService.update("send_all", 0l);
                 for (SensorValue sensorValue : request.getSensorValues().getSensorValue()) {
-                    System.out.println("Sensor ID: " + sensorValue.getSensorId() + " sensor value: " + sensorValue.getSensorValue());
-                    measParamSysService.updateValue((int) sensorValue.getSensorId(), sensorValue.getSensorValue());
-                    signSysService.updateValues((int) sensorValue.getSensorId(), sensorValue.getSensorValue());
+                    System.out.println("Sensor ID: " + sensorValue.getSensorId() + " sensor value: " + sensorValue.getValue());
+                    measParamSysService.updateValue((int) sensorValue.getSensorId(), sensorValue.getValue());
+                    signSysService.updateValues((int) sensorValue.getSensorId(), sensorValue.getValue());
 
-                    measParamSysStorageService.insertValue((int) sensorValue.getSensorId(), sensorValue.getSensorValue());
-                    signSysStorageService.insertValues((int) sensorValue.getSensorId(), sensorValue.getSensorValue());
+                    measParamSysStorageService.insertValue((int) sensorValue.getSensorId(), sensorValue.getValue());
+                    signSysStorageService.insertValues((int) sensorValue.getSensorId(), sensorValue.getValue());
                 }
             } else {
                 response.setStatusCode(0);
@@ -122,7 +122,7 @@ public class SensorValueEndpoint {
                     sensorInfoValue.setSensorId(sensor.getIdSensors());
                     sensorInfoValue.setSensorNumber(sensor.getNumber());
                     sensorInfoValue.setSensorParameter(sensor.getTypeOfSensor());
-                    sensorInfoValue.setSensorValue(sensor.getMeasParamSys().getValueMeas());
+                    sensorInfoValue.setValue(sensor.getMeasParamSys().getValueMeas());
                     sensorValues.getSensorValue().add(sensorInfoValue);
                 }
                 response.setStatusCode(1);

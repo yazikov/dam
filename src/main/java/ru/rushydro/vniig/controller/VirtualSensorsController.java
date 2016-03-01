@@ -256,7 +256,7 @@ public class VirtualSensorsController {
 
 
 
-
+        sensorStorage.setIdSensors(sensor.getIdSensors());
         sensorStorage.setName(name);
         sensorStorage.setObjMonitor(objMonitor);
         sensorStorage.setNumber(number);

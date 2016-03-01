@@ -21,7 +21,7 @@
     <xs:complexType name="sensorValue">
         <xs:sequence>
             <xs:element name="sensorId" type="xs:long"/>
-            <xs:element name="sensorValue" type="xs:double"/>
+            <xs:element name="value" type="xs:double"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -88,7 +88,7 @@
             <xs:element name="sensorId" type="xs:long"/>
             <xs:element name="sensorNumber" type="xs:string" />
             <xs:element name="sensorParameter" type="xs:string" />
-            <xs:element name="sensorValue" type="xs:double"/>
+            <xs:element name="value" type="xs:double"/>
         </xs:sequence>
     </xs:complexType>
 

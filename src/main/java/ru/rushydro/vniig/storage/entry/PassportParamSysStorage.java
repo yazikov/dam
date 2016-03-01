@@ -32,8 +32,8 @@ public class PassportParamSysStorage extends AbstractStorageEntry {
     String number;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Basic(optional = false)
     @Column(name = "id_sensors")
     Integer idSensors;
     @Column(name = "x_value")
