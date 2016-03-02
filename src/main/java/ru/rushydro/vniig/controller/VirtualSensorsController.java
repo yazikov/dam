@@ -211,6 +211,7 @@ public class VirtualSensorsController {
             sensorStorage = new PassportParamSysStorage();
         }
 
+        sensor.setIdSensors(passportParamSysService.getLastId());
         sensor.setName(name);
         sensor.setObjMonitor(objMonitor);
         sensor.setNumber(number);

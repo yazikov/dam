@@ -95,4 +95,9 @@ public class PassportParamSysDAO extends AbstractDAO<PassportParamSys> {
         query.setParameter("measParamType",type);
         return query.getResultList();
     }
+
+    public Integer getLastId() {
+        TypedQuery<Integer> query = em.createQuery("SELECT MAX(pps.idSensors) + 1 FROM PassportParamSys pps", Integer.class);
+        return query.getSingleResult();
+    }
 }

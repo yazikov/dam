@@ -100,4 +100,8 @@ public class PassportParamSysService extends AbstractService<PassportParamSys, P
     public Object getSensorByTypeUpper(int type) {
         return dao.getSensorByTypeUpper(type);
     }
+
+    public Integer getLastId() {
+        return dao.getLastId();
+    }
 }
