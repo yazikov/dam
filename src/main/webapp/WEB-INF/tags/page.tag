@@ -79,7 +79,7 @@
                 </div>
                 <div class="btn-group">
                     <a class="btn btn-default menu_btn" href="<spring:url value="/virtual/sensors" />" target="_blank">
-                        Неавт. КИА
+                        Н/А КИА
                     </a>
                 </div>
 
