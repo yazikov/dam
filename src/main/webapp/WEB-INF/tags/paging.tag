@@ -1,6 +1,7 @@
 <%@ tag import="java.util.ArrayList" %>
 <%@ tag import="java.util.List" %>
 <%@ tag import="java.util.HashMap" %>
+<%@ tag import="java.util.LinkedHashMap" %>
 <%@ tag import="java.util.Map" %>
 <%@ tag import="java.net.URLDecoder" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -44,7 +45,7 @@
     }
     Long end = start + 4 < pageCount ? start + 4 : pageCount;
 
-    Map<Long, String> pages = new HashMap<>();
+    Map<Long, String> pages = new LinkedHashMap<>();
 
     for (long i = start; i <= end; i++) {
         pages.put(i, baseURL + i);

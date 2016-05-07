@@ -62,8 +62,8 @@
                 <tbody>
                     <c:forEach items="${page.content}" var="sensor">
                         <tr class="sensor_type_${sensor.type}">
-                            <td><c:out value="${df.format(sensor.date)}" /></td>
-                            <td><c:out value="${hf.format(sensor.time)}" /></td>
+                            <td><c:out value="${sensor.date != null ? df.format(sensor.date) : ''}" /></td>
+                            <td><c:out value="${sensor.time != null ? hf.format(sensor.time) : ''}" /></td>
                             <td><c:out value="${sensor.objMonitor}" /></td>
                             <td><c:out value="${sensor.name}" /></td>
                             <td><c:out value="${sensor.text}" /></td>

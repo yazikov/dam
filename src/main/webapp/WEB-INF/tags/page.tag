@@ -77,11 +77,11 @@
                         Тренды
                     </a>
                 </div>
-                <div class="btn-group">
-                    <a class="btn btn-default menu_btn" href="<spring:url value="/virtual/sensors" />" target="_blank">
-                        Н/А КИА
-                    </a>
-                </div>
+                <%--<div class="btn-group">--%>
+                    <%--<a class="btn btn-default menu_btn" href="<spring:url value="/virtual/sensors" />" target="_blank">--%>
+                        <%--Н/А КИА--%>
+                    <%--</a>--%>
+                <%--</div>--%>
 
                 <%--<div class="btn-group">--%>
                     <%--<button class="btn btn-default dropdown-toggle menu_btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">--%>

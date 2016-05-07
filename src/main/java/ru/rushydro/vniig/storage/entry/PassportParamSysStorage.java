@@ -41,19 +41,19 @@ public class PassportParamSysStorage extends AbstractStorageEntry {
     @Column(name = "y_value")
     Integer yValue;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "passportParamSys")
-    List<MeasParamSysStorage> measParamSys;
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "passportParamSys")
+//    List<MeasParamSysStorage> measParamSys;
 
-    public List<SignSysStorage> getSignSys() {
-        return signSys;
-    }
+//    public List<SignSysStorage> getSignSys() {
+//        return signSys;
+//    }
+//
+//    public void setSignSys(List<SignSysStorage> signSys) {
+//        this.signSys = signSys;
+//    }
 
-    public void setSignSys(List<SignSysStorage> signSys) {
-        this.signSys = signSys;
-    }
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "passportParamSys")
-    List<SignSysStorage> signSys;
+//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "passportParamSys")
+//    List<SignSysStorage> signSys;
 
     public String getObjMonitor() {
         return objMonitor;
@@ -119,13 +119,13 @@ public class PassportParamSysStorage extends AbstractStorageEntry {
         this.yValue = yValue;
     }
 
-    public List<MeasParamSysStorage> getMeasParamSys() {
-        return measParamSys;
-    }
-
-    public void setMeasParamSys(List<MeasParamSysStorage> measParamSys) {
-        this.measParamSys = measParamSys;
-    }
+//    public List<MeasParamSysStorage> getMeasParamSys() {
+//        return measParamSys;
+//    }
+//
+//    public void setMeasParamSys(List<MeasParamSysStorage> measParamSys) {
+//        this.measParamSys = measParamSys;
+//    }
 
     public UstavkaParamSysStorage getMeasParamTypeSig() {
         return measParamTypeSig;
