@@ -9,10 +9,10 @@
 
 
 
-<form action="${graphicAction}" class="form-horizontal" target="_blank">
+<form action="${graphicAction}" method="post" class="form-horizontal validator-form" data-toggle="validator" target="_blank">
     <div class="form-group">
-        <t:calendar name="startDate" text="Период с" value="${startDate}" inline="true"/>
-        <t:calendar name="endDate" text="Период по" value="${endDate}" inline="true"/>
+        <t:calendar name="startDate" text="Период с" value="${startDate}" inline="true" required="true"/>
+        <t:calendar name="endDate" text="Период по" value="${endDate}" inline="true" required="true"/>
         <div class="col-sm-2">
             <button id="btnGraphic" type="submit" class="btn btn-primary">Построить график</button>
         </div>

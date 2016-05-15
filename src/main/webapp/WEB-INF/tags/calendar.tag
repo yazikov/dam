@@ -10,7 +10,7 @@
     <c:when test="${inline}">
         <label class="col-sm-1 control-label" for="${name}">${text}</label>
         <div class="col-sm-2">
-            <input class="form-control datepicker" type="text" id="${name}" name="${name}" value="${value}" placeholder="дд.мм.гггг" <c:if test="${required}">required</c:if> >
+            <input class="form-control datepicker" type="text" pattern="\d\d\.\d\d\.\d\d\d\d" id="${name}" name="${name}" value="${value}" placeholder="дд.мм.гггг" <c:if test="${required}">required</c:if> >
         </div>
     </c:when>
     <c:otherwise>

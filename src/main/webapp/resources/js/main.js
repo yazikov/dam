@@ -82,7 +82,25 @@ $(document).ready(function() {
         monthNamesShort: [ "Янв", "Фев", "Март", "Апр", "Май", "Июнь", "Июль", "Авг", "Сен", "Окт", "Нояб", "Дек" ]
     });
 
-    $(".validator-form").validator();
+    $(".validator-form").validator().on('submit', function (e) {
+        if ($("#startDate") && $("#endDate")) {
+            var start = $("#startDate").val();
+            var end = $("#endDate").val();
+            var parts = start.split('\.');
+            var startDate = new Date(parts[2] + '-' + parts[1] + '-' + parts[0]);
+            parts = end.split('\.');
+            var endDate = new Date(parts[2] + '-' + parts[1] + '-' + parts[0]);
+            if (endDate.getTime() - startDate.getTime() < 0) {
+                alert("Начальная дата должна быть меньше или равна чем конечная!");
+                e.preventDefault();
+            }
+            var action = $(".validator-form").attr("action");
+            if (action.indexOf('graphic') != -1 && endDate.getTime() - startDate.getTime() > 30 * 24 * 60 * 60 * 1000) {
+                alert("Период для построения графика должен быть менее 30 суток!");
+                e.preventDefault();
+            }
+        }
+    });
 
 });
 
