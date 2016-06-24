@@ -65,6 +65,10 @@ public class MeasParamSysStorageDAO extends AbstractStorageDAO<MeasParamSysStora
     }
 
     public List<MeasParamSysStorage> filter(String startDateStr, String endDateStr, List<Integer> sensors) {
+        return filter(startDateStr, endDateStr, sensors, false);
+    }
+
+    public List<MeasParamSysStorage> filter(String startDateStr, String endDateStr, List<Integer> sensors, boolean sort) {
         Date startDate = null;
         Date endDate = null;
         if (startDateStr != null && !startDateStr.isEmpty()) {
@@ -104,7 +108,7 @@ public class MeasParamSysStorageDAO extends AbstractStorageDAO<MeasParamSysStora
         }
 
 
-        TypedQuery<MeasParamSysStorage> query = em.createQuery("SELECT mpss FROM MeasParamSysStorage mpss " + where, MeasParamSysStorage.class);
+        TypedQuery<MeasParamSysStorage> query = em.createQuery("SELECT mpss FROM MeasParamSysStorage mpss " + where + (sort ? "order by mpss.passportParamSys.name, mpss.dateMeas, mpss.timeMeas" : ""), MeasParamSysStorage.class);
 
         if (startDate != null) {
             query.setParameter("startDate", startDate);

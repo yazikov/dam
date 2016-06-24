@@ -136,4 +136,8 @@ public class MeasParamSysStorageService extends AbstractStorageService<MeasParam
     public MeasParamSysStorage save(MeasParamSysStorage measParamSysStorage) {
         return dao.save(measParamSysStorage);
     }
+
+    public List<MeasParamSysStorage> filterAndSort(String startDate, String endDate, List<Integer> sensors) {
+        return dao.filter(startDate, endDate, sensors, true);
+    }
 }

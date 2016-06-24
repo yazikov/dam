@@ -6,6 +6,7 @@
 
 <spring:url value="/enter/graphic" var="graphicAction" />
 <spring:url value="/enter/table" var="tableAction" />
+<spring:url value="/enter/csv" var="csvAction" />
 
 
 
@@ -18,6 +19,9 @@
         </div>
         <div class="col-sm-2">
             <button id="btnTable" type="submit" class="btn btn-default">Вывести таблицу</button>
+        </div>
+        <div class="col-sm-2">
+            <button id="btnCSV" type="submit" class="btn btn-default">Сохранить CSV</button>
         </div>
 
     </div>
@@ -78,6 +82,7 @@
 <script>
     var graphic = "${graphicAction}";
     var table = "${tableAction}";
+    var csv = "${csvAction}";
 
     $(document).ready(function() {
         $('#btnGraphic').click(function() {
@@ -85,6 +90,9 @@
         });
         $('#btnTable').click(function() {
             $('form').attr('action', table);
+        });
+        $('#btnCSV').click(function() {
+            $('form').attr('action', csv);
         });
 
         $('body').on('click','.btn-off',function() {
