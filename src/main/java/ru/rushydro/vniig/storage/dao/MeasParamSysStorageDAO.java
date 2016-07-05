@@ -108,7 +108,7 @@ public class MeasParamSysStorageDAO extends AbstractStorageDAO<MeasParamSysStora
         }
 
 
-        TypedQuery<MeasParamSysStorage> query = em.createQuery("SELECT mpss FROM MeasParamSysStorage mpss " + where + (sort ? "order by mpss.passportParamSys.name, mpss.dateMeas, mpss.timeMeas" : ""), MeasParamSysStorage.class);
+        TypedQuery<MeasParamSysStorage> query = em.createQuery("SELECT mpss FROM MeasParamSysStorage mpss " + where + (sort ? "order by mpss.passportParamSys.name, mpss.passportParamSys.measParamTypeSig.discription, mpss.dateMeas, mpss.timeMeas" : ""), MeasParamSysStorage.class);
 
         if (startDate != null) {
             query.setParameter("startDate", startDate);

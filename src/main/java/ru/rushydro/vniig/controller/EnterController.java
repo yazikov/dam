@@ -164,7 +164,7 @@ public class EnterController {
 
             sb.append("\"");
             if (measParamSysStorage.getValueMeas() != null) {
-                sb.append(measParamSysStorage.getValueMeas().toString());
+                sb.append(measParamSysStorage.getValueMeas().toString().replaceAll("\\.", ","));
             }
             sb.append("\"");
 
