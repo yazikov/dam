@@ -14,16 +14,18 @@ $(document).ready(function() {
     col3 = $('.col3');
 
     if (mapContainer != null) {
-        setMapContainerSize(mapContainer);
+        //setMapContainerSize(mapContainer);
         scrollToCenter(mapContainer);
     }
 
-    setColumnSize();
+    //setColumnSize();
+    setLayoutSize();
     $(window).resize(function() {
         if (mapContainer != null) {
-            setMapContainerSize();
+            //setMapContainerSize();
         }
-        setColumnSize();
+        //setColumnSize();
+        setLayoutSize();
     });
 
     var pressed = false;
@@ -145,6 +147,20 @@ function setMapContainerSize() {
     mapContainer.height(viewportHeight);
 }
 
+function setLayoutSize() {
+    var viewportHeight = $(window).height();
+    var h = viewportHeight - 50;
+    $('.layout').height(h);
+    var treeDiv = $('#tree');
+    if (treeDiv.length > 0) {
+        treeDiv.css('max-height', (h / 4 * 3 - 85) + 'px');
+    }
+    var logginDiv = $('#sensor-logging');
+    if (logginDiv.length > 0) {
+        logginDiv.css('max-height', (h - 85) + 'px');
+    }
+}
+
 function setColumnSize() {
     var height = col2.height() + 20;
     if (height > 600) {
@@ -159,3 +175,5 @@ function setColumnSize() {
         col3.css("min-height", "600px");
     }
 }
+
+

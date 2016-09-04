@@ -29,17 +29,21 @@ $(document).ready(function() {
 
 function drawMap() {
     var map = $('#map');
+    var h = $('.col2').width() - 20;
+    var k = (h / map.width());
+    map.width(map.width()*k);
+    //map.height(map.height()*k);
     if (map != null) {
         context = map[0].getContext("2d");
 
         for (var i = 0; i < insisions.length; i++) {
             var insision = insisions[i];
-            drawInsision(insision);
+            drawInsision(insision, 1, 1);
         }
 
         for (var i=0; i < sensors.length; i++) {
             var sensor = sensors[i];
-            drawSensor(sensor, colors[sensor.type - 1]);
+            drawSensor(sensor, colors[sensor.type - 1], 1);
             if ((sensor.type == 2 || sensor.type == 3) && !sensor.isKvint) {
                 kvent.push(sensor.id);
             }
@@ -49,8 +53,11 @@ function drawMap() {
         var headerHeight = $('header').height();
 
         map.mousemove(function(e) {
-            var x = e.pageX - this.offsetLeft + container.scrollLeft;
-            var y = e.pageY - this.offsetTop + container.scrollTop - headerHeight;
+            var x = (e.pageX - this.offsetLeft + container.scrollLeft) / k;
+            var y = (e.pageY - this.offsetTop + container.scrollTop - headerHeight) / k;
+
+            //var x = e.pageX + container.scrollLeft;
+            //var y = e.pageY + container.scrollTop - headerHeight;
 
             var isCursor = false;
             for (var i = 0; i < circles.length; i++) {
@@ -73,9 +80,14 @@ function drawMap() {
 
         map.click(function (e) {
 
-            var x = e.pageX - this.offsetLeft + container.scrollLeft;
-            var y = e.pageY - this.offsetTop + container.scrollTop - headerHeight;
+            var x = (e.pageX - this.offsetLeft + container.scrollLeft) / k;
+            var y = (e.pageY - this.offsetTop + container.scrollTop - headerHeight) / k;
+
+            //var x = e.pageX + container.scrollLeft;
+            //var y = e.pageY + container.scrollTop - headerHeight;
+
             //alert("x: " + x + " y: " + y);
+            //alert("x: " + e.pageX + "y: " + e.pageY);
             var isSensor = false;
             for (var i = 0; i < sensors.length; i++) {
                 var sensor = sensors[i];
@@ -101,18 +113,18 @@ function drawMap() {
     }
 }
 
-var drawSensor = function (sensor, color) {
+var drawSensor = function (sensor, color, k) {
     var circle = new Path2D();
     circles.push(circle);
     context.fontWeight = "normal";
     if (cutId == 0) {
-        circle.arc(sensor.x, sensor.y, 5, 0, 2 * Math.PI, false);
+        circle.arc(sensor.x * k, sensor.y * k, 5 * k, 0, 2 * Math.PI, false);
     } else {
-        circle.moveTo(sensor.x, sensor.y);
-        circle.lineTo(sensor.x, sensor.y + 10);
-        circle.lineTo(sensor.x + 6, sensor.y + 10);
-        circle.lineTo(sensor.x + 6, sensor.y);
-        circle.lineTo(sensor.x, sensor.y);
+        circle.moveTo(sensor.x * k, sensor.y * k);
+        circle.lineTo(sensor.x * k, (sensor.y + 10) * k);
+        circle.lineTo((sensor.x + 6) * k, (sensor.y + 10) * k);
+        circle.lineTo((sensor.x + 6) * k, sensor.y * k);
+        circle.lineTo(sensor.x * k, sensor.y * k);
     }
     context.fillStyle = color;
     context.fill(circle);
@@ -122,29 +134,29 @@ var drawSensor = function (sensor, color) {
     context.fillStyle = "black";
     context.font = "bold 14px Arial";
     if (cutId == 0) {
-        context.fillText(sensor.name, sensor.x + 7, sensor.y + 5);
+        context.fillText(sensor.name, (sensor.x + 7) * k, (sensor.y + 5) * k);
     } else {
-        context.fillText(sensor.name, sensor.x + 8, sensor.y + 10);
+        context.fillText(sensor.name, (sensor.x + 8) * k, (sensor.y + 10) * k);
     }
     return circle;
 };
 
-var drawInsision = function (insision) {
+var drawInsision = function (insision, k, h) {
     var insisionObj = new Path2D();
     insisionObjs.push(insisionObj);
     context.fontWeight = "normal";
     if (insision.x2 - insision.x1 > 100) {
-        insisionObj.moveTo(insision.x1 - 1, insision.y1 - 1);
-        insisionObj.lineTo(insision.x1 + 3, insision.y1 + 3);
-        insisionObj.lineTo(insision.x2 + 3, insision.y2 + 3);
-        insisionObj.lineTo(insision.x2 - 1, insision.y2 - 1);
-        insisionObj.lineTo(insision.x1 - 1, insision.y1 - 1);
+        insisionObj.moveTo((insision.x1 - 1) * k, (insision.y1 - 1) * h);
+        insisionObj.lineTo((insision.x1 + 3) * k, (insision.y1 + 3) * h);
+        insisionObj.lineTo((insision.x2 + 3) * k, (insision.y2 + 3) * h);
+        insisionObj.lineTo((insision.x2 - 1) * k, (insision.y2 - 1) * h);
+        insisionObj.lineTo((insision.x1 - 1) * k, (insision.y1 - 1) * h);
     } else {
-        insisionObj.moveTo(insision.x1 - 1, insision.y1 - 1);
-        insisionObj.lineTo(insision.x1 + 2, insision.y1 + 2);
-        insisionObj.lineTo(insision.x2 + 2, insision.y2 + 2);
-        insisionObj.lineTo(insision.x2 - 1, insision.y2 - 1);
-        insisionObj.lineTo(insision.x1 - 1, insision.y1 - 1);
+        insisionObj.moveTo((insision.x1 - 1) * k, (insision.y1 - 1) * h);
+        insisionObj.lineTo((insision.x1 + 2) * k, (insision.y1 + 2) * h);
+        insisionObj.lineTo((insision.x2 + 2) * k, (insision.y2 + 2) * h);
+        insisionObj.lineTo((insision.x2 - 1) * k, (insision.y2 - 1) * h);
+        insisionObj.lineTo((insision.x1 - 1) * k, (insision.y1 - 1) * h);
     }
 
     context.fillStyle = "dodgerblue";

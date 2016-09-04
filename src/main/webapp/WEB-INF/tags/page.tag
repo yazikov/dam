@@ -161,9 +161,9 @@
 </div>
 
 <c:if test="${!notShow}">
-    <footer>
-        <div>Inversion sensor</div>
-    </footer>
+    <%--<footer>--%>
+        <%--<div>Inversion sensor</div>--%>
+    <%--</footer>--%>
 </c:if>
 
 
