@@ -180,7 +180,7 @@ public class EnterController {
 
             sb.append("\"");
             if (measParamSysStorage.getTimeMeas() != null) {
-                sb.append(new SimpleDateFormat("hh:mm:ss").format(measParamSysStorage.getTimeMeas()));
+                sb.append(new SimpleDateFormat("HH:mm:ss").format(measParamSysStorage.getTimeMeas()));
             }
             sb.append("\"");
 
